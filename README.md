@@ -2,7 +2,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/build-MrSanZz-badge?style=flat-square&logo=bitcoin&logoColor=yellow&label=Author&labelColor=grey&color=yellow"><br>
-<img src="https://kosred.com/a/rgrzpj.png">
+<img src="https://kosred.com/a/asbbtk.png">
 </center>
 <span>Do Not Recode This Project, Skiddo Scripter.</span><br>
 </p>
