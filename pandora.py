@@ -2373,6 +2373,13 @@ elif answer == ("20"):
         target = input(info + f"Target Sites : ")
         print('Please Wait..')
         file_types = ['doc', 'dta', 'shx', 'dbf', 'shp', 'db', 'mdf', 'mpd', 'ndb', 'docx', 'docm', 'dot', 'dotx', 'dotm','csv', 'pdf', 'xls', 'xlsx', 'xslsm', 'xlt', 'xltx', 'xltm', 'sql', 'txt', 'zip', 'rar', 'rar4', 'xyz']
+	
+        resultdork = ""
+	def logger(target):
+            file = open((target) + ".txt", "a")
+            file.write(str(resultdork))
+            file.write("\n")
+            file.close()
         for i in file_types:
             try:
                 cookies = exists('.google-cookie')
@@ -2387,6 +2394,7 @@ elif answer == ("20"):
                 print("")
                 for results in search(f'site:{target} filetype:{i}', tld='com', num=5, start=0, stop=None, pause=20):
                     print(success + results)
+		    logger(target, results)
             except urllib.error.HTTPError as e:
                 if e.code == 429:
                     print(fail + f'[429] Too Many Request, Please Wait')
