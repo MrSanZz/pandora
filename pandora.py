@@ -2375,7 +2375,7 @@ elif answer == ("20"):
         print('Please Wait..')
         file_types = ['doc', 'dta', 'shx', 'dbf', 'shp', 'db', 'mdf', 'mpd', 'ndb', 'docx', 'docm', 'dot', 'dotx', 'dotm','csv', 'pdf', 'xls', 'xlsx', 'xslsm', 'xlt', 'xltx', 'xltm', 'sql', 'txt', 'zip', 'rar', 'rar4', 'xyz']
         for i in file_types:
-	        try:
+	    try:
                 cookies = exists('.google-cookie')
                 if cookies == True:
                     os.remove('.google-cookie')
