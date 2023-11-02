@@ -2389,12 +2389,13 @@ elif answer == ("20"):
                 print("")
                 for results in search(f'site:{target} filetype:{i}', tld='com', num=5, start=0, stop=None, pause=20):
                     print(success + results)
-                    def logger(target):
-                        file = open((target) + ".txt", "a")
-                        file.write(str(resultdork))
-                        file.write("\n")
-                        file.close()
-                    logger(results)
+		    file_name = target
+                    def log(file_name):
+                        file = open((file_name) + ".txt", "a")
+                        file.write(str(results))
+                        file.close
+                        file_name = file_name
+                    log(file_name)
             except urllib.error.HTTPError as e:
                 if e.code == 429:
                     print(fail + f'[429] Too Many Request, Please Wait')
