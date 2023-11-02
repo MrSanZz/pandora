@@ -2371,7 +2371,6 @@ elif answer == ("20"):
         print('')
         print("If You Want Skip Some Extension You Dont Want To Leak, Just Click CTRL + C..")
         target = input(info + f"Target Sites : ")
-	os.mkdir(target)
         print(f"Leaked DB Will Be Saved On {target}.txt !")
         print('Please Wait..')
         file_types = ['doc', 'dta', 'shx', 'dbf', 'shp', 'db', 'mdf', 'mpd', 'ndb', 'docx', 'docm', 'dot', 'dotx', 'dotm','csv', 'pdf', 'xls', 'xlsx', 'xslsm', 'xlt', 'xltx', 'xltm', 'sql', 'txt', 'zip', 'rar', 'rar4', 'xyz']
