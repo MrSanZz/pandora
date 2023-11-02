@@ -2379,9 +2379,6 @@ elif answer == ("20"):
                 cookies = exists('.google-cookie')
                 if cookies == True:
                     os.remove('.google-cookie')
-		rand_user = random.choice(user_agents)
-                rand_ipv4 = random.choice(address)
-                rand_ipv6 = random.choice(ip6)
                 print("")
                 print("")
                 print(white + f"=================================")
