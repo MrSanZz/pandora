@@ -2394,7 +2394,7 @@ elif answer == ("20"):
                         file.write(str(resultdork))
                         file.write("\n")
                         file.close()
-                    logger(target, results)
+                    logger(results)
             except urllib.error.HTTPError as e:
                 if e.code == 429:
                     print(fail + f'[429] Too Many Request, Please Wait')
