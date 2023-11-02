@@ -2390,8 +2390,11 @@ elif answer == ("20"):
                 for results in search(f'site:{target} filetype:{i}', tld='com', num=5, start=0, stop=None, pause=20):
                     print(success + results)
                     def log(target):
+                        emp = ""
                         file = open((target) + ".txt", "a")
+                        file.write(str(emp))
                         file.write(str(results))
+                        file.write(str(emp))
                         file.close
                         file_name = target
                     log(target)
