@@ -2373,11 +2373,6 @@ elif answer == ("20"):
         target = input(info + f"Target Sites : ")
 	os.mkdir(target)
         print(f"Leaked DB Will Be Saved On {target}.txt !")
-        def logger(target):
-            file = open((target) + ".txt", "a")
-            file.write(str(resultdork))
-            file.write("\n")
-            file.close()
         print('Please Wait..')
         file_types = ['doc', 'dta', 'shx', 'dbf', 'shp', 'db', 'mdf', 'mpd', 'ndb', 'docx', 'docm', 'dot', 'dotx', 'dotm','csv', 'pdf', 'xls', 'xlsx', 'xslsm', 'xlt', 'xltx', 'xltm', 'sql', 'txt', 'zip', 'rar', 'rar4', 'xyz']
         for i in file_types:
@@ -2397,7 +2392,10 @@ elif answer == ("20"):
                 print("")
                 for results in search(f'site:{target} filetype:{i}', tld='com', num=5, start=0, stop=None, pause=20):
                     print(success + results)
-		    logger(target)
+		    file = open((target) + ".txt", "a")
+                    file.write(results)
+                    file.close
+                    file_name = file_name
             except urllib.error.HTTPError as e:
                 if e.code == 429:
                     print(fail + f'[429] Too Many Request, Please Wait')
