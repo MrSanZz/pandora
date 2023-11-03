@@ -3,6 +3,7 @@
 <p align="center">
 <img src="https://img.shields.io/badge/build-MrSanZz-badge?style=flat-square&logo=bitcoin&logoColor=yellow&label=Author&labelColor=grey&color=yellow"><br>
 <img src="https://kosred.com/a/asbbtk.png">
+<img src="https://kosred.com/a/pvwnwx.png" style="height: 30%; width: 30%;"><br>
 </center>
 <span>Do Not Recode This Project, Skiddo Scripter.</span><br>
 </p>
@@ -50,4 +51,4 @@
     9. python3 pandora.py
     10. If the tool has an error in the module, try typing python3 setup.py
 ```
-<span>Thanks For : EternightyIHT</span>
+<span>Thanks For : JogjaXploit</span>
