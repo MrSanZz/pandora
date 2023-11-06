@@ -2708,6 +2708,13 @@ elif answer == ("20"):
                         log(site)
                     else:
                         print(fail + f"[!] File {i} Doesn't Exists [!]")
+                except FileExistsError:
+                    print(fail + f"[!] File {site}.txt Already Exists [!]")
+                    delete = input(f"Delete? y/n : ")
+                    if delete == "Y" or "y":
+                        os.removedirs(site)
+                    else:
+                        exit()
                 except urllib.error.HTTPError as e:
                     if e.code == 429:
                         print(fail + f"[!] Error 429.. Coldown 25 sec.. [!]")
