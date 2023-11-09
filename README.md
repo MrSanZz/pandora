@@ -16,39 +16,43 @@
     Linux Mint:
 
     1. apt install wget
-    2. apt install figlet
-    3. apt install git
-    4. apt install python3-pip
-    5. apt install python2 && apt install python3
-    6. git clone https://github.com/MrSanZz/pandora
-    7. cd pandora
-    8. pip3 install -r requirements.txt
-    9. python3 pandora.py
-    10. If the tool has an error in the module, try typing python3 setup.py
+    2. apt install curl
+    3. apt install figlet
+    4. apt install git
+    5. apt install python3-pip
+    6. apt install python2 && apt install python3
+    7. git clone https://github.com/MrSanZz/pandora
+    8. cd pandora
+    9. pip3 install -r requirements.txt
+    10. python3 pandora.py
+    11. If the tool has an error in the module, try typing python3 setup.py
 
     Linux:
 
     1. apt install figlet
-    2. apt install wget
-    3. apt install pip / pip3
-    4. apt install python3
-    5. apt install git
-    6. git clone https://github.com/MrSanZz/pandora
-    7. cd pandora
-    8. pip3 install -r requirements.txt
-    9. python3 pandora.py
-    10. If the tool has an error in the module, try typing python3 setup.py
+    2. apt install curl
+    3. apt install wget
+    4. apt install pip / pip3
+    5. apt install python3
+    6. apt install git
+    7. git clone https://github.com/MrSanZz/pandora
+    8. cd pandora
+    9. pip3 install -r requirements.txt
+    10. python3 pandora.py
+    11. If the tool has an error in the module, try typing python3 setup.py
 
     Termux:
+
     1. pkg install pip3
-    2. pkg install wget
-    3. pkg install python3
-    4. pkg install git
-    5. pkg install figlet
-    6. git clone https://github.com/MrSanZz/pandora
-    7. cd pandora
-    8. pip3 install -r requirements.txt
-    9. python3 pandora.py
-    10. If the tool has an error in the module, try typing python3 setup.py
+    2. pkg install curl
+    3. pkg install wget
+    4. pkg install python3
+    5. pkg install git
+    6. pkg install figlet
+    7. git clone https://github.com/MrSanZz/pandora
+    8. cd pandora
+    9. pip3 install -r requirements.txt
+    10. python3 pandora.py
+    11. If the tool has an error in the module, try typing python3 setup.py
 ```
 <span>Thanks For : JogjaXploit</span>
