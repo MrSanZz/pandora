@@ -14,7 +14,8 @@ wget==3.2
 random2==1.0.1
 colorama==0.4.6
 argparse==1.4.0
-os-sys==2.1.4
 urllib3==2.0.5
 pyexiftool==0.5.5
 scapy-python3==0.26
+os-sys==2.1.4
+pycurl==7.45.2
