@@ -31,6 +31,7 @@ import requests
 import sys
 from googlesearch import search
 from subprocess import getoutput
+from urllib.parse import urlparse
 import argparse
 import ipaddress
 import faker
@@ -2094,7 +2095,7 @@ elif answer == ("20"):
     {yellow}│{blue} [07] Mass Deface V3                                                                             {yellow}│{blue}
     {yellow}│{blue} [08] DIRBER                                                                                     {yellow}│{blue}
     {yellow}│{blue} [09] Bypass Admin With File.txt                                                                 {yellow}│{blue}
-    {yellow}│{blue} [10] Leaker V4                                                                                  {yellow}│{blue}
+    {yellow}│{blue} [10] Leaker V4 {red}[Hot Results]{blue}                                                                    {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
     """)
     print('')
@@ -2653,8 +2654,11 @@ elif answer == ("20"):
                                                                             
         """)
         try:
+            ip = ['']
             files = input(f"File Extension [example : pdf xls csv] : ")
             site = input(f"Target Site : ")
+            date = input(f"File Date Created [example : 2023] : ")
+            data = input(f"Data [example : phone,name,email] : ")
             mode = input(f"Save As TXT / Auto Download ? txt/download : ")
         except FileExistsError:
             print(fail + f"File {site} Is Exists.. Do You Want To Delete It?")
@@ -2665,20 +2669,20 @@ elif answer == ("20"):
                 exit()
         if mode == "download":
             try:
+                os.mkdir(site)
                 file_list = files.split()
                 result = file_list
                 print('')
                 print('[!] Please Wait [!]')  
                 print(f"[ + ] All Results Will Be Downloaded On Folder {site} [ + ]")
-                os.mkdir(site)
                 time.sleep(0.6)
                 for i in result:
                     try:
                         print(info + f"[ + ]Searching Info For [ + ] : {i}")
-                        num = 1
+                        num = 0
                         num = num + 1
                         rand_user = random.choice(user_agents)
-                        for results in search(f'filetype:{i} site:{site}', tld='com', lang='en', num=int(num), pause=2, stop=0, start=0):
+                        for results in search(f'filetype:{i} site:{site} intext:{data} {date}', tld='com', lang='en', num=int(num), pause=2, stop=0, start=0):
                             print('')
                             print(success + results)
                             wget.download(results, out=site)
@@ -2697,6 +2701,16 @@ elif answer == ("20"):
                         if e.code == 1006:
                             print(fail + f"[!] Error While Running Task.. [!]")
                             exit()
+                    except requests.exceptions.ConnectTimeout:
+                        continue
+                    except urllib.error.URLError:
+                        continue
+                    except KeyboardInterrupt:
+                        print(info + f"[!] File Type : {i} Skipped.. [!]")
+                    except IndexError:
+                        continue
+                    except EOFError:
+                        continue
             except FileExistsError:
                  print(fail + f"[!] File {site} Already Exists [!]")
                  delete = input(f"Delete? y/n : ")
@@ -2718,7 +2732,7 @@ elif answer == ("20"):
                         rand_user = random.choice(user_agents)
                         req = 1
                         req = req + 1
-                        for results in search(f'filetype:{i} site:{site}', num=int(req), pause=2, stop=None, start=0):
+                        for results in search(f'filetype:{i} site:{site} intext:{data} {date}', num=int(req), pause=2, stop=None, start=0):
                             print('')
                             print(success + results)
                             def log(site):
@@ -2737,6 +2751,8 @@ elif answer == ("20"):
                     except KeyboardInterrupt:
                         print("Interrupt")
                         exit()
+                    except urllib.error.URLError:
+                        continue
                 print(success + f"[ + ] Done.. [ + ]")
             except FileExistsError:
                 print(fail + f"[!] File {site}.txt Already Exists [!]")
