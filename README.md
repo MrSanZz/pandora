@@ -15,6 +15,7 @@
 ```bash
     Linux Mint:
 
+    0. apt update && apt upgrade
     1. apt install wget
     2. apt install curl
     3. apt install figlet
@@ -29,6 +30,7 @@
 
     Linux:
 
+    0. apt update && apt upgrade
     1. apt install figlet
     2. apt install curl
     3. apt install wget
@@ -43,6 +45,7 @@
 
     Termux:
 
+    0. apt update && apt upgrade && pkg update && pkg upgrade
     1. pkg install pip3
     2. pkg install curl
     3. pkg install wget
