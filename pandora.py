@@ -157,7 +157,7 @@ print(f"""
                 ░░         ░   ▒      ░   ░ ░  ░ ░  ░ ░ ░ ░ ▒    ░░   ░   ░   ▒   
                  ░              ░  ░         ░    ░        ░ ░     ░           ░  ░                       
                                       \033[1;32mCoded By : MrSanZz
-                                           V : 3.1.2
+                                           V : 3.1.4
                                        Team:JogjaXploit
                                   \033[1;33mhttps://github.com/MrSanZz
 """)
