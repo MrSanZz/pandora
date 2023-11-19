@@ -3055,7 +3055,7 @@ elif answer == ("20"):
                 except FileExistsError:
                     print(f"File {file_name} Already Exists !")
             logging(file_name)
-        elif answer == "4":
+        elif choice == "4":
             pass
             name = input(info + f"Attacker name : ")
             team = input(info + f"Team name : ")
@@ -3098,7 +3098,7 @@ elif answer == ("20"):
                 except FileExistsError:
                     print(f"File {file_name} Already Exists !")
             logging(file_name)
-        elif answer == "5":
+        elif choice == "5":
             pass
             name = input(info + f"Attacker name : ")
             team = input(info + f"Team name : ")
