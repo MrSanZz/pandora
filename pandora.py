@@ -157,7 +157,7 @@ print(f"""
                 ░░         ░   ▒      ░   ░ ░  ░ ░  ░ ░ ░ ░ ▒    ░░   ░   ░   ▒   
                  ░              ░  ░         ░    ░        ░ ░     ░           ░  ░                       
                                       \033[1;32mCoded By : MrSanZz
-                                           V : 3.1.4
+                                           V : 3.1.2
                                        Team:JogjaXploit
                                   \033[1;33mhttps://github.com/MrSanZz
 """)
@@ -2840,8 +2840,9 @@ elif answer == ("20"):
             dorks = e
             
             for i in dorks:
+                rand_user = random.choice(user_agents)
                 print(info + f"[ + ] Searching : {i} [ + ]")
-                for results in search(f'{i}', num=int(1), start=0, stop=None, pause=2):
+                for results in search(f'{i}', num=int(1), start=0, stop=None, pause=4):
                     print(success + results)
         except urllib.error.HTTPError as e:
             if e.code == 429:
@@ -2988,11 +2989,12 @@ elif answer == ("20"):
             grts = input(f"Greetz : ")
             music = input(f"Music URL : ")
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            logs = ['https://img.freepik.com/free-vector/cute-kitsune-with-sword-cartoon-character-art-object-isolated_138676-3159.jpg?size=338&ext=jpg&ga=GA1.1.1880011253.1700265600&semt=ais', 'https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+            rdd = random.choice(logs)
             if e:
                 logo = e
             else:
-                logs = ['https://img.freepik.com/free-vector/cute-kitsune-with-sword-cartoon-character-art-object-isolated_138676-3159.jpg?size=338&ext=jpg&ga=GA1.1.1880011253.1700265600&semt=ais', 'https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
-                logo = random.choice(logs)
+                logo = rdd
             sc1 = f"""
             <head>
                 <title>Hacked By {name}</title>
@@ -3040,6 +3042,118 @@ elif answer == ("20"):
             <body>
 
             <body oncontextmenu="return false" onkeydown="return false" onmousedown="return false">
+            """
+            sc = sc1
+            def logging(file_name):
+                try:
+                    time.sleep(0.5)
+                    file = open((file_name) + ".html", "a")
+                    file.write(str(sc))
+                    file.close()
+                    file_name = file_name
+                    print(success + f"Success make file {file_name}")
+                except FileExistsError:
+                    print(f"File {file_name} Already Exists !")
+            logging(file_name)
+        elif answer == "4":
+            pass
+            name = input(info + f"Attacker name : ")
+            team = input(info + f"Team name : ")
+            msg = input(info + f"Message : ")
+            file_name = input(info + f"Save as [e.x : sanzz]: ")
+            grts = input(f"Greetz : ")
+            e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            logs = ['https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+            rdd = random.choice(logs)
+            if e:
+                logo = e
+            else:
+                logo = rdd
+            sc1 = f"""
+            <html>
+            <head>
+                <title>Hacked By {name}</title>
+            </head>
+            <body bgcolor="black" >
+            <center><font face="Courier new" size="24" color="lime"> We Are {team}  </font>
+            <br><img src="{logo}"width="300"height="300">
+            <br><h1><span style="color:#ffffff;font-family:Iceland;text-shadow:#FF0099 0px 0px 10px">[ Hacked By {name} ]</span></h1>
+            <font face="Courier new" size="6" color="red"> {msg} </font>
+            <br>
+            <marquee behavior="scroll" direction="left" scrollamount="4" scrolldelay="55" width="100%">
+            <font face="Courier New" size="5" font style="text-shadow: 0px 0px 20px blue;" color="blue">
+            <b>-=| Greetz : {grts} |=-</font>
+            </body>
+            </html>
+            """
+            sc = sc1
+            def logging(file_name):
+                try:
+                    time.sleep(0.5)
+                    file = open((file_name) + ".html", "a")
+                    file.write(str(sc))
+                    file.close()
+                    file_name = file_name
+                    print(success + f"Success make file {file_name}")
+                except FileExistsError:
+                    print(f"File {file_name} Already Exists !")
+            logging(file_name)
+        elif answer == "5":
+            pass
+            name = input(info + f"Attacker name : ")
+            team = input(info + f"Team name : ")
+            msg = input(info + f"Message : ")
+            file_name = input(info + f"Save as [e.x : sanzz]: ")
+            grts = input(f"Greetz : ")
+            e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            logs = ['https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+            rdd = random.choice(logs)
+            if e:
+                logo = e
+            else:
+                logo = rdd
+            style = """
+            body {
+                    font-family: monospace;
+	                background-color: black;
+	                justify-content: center;
+	                text-align: center;
+		            font-color: white;
+                }
+
+                .message {
+                    font-color: gold;
+	                font-family: monospace;
+    	            font-align: center;
+                }
+
+               .in {
+                    font-family: sans-serif;
+	                font-color: white;
+                }
+            """
+            sc1 = f"""
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Hacked By {name}</title>
+	            <table width="100%" height="100%">
+	            <tbody><tr><td align="center">
+	            </head>
+                <style>
+                {style}
+                </style>
+                <body text="white">
+                <p>Hacked By {name}</p><br>
+                <img src="{logo}" width="300" height="300"><br><br>
+                <font color="yellow" ><p class="message">MESSAGE : </p></font>
+                <p class="in">{msg}</p><br><br>
+                <p><font color="red" size="4">-= Greetz =-</font></p>
+                <marquee>-= {grts} =-</marquee>
+                <br><br><font color="gold" size="3"><p class="message">WE ARE :</p></font>
+                <p>{team}</p>
             """
             sc = sc1
             def logging(file_name):
