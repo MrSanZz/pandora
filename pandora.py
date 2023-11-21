@@ -2880,6 +2880,8 @@ elif answer == ("20"):
             file_name = input(info + f"Save as [e.x : sanzz]: ")
             grts = input(f"Greetz : ")
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            width = input("Logo Width [Default : 300] : ")
+            height = input("Logo Height [Default : 300] : ")
             if e:
                 logo = e
             else:
@@ -2913,7 +2915,7 @@ elif answer == ("20"):
             rr = f"""["{msg}"]{oke}"""
             sc4 = f"{ueh}var n={rr}"
             sc5 = f"""
-            <body bgcolor="black" text="white" oncontextmenu="return!1" onkeydown="return!1" onmousedown="return!1" onclick="document.getElementById(&quot;lagu&quot;).play(),fs()" id="body" onload="typeWriter()" data-new-gr-c-s-check-loaded="14.1097.0" data-gr-ext-installed=""><style type="text/css">center{sc2}</style><script language="JavaScript">function confirmExit(){r}"are you sure ? wkwk"{i}function fs(){sc3}window.onbeforeunload=confirmExit;</script><script id="rendered-js">document.addEventListener("DOMContentLoaded",function(e){sc4})</script><audio src="https://kosred.com/a/gavwen.mp3" autoplay="true" id="lagu" loop=""></audio><video id="background-video" src="https://kosred.com/a/oanknh.mp4" autoplay="" loop="" muted="" style="position:fixed;object-fit:cover" poster="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="><source src="hehe.mp4" type="video/webm"></video><table width="100%" height="80%"><tbody><tr><td><center><small>We ARE <red>{team}</red></small><br><img src="{logo}" width="220" height="220" Loading="Lazy" onerror="this.style.display=&quot;none&quot;"><font size="5"><br>Hacked by<red><i> {name}</i></red></font><br><font size="2" id="hekerabies">Oh No! The Security Has Been Hacked!</font><br><br><small><font size="1" color="gray">From {name}</font></small><div class="footer-greetings"><marquee><font size="2"><b>Greetz</b>: {grts}</font></marquee></div></center></td></tr></tbody></table><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body><br>
+            <body bgcolor="black" text="white" oncontextmenu="return!1" onkeydown="return!1" onmousedown="return!1" onclick="document.getElementById(&quot;lagu&quot;).play(),fs()" id="body" onload="typeWriter()" data-new-gr-c-s-check-loaded="14.1097.0" data-gr-ext-installed=""><style type="text/css">center{sc2}</style><script language="JavaScript">function confirmExit(){r}"are you sure ? wkwk"{i}function fs(){sc3}window.onbeforeunload=confirmExit;</script><script id="rendered-js">document.addEventListener("DOMContentLoaded",function(e){sc4})</script><audio src="https://kosred.com/a/gavwen.mp3" autoplay="true" id="lagu" loop=""></audio><video id="background-video" src="https://kosred.com/a/oanknh.mp4" autoplay="" loop="" muted="" style="position:fixed;object-fit:cover" poster="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="><source src="hehe.mp4" type="video/webm"></video><table width="100%" height="80%"><tbody><tr><td><center><small>We ARE <red>{team}</red></small><br><img src="{logo}" width="{width}" height="{height}" Loading="Lazy" onerror="this.style.display=&quot;none&quot;"><font size="5"><br>Hacked by<red><i> {name}</i></red></font><br><font size="2" id="hekerabies">Oh No! The Security Has Been Hacked!</font><br><br><small><font size="1" color="gray">From {name}</font></small><div class="footer-greetings"><marquee><font size="2"><b>Greetz</b>: {grts}</font></marquee></div></center></td></tr></tbody></table><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body><br>
             </div>
             </font>
             </body>
@@ -2940,6 +2942,8 @@ elif answer == ("20"):
             file_name = input(info + f"Save as [e.x : sanzz]: ")
             grts = input(f"Greetz : ")
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            width = input("Logo Width [Default : 300] : ")
+            height = input("Logo Height [Default : 300] : ")
             if e:
                 logo = e
             else:
@@ -2964,7 +2968,7 @@ elif answer == ("20"):
             uh = f"""{ess}function fs(){i2}window.onbeforeunload=confirmExit;</script><script id="rendered-js">document.addEventListener("DOMContentLoaded",function(e){wade}["{msg}"];!function e(t){jogja}"""
             sc2 = f"""
             <body bgcolor="black" text="white" oncontextmenu="return!1" onkeydown="return!1" onmousedown="return!1" onclick="document.getElementById(&quot;lagu&quot;).play(),fs()" id="body" onload="typeWriter()" data-new-gr-c-s-check-loaded="14.1097.0" data-gr-ext-installed=""><style type="text/css">center{idiot}</style><script language="JavaScript">function confirmExit(){uh}</script>
-            <video id="background-video" src="https://kosred.com/a/rkylam.mp4" autoplay="" loop="" muted="" style="position:fixed;object-fit:cover" poster="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="><source src="hehe.mp4" type="video/webm"></video><table width="100%" height="80%"><font size="5"><br>TEAM : {team}<br><img src="{logo}" style="width:300px; height:300px; border-width:0;"><br>Hacked by<red><i> {name}</i></red></font><br><font size="2" id="hekerabies">Oh No! The Security Has Been Hacked!</font><br><br><small><font size="1" color="gray">From {name}</font></small><div class="footer-greetings"><marquee><font size="2"><b>Greetz</b>: {grts}</font></marquee></div></center></td></tr></tbody></table><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body><br>
+            <video id="background-video" src="https://kosred.com/a/rkylam.mp4" autoplay="" loop="" muted="" style="position:fixed;object-fit:cover" poster="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="><source src="hehe.mp4" type="video/webm"></video><table width="{width}%" height="{height}%"><font size="5"><br>TEAM : {team}<br><img src="{logo}" style="width:300px; height:300px; border-width:0;"><br>Hacked by<red><i> {name}</i></red></font><br><font size="2" id="hekerabies">Oh No! The Security Has Been Hacked!</font><br><br><small><font size="1" color="gray">From {name}</font></small><div class="footer-greetings"><marquee><font size="2"><b>Greetz</b>: {grts}</font></marquee></div></center></td></tr></tbody></table><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body><br>
             <br>
             <audio controls src="https://kosred.com/a/jsmuvk.mp3">
             """
@@ -2989,6 +2993,8 @@ elif answer == ("20"):
             grts = input(f"Greetz : ")
             music = input(f"Music URL : ")
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            width = input("Logo Width [Default : 300] : ")
+            height = input("Logo Height [Default : 300] : ")
             logs = ['https://img.freepik.com/free-vector/cute-kitsune-with-sword-cartoon-character-art-object-isolated_138676-3159.jpg?size=338&ext=jpg&ga=GA1.1.1880011253.1700265600&semt=ais', 'https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
             rdd = random.choice(logs)
             if e:
@@ -3009,7 +3015,7 @@ elif answer == ("20"):
             <br><br><font color="black">
             <i>
 
-            <img src="{logo}" style="width:300px; height:300px; border-width:0;">
+            <img src="{logo}" style="width:{width}px; height:{height}px; border-width:0;">
             </a><br>
 
             <title>Hacked By {name}</title>
@@ -3055,7 +3061,7 @@ elif answer == ("20"):
                 except FileExistsError:
                     print(f"File {file_name} Already Exists !")
             logging(file_name)
-        elif choice == "4":
+        elif answer == "4":
             pass
             name = input(info + f"Attacker name : ")
             team = input(info + f"Team name : ")
@@ -3063,6 +3069,8 @@ elif answer == ("20"):
             file_name = input(info + f"Save as [e.x : sanzz]: ")
             grts = input(f"Greetz : ")
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            width = input("Logo Width [Default : 300] : ")
+            height = input("Logo Height [Default : 300] : ")
             logs = ['https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
             rdd = random.choice(logs)
             if e:
@@ -3076,7 +3084,7 @@ elif answer == ("20"):
             </head>
             <body bgcolor="black" >
             <center><font face="Courier new" size="24" color="lime"> We Are {team}  </font>
-            <br><img src="{logo}"width="300"height="300">
+            <br><img src="{logo}"width="{width}"height="{height}">
             <br><h1><span style="color:#ffffff;font-family:Iceland;text-shadow:#FF0099 0px 0px 10px">[ Hacked By {name} ]</span></h1>
             <font face="Courier new" size="6" color="red"> {msg} </font>
             <br>
@@ -3098,7 +3106,7 @@ elif answer == ("20"):
                 except FileExistsError:
                     print(f"File {file_name} Already Exists !")
             logging(file_name)
-        elif choice == "5":
+        elif answer == "5":
             pass
             name = input(info + f"Attacker name : ")
             team = input(info + f"Team name : ")
@@ -3106,6 +3114,8 @@ elif answer == ("20"):
             file_name = input(info + f"Save as [e.x : sanzz]: ")
             grts = input(f"Greetz : ")
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            width = input("Logo Width [Default : 300] : ")
+            height = input("Logo Height [Default : 300] : ")
             logs = ['https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
             rdd = random.choice(logs)
             if e:
@@ -3147,7 +3157,7 @@ elif answer == ("20"):
                 </style>
                 <body text="white">
                 <p>Hacked By {name}</p><br>
-                <img src="{logo}" width="300" height="300"><br><br>
+                <img src="{logo}" width="{width}" height="{height}"><br><br>
                 <font color="yellow" ><p class="message">MESSAGE : </p></font>
                 <p class="in">{msg}</p><br><br>
                 <p><font color="red" size="4">-= Greetz =-</font></p>
