@@ -2885,7 +2885,7 @@ elif answer == ("20"):
             if e:
                 logo = e
             else:
-                logs = ['https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+                logs = ['https://kosred.com/a/saewlg.jpeg']
                 logo = random.choice(logs)
             sc1 = f"""
             <font color="white">
@@ -2947,7 +2947,7 @@ elif answer == ("20"):
             if e:
                 logo = e
             else:
-                logs = ['https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+                logs = ['https://kosred.com/a/nkgiza.jpeg']
                 logo = random.choice(logs)
             sc1 = f"""
             <head>
@@ -2995,7 +2995,7 @@ elif answer == ("20"):
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
             width = input("Logo Width [Default : 300] : ")
             height = input("Logo Height [Default : 300] : ")
-            logs = ['https://img.freepik.com/free-vector/cute-kitsune-with-sword-cartoon-character-art-object-isolated_138676-3159.jpg?size=338&ext=jpg&ga=GA1.1.1880011253.1700265600&semt=ais', 'https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+            logs = ['https://kosred.com/a/ukchqj.jpeg']
             rdd = random.choice(logs)
             if e:
                 logo = e
@@ -3071,7 +3071,7 @@ elif answer == ("20"):
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
             width = input("Logo Width [Default : 300] : ")
             height = input("Logo Height [Default : 300] : ")
-            logs = ['https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+            logs = ['https://kosred.com/a/exvpkp.jpeg']
             rdd = random.choice(logs)
             if e:
                 logo = e
@@ -3116,7 +3116,7 @@ elif answer == ("20"):
             e = input(info + f"Photo / Logo [Skip for default icon]: ")
             width = input("Logo Width [Default : 300] : ")
             height = input("Logo Height [Default : 300] : ")
-            logs = ['https://m.media-amazon.com/images/I/414AP1U4afL.jpg', 'https://i.pinimg.com/736x/8c/fe/ed/8cfeed5fef181d8bb654f99ace2c2421.jpg', 'https://media.tenor.com/glpSwjTJQJEAAAAi/furina-genshin-impact.gif']
+            logs = ['https://kosred.com/a/wudeyr.jpeg']
             rdd = random.choice(logs)
             if e:
                 logo = e
