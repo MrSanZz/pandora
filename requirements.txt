@@ -16,3 +16,4 @@ urllib3==2.0.5
 pyexiftool==0.5.5
 scapy-python3==0.26
 pycurl==7.45.2
+cloudscraper==1.2.71
