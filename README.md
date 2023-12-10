@@ -34,7 +34,7 @@
     1. apt install figlet
     2. apt install curl
     3. apt install wget
-    4. apt install pip / pip3
+    4. apt install python3-pip
     5. apt install python3
     6. apt install git
     7. git clone https://github.com/MrSanZz/pandora
@@ -45,8 +45,7 @@
 
     Termux:
 
-    0. apt update && apt upgrade && pkg update && pkg upgrade
-    1. pkg install pip3
+    1. apt update && apt upgrade && pkg update && pkg upgrade
     2. pkg install curl
     3. pkg install wget
     4. pkg install python3
