@@ -10,10 +10,11 @@ sockets==1.0.0
 times==0.7
 wget==3.2
 random2==1.0.1
-colorama==0.4.6
+colorama
 argparse==1.4.0
 urllib3==2.0.5
 pyexiftool==0.5.5
 scapy-python3==0.26
 pycurl==7.45.2
 cloudscraper==1.2.71
+scapy==2.5.0
