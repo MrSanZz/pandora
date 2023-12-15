@@ -31,6 +31,7 @@
 -Simple Dirber<br>
 -Trojan Maker<br>
 -Mass Dork<br>
+-Doxing / Osint <br>
 ===============<br>
 </center>
 </details>
