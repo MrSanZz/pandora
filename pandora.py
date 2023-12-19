@@ -3755,7 +3755,6 @@ elif answer == ("20"):
                 s.connect((ip,port))
                 s.sendto(("GET /" + ip + " HTTP/1.1\r\n\r\n").encode('ascii'), (ip,port))
                 s.sendto(("Host: " + str(fip) + "\r\n\r\n").encode('ascii'), (ip,port))
-                s.sendall(b"GET / HTTP/1.1\r\nHost: " + ip.encode() + b"\r\n\r\n")
                 req = "GET " + str(ip) + " HTTP/1.1\r\n"
                 req += "Host: " + str(fip) + "\r\n"
                 req += "Proxt-agent: " + str(fip) + "\r\n"
