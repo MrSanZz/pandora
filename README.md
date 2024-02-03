@@ -11,9 +11,9 @@
 #Feature
 <details open>
     <center>
--= Has features =-<br>
+-= Has features =-<br><br>
 
-===============<br>
+===============<br><br>
 -DDoS<br>
 -Web Scanning<br>
 -Phone Hunter<br>
@@ -32,6 +32,14 @@
 -Trojan Maker<br>
 -Mass Dork<br>
 -Doxing / Osint <br>
+-Network Sniffing / Monitor<br>
+-Ransomware Maker<br>
+-DDOS Layer 4 - 7<br>
+-AutoXploit<br>
+-WormGPT<br>
+-Encrypter<br>
+-API GPT Cracker<br>
+-Shell Finder<br><br>
 ===============<br>
 </center>
 </details>
