@@ -38,7 +38,8 @@
 -AutoXploit<br>
 -WormGPT<br>
 -Encrypter<br>
--API GPT Cracker<br>
+-API GPT Cracker<br><br>
+-SQL Injection
 -Shell Finder<br><br>
 ===============<br>
 </center>
