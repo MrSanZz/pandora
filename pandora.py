@@ -218,7 +218,7 @@ def sqlite():
                     print(f"{yellow}[{green} Injected! {yellow}] {gold} Payload : {uri}")
                     start_savelog(target, uri, value)
                 else:
-                    continue
+                    pass
         def start_injection_sql():
             heads = {
                 f"User-Agent": f"{random.choice(user_agents)}",
