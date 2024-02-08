@@ -440,7 +440,7 @@ def sqlite():
                                 e = requests.get(domp)
                             if ecode1 in e.text:
                                 print(f"{yellow}[{red} CRITICAL {yellow}] {gold} 403 Forbidden")
-                                continue
+                                pass
                             return e.text
                         inject()
                 print("Finished")
