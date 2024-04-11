@@ -2,7 +2,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/build-MrSanZz-badge?style=flat-square&logo=bitcoin&logoColor=yellow&label=Author&labelColor=grey&color=yellow"><br>
-<img src="https://kosred.com/a/asbbtk.png"><br>
+<img width="225" height="225" src="https://bnhsec.000webhostapp.com/a/ublpyf.jpg"><br>Donate Me :).. (Payment : Dana)<br><br>
 <img src="https://kosred.com/a/jokpxf.png" style="height: 50%; width: 100%;"><br>
 <img src="https://kosred.com/a/pvwnwx.png" style="height: 30%; width: 30%;"><br>
 </center>
