@@ -38,7 +38,6 @@ import re
 import phonenumbers
 from phonenumbers import timezone, geocoder, carrier
 from pythonping import ping
-import exiftool
 import importlib
 import socket #new
 import threading
